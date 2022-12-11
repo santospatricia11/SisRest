@@ -4,10 +4,23 @@ import java.util.List;
 
 
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.*;
+import java.util.Date;
+
+
 @Entity
+
 public class Conta {
 	@Column(name = "nome")
 	private String nome;
@@ -47,6 +60,8 @@ public class Conta {
 	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
+	
+	
 	
 	
 	

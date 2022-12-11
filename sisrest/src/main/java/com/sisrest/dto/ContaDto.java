@@ -9,35 +9,32 @@ import com.sisrest.model.entities.Conta;
 
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.*;
+import java.util.Date;
 
 public class ContaDto {
 	@NotBlank
-	@Size(min=2, max=50)
+	@Size(min = 2, max = 50)
 	private String nome;
-	
+
 	@NotBlank
-	@Pattern(regexp="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])", message = "Enter a valid, default email: _@_._")
+	@Pattern(regexp = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])", message = "Enter a valid, default email: _@_._")
 	private String email;
 
 	private boolean isAdmin;
-	
-
 
 	public ContaDto(Conta conta) {
-	
-		this.nome = conta.getNome();
-		
 
-		this.email =conta.getEmail();
-		this.isAdmin=conta.isAdmin();
+		this.nome = conta.getNome();
+
+		this.email = conta.getEmail();
+		this.isAdmin = conta.isAdmin();
 	}
 
 	public ContaDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
 
 	public String getNome() {
 		return nome;
@@ -64,11 +61,8 @@ public class ContaDto {
 	}
 
 	public static List<ContaDto> convert(List<Conta> contas) {
-		
-		
+
 		return contas.stream().map(ContaDto::new).collect(Collectors.toList());
 	}
 
-
-	
 }
