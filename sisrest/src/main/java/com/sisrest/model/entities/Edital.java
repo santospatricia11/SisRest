@@ -3,6 +3,7 @@ package com.sisrest.model.entities;
 import java.sql.Date;
 
 public class Edital {
+	///teste
 	private int numero;
 	private String ano;
 	private String nome; 
