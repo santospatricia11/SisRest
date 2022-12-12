@@ -2,7 +2,6 @@ package com.sisrest.services;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -12,12 +11,8 @@ import org.springframework.stereotype.Service;
 import com.sisrest.model.entities.Conta;
 import com.sisrest.repositories.ContaRepository;
 
-
-
-
 @Service
 public class ContaService {
-	
 
 	@Autowired
 	private ContaRepository contaRepository;
@@ -57,6 +52,5 @@ public class ContaService {
 		return contaRepository.findAll(example);
 
 	}
-
 
 }

@@ -8,24 +8,24 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
 @Entity
-public class Beneficiario extends Conta implements Serializable{
+public class Beneficiario extends Conta implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
-	@Column(columnDefinition="matricula_id")
-	
+
+	@Column(columnDefinition = "matricula_id")
+
 	private long matricula;
-	
+
 	public Beneficiario(Long matricula) {
 		super();
-		this.matricula= matricula;
-		
+		this.matricula = matricula;
+
 	}
+
 	public Beneficiario() {
-		
+
 	}
 
 	public Long getMatricula() {

@@ -5,14 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import com.sisrest.model.entities.Conta;
 
-
 @Repository
 
-	public interface ContaRepository extends JpaRepository<ContaRepository, String> {
+public interface ContaRepository extends JpaRepository<ContaRepository, String> {
 
-		Conta save(Conta conta);
+	Conta save(Conta conta);
 
-
-	}
-
-
+}
