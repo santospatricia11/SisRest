@@ -1,17 +1,15 @@
 package com.sisrest.model.entities;
 
-import java.util.List;
+
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 
-@Entity
-
+@MappedSuperclass
 public class Conta {
 	@Column(name = "nome")
 	private String nome;
-	@Id
+	
 	@Column(name = "email")
 	private String email;
 
@@ -19,7 +17,7 @@ public class Conta {
 	@Column(name = "isAdmin")
 	private boolean isAdmin;
 
-	private List<Conta> contas;
+	//private List<Conta> contas;
 
 	public String getNome() {
 		return nome;

@@ -73,22 +73,22 @@ public class BeneficiarioResource {
 		}
 	}
 
-	@PutMapping(value = "/beneficiario/{matricula}")
-	public ResponseEntity<Beneficiario> updateBeneficiario(@PathVariable("matricula") long matricula, @RequestBody Beneficiario beneficiario) {
-		Optional<Beneficiario> informacoesBeneficiario = beneficiarioService.findById(matricula);
-				
-		if (informacoesBeneficiario.isPresent()) {
-			Beneficiario auxiliar = informacoesBeneficiario.get();
-			
-			auxiliar.setAdmin(false);
-			auxiliar.setMatricula(beneficiario.getMatricula());
-			auxiliar.setEmail(beneficiario.getEmail());
-			auxiliar.setNome(beneficiario.getNome());
-			auxiliar.setSenha(beneficiario.getSenha());
-			return new ResponseEntity<>(beneficiarioService.save(auxiliar),HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		return null;
-	}
+//	@PutMapping(value = "/beneficiario/{matricula}")
+//	public ResponseEntity<Beneficiario> updateBeneficiario(@PathVariable("matricula") long matricula, @RequestBody Beneficiario beneficiario) {
+//		Optional<Beneficiario> informacoesBeneficiario = beneficiarioService.findById(matricula);
+//				
+//		if (informacoesBeneficiario.isPresent()) {
+//			Beneficiario auxiliar = informacoesBeneficiario.get();
+//			
+//			auxiliar.setAdmin(false);
+//			auxiliar.setMatricula(beneficiario.getMatricula());
+//			auxiliar.setEmail(beneficiario.getEmail());
+//			auxiliar.setNome(beneficiario.getNome());
+//			auxiliar.setSenha(beneficiario.getSenha());
+//			return new ResponseEntity<>(beneficiarioService.save(auxiliar),HttpStatus.OK);
+//		} else {
+//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//		}
+//		return null;
+//	}
 }
