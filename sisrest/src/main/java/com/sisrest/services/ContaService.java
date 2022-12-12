@@ -2,10 +2,7 @@ package com.sisrest.services;
 
 import java.awt.print.Pageable;
 import java.util.List;
-<<<<<<< HEAD
 import java.util.Optional;
-=======
->>>>>>> 3bd3c569d1f574638f4d016acaf065776f0aa26c
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;

@@ -38,7 +38,11 @@ public class ContaResource {
 	private ContaService contaService;
 	
 	
-	
+
+	public ContaResource(ContaRepository contaRepository) {
+		super();
+		this.contaRepository = contaRepository;
+	}
 
 	public Conta save(Conta conta) {
 		return contaRepository.save(conta);
@@ -87,22 +91,18 @@ public class ContaResource {
 
 	
 	@PutMapping(value = "/conta/{email}")
-	
-	public ResponseEntity<Conta> updateConta(@PathVariable("email") String email, @RequestBody Conta conta) {
-		Optional<Conta> informacoesConta = contaService.findById(email);
-		if (informacoesConta.isPresent()) {
-			Conta con = informacoesConta.get();
 
-			con.setNome(conta.getNome());
-			con.setEmail(conta.getEmail());
-			con.setAdmin(conta.isAdmin());
-			con.setSenha(conta.getSenha());
+	public ResponseEntity<Object> updateConta(@RequestBody Conta conta, @PathVariable String email) {
 
-			return new ResponseEntity<>(contaService.save(con), HttpStatus.OK);
-			
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		return null;
+		Optional<ContaRepository> contOptional = contaRepository.findById(email);
+
+		if (((CharSequence) contaRepository).isEmpty())
+			return ResponseEntity.notFound().build();
+
+		conta.setEmail(email);
+		
+		contaRepository.save(conta);
+
+		return ResponseEntity.noContent().build();
 	}
 }

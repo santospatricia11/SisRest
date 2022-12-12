@@ -3,18 +3,6 @@ package com.sisrest.model.entities;
 import java.sql.Date;
 
 import jakarta.persistence.Column;
-<<<<<<< HEAD
-import jakarta.persistence.Id;
-
-public class Edital {
-	///teste
-	@Id
-	private int numero;
-	@Column
-	private String ano;
-	
-	private String nome; 
-=======
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -29,7 +17,7 @@ public class Edital {
 	@Column(name = "nome")
 	private String nome;
 	@Column(name = "vigente_inicio")
->>>>>>> 3bd3c569d1f574638f4d016acaf065776f0aa26c
+
 	private Date vigenteInicio;
 	@Column(name = "vigente_final")
 	private Date vigenteFinal;
