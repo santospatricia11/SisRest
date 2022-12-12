@@ -1,74 +1,50 @@
 package com.sisrest.model.entities;
 
+import java.io.Serializable;
 import java.sql.Date;
+import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
-public class Edital {
+@Getter
+@Setter
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class Edital implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "numero")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "edital_id")
+	private long id;
+
+	@Column(name = "edital_numero")
 	private int numero;
-	@Column(name = "ano")
+
+	@Column(name = "edital_ano")
 	private String ano;
-	@Column(name = "nome")
+
+	@Column(name = "edital_nome")
 	private String nome;
-	@Column(name = "vigente_inicio")
 
+	@Column(name = "edital_vigente_inicio")
 	private Date vigenteInicio;
-	@Column(name = "vigente_final")
+
+	@Column(name = "edital_vigente_final")
 	private Date vigenteFinal;
-
-	public Edital(int numero, String ano, String nome, Date vigenteInicio, Date vigenteFinal) {
-		super();
-		this.numero = numero;
-		this.ano = ano;
-		this.nome = nome;
-		this.vigenteInicio = vigenteInicio;
-		this.vigenteFinal = vigenteFinal;
-	}
-
-	public int getNumero() {
-		return numero;
-	}
-
-	public void setNumero(int numero) {
-		this.numero = numero;
-	}
-
-	public String getAno() {
-		return ano;
-	}
-
-	public void setAno(String ano) {
-		this.ano = ano;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public Date getVigenteInicio() {
-		return vigenteInicio;
-	}
-
-	public void setVigenteInicio(Date vigenteInicio) {
-		this.vigenteInicio = vigenteInicio;
-	}
-
-	public Date getVigenteFinal() {
-		return vigenteFinal;
-	}
-
-	public void setVigenteFinal(Date vigenteFinal) {
-		this.vigenteFinal = vigenteFinal;
-	}
 
 }

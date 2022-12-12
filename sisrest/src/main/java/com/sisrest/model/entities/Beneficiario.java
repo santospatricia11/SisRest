@@ -1,40 +1,37 @@
 package com.sisrest.model.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
+@Getter
+@Setter
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Beneficiario extends Conta implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
 	@Id
-	@Column(columnDefinition = "matricula_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "beneficiario_id")
+	private long id;
+
+	@Column(columnDefinition = "beneficiario_matricula")
 	private long matricula;
-
-	public Beneficiario(Long matricula) {
-		super();
-		this.matricula = matricula;
-
-	}
-
-	public Beneficiario() {
-
-	}
-
-	public Long getMatricula() {
-		return matricula;
-	}
-
-	public void setMatricula(Long matricula) {
-		this.matricula = matricula;
-	}
 
 }
