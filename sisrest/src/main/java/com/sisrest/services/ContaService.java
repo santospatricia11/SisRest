@@ -1,7 +1,8 @@
 package com.sisrest.services;
 
+import java.awt.print.Pageable;
 import java.util.List;
-
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -12,50 +13,32 @@ import org.springframework.stereotype.Service;
 import com.sisrest.model.entities.Conta;
 import com.sisrest.repositories.ContaRepository;
 
-
-
-
 @Service
 public class ContaService {
-	
 
+	
 	@Autowired
 	private ContaRepository contaRepository;
-
-	public ContaRepository save(Conta conta) {
-		return contaRepository.save(contaRepository);
-	}
-
-	public void deleteById(String email) {
-		Conta conta = findById(email);
-		if (conta == null) {
-			throw new IllegalStateException(String.format("Could not find a entity with id=%1", email));
-
-		}
-		contaRepository.deleteById(email);
-
-	}
-
-	private Conta findById(String email) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private Conta update(String email) {
-		Conta conta = (Conta) contaRepository.getById(email);
-		if (email == null) {
-			throw new IllegalStateException("Email cannot be null");
-		}
+	
+	public Conta save(Conta conta) {
 		return contaRepository.save(conta);
 	}
 
-	public List<Conta> find(Conta filter) {
+	public Conta deleteById(String email) {
+		return null;
+	}
 
-		Example example = Example.of(filter,
-				ExampleMatcher.matching().withIgnoreCase().withStringMatcher(StringMatcher.CONTAINING));
+	public Optional<Optional<ContaRepository>> findById(String email) {
+		return Optional.of(contaRepository.findById(email));
+	}
 
-		return contaRepository.findAll(example);
+	public Optional<List<ContaRepository>> findAll() {
+		
+		return Optional.of(contaRepository.findAll());
+	}
 
+	public Conta update(String email, Conta conta) {
+		return contaRepository.save(conta);
 	}
 
 

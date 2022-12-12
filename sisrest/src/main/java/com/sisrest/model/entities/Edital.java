@@ -2,10 +2,16 @@ package com.sisrest.model.entities;
 
 import java.sql.Date;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+
 public class Edital {
 	///teste
+	@Id
 	private int numero;
+	@Column
 	private String ano;
+	
 	private String nome; 
 	private Date vigenteInicio;
 	private Date  vigenteFinal;
