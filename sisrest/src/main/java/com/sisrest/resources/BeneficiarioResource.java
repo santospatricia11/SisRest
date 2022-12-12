@@ -74,7 +74,7 @@ public class BeneficiarioResource {
 	}
 
 	@PutMapping(value = "/beneficiario/{matricula}")
-	public ResponseEntity<Beneficiario> updateConta(@PathVariable("matricula") long matricula, @RequestBody Beneficiario beneficiario) {
+	public ResponseEntity<Beneficiario> updateBeneficiario(@PathVariable("matricula") long matricula, @RequestBody Beneficiario beneficiario) {
 		Optional<Beneficiario> informacoesBeneficiario = beneficiarioService.findById(matricula);
 				
 		if (informacoesBeneficiario.isPresent()) {
