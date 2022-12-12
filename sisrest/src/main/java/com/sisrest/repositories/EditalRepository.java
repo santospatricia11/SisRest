@@ -3,12 +3,11 @@ package com.sisrest.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.sisrest.model.entities.Conta;
+import com.sisrest.model.entities.Edital;
 
 @Repository
 
-public interface ContaRepository extends JpaRepository<ContaRepository, String> {
+public interface EditalRepository extends JpaRepository<EditalRepository, String> {
 
-	Conta save(Conta conta);
-
+	Edital save(Edital edital);
 }

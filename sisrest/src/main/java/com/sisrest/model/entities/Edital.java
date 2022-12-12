@@ -3,6 +3,7 @@ package com.sisrest.model.entities;
 import java.sql.Date;
 
 import jakarta.persistence.Column;
+<<<<<<< HEAD
 import jakarta.persistence.Id;
 
 public class Edital {
@@ -13,10 +14,26 @@ public class Edital {
 	private String ano;
 	
 	private String nome; 
+=======
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
+public class Edital {
+
+	@Id
+	@Column(name = "numero")
+	private int numero;
+	@Column(name = "ano")
+	private String ano;
+	@Column(name = "nome")
+	private String nome;
+	@Column(name = "vigente_inicio")
+>>>>>>> 3bd3c569d1f574638f4d016acaf065776f0aa26c
 	private Date vigenteInicio;
-	private Date  vigenteFinal;
-	
-	
+	@Column(name = "vigente_final")
+	private Date vigenteFinal;
+
 	public Edital(int numero, String ano, String nome, Date vigenteInicio, Date vigenteFinal) {
 		super();
 		this.numero = numero;
@@ -26,58 +43,44 @@ public class Edital {
 		this.vigenteFinal = vigenteFinal;
 	}
 
-
 	public int getNumero() {
 		return numero;
 	}
-
 
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
 
-
 	public String getAno() {
 		return ano;
 	}
-
 
 	public void setAno(String ano) {
 		this.ano = ano;
 	}
 
-
 	public String getNome() {
 		return nome;
 	}
-
 
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-
 	public Date getVigenteInicio() {
 		return vigenteInicio;
 	}
-
 
 	public void setVigenteInicio(Date vigenteInicio) {
 		this.vigenteInicio = vigenteInicio;
 	}
 
-
 	public Date getVigenteFinal() {
 		return vigenteFinal;
 	}
 
-
 	public void setVigenteFinal(Date vigenteFinal) {
 		this.vigenteFinal = vigenteFinal;
 	}
-	
-	
-	
-	
 
 }
