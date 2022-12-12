@@ -15,7 +15,6 @@ public class Beneficiario extends Conta implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
 	@Column(columnDefinition = "matricula_id")
-
 	private long matricula;
 
 	public Beneficiario(Long matricula) {
