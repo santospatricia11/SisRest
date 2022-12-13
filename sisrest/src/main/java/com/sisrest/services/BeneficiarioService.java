@@ -19,6 +19,7 @@ public class BeneficiarioService {
 
 	public BeneficiarioRepository save(Beneficiario beneficiario) {
 		return beneficiarioRepository.save(beneficiarioRepository);
+	
 	}
 
 	public void deleteById(long id) {

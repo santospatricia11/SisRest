@@ -2,6 +2,7 @@ package com.sisrest.model.entities;
 
 import java.io.Serializable;
 import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
@@ -23,25 +24,24 @@ import lombok.ToString;
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
+
+@Embeddable
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "conta_beneficiario")
+
 public class Beneficiario extends Conta implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
+
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "beneficiario_id")
 	private long id;
 
-	@Column(columnDefinition = "beneficiario_matricula")
+	@Column
 	private long matricula;
 
-	@OneToOne(fetch = FetchType.LAZY, optional = false)
-	@MapsId
-	@JoinColumn(name = "conta_id", foreignKey = @ForeignKey(name = "conta_beneficiario_id"), nullable = false)
-	private Conta conta;
+
 
 }

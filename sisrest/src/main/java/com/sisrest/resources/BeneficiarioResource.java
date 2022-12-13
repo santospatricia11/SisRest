@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,9 @@ import com.sisrest.dto.BeneficiarioDto;
 import com.sisrest.model.entities.Beneficiario;
 import com.sisrest.repositories.BeneficiarioRepository;
 import com.sisrest.services.BeneficiarioService;
+
+import io.micrometer.core.ipc.http.HttpSender.Response;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/beneficiario")
@@ -70,6 +74,8 @@ public class BeneficiarioResource {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	
 
 //	@PutMapping(value = "/beneficiario/{id}")
 //	public ResponseEntity<Beneficiario> updateBeneficiario(@PathVariable("id") long id, @RequestBody Beneficiario beneficiario) {
