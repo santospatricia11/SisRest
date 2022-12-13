@@ -48,10 +48,10 @@ public class BeneficiarioResource {
 		}
 	}
 
-	@DeleteMapping(value = "/{matricula}")
-	public ResponseEntity<HttpStatus> delete(@PathVariable("matricula") long matricula) {
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<HttpStatus> deleteBeneficiario(@PathVariable("id") long id) {
 		try {
-			beneficiarioService.deleteById(matricula);
+			beneficiarioService.deleteById(id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -73,9 +73,9 @@ public class BeneficiarioResource {
 		}
 	}
 
-//	@PutMapping(value = "/beneficiario/{matricula}")
-//	public ResponseEntity<Beneficiario> updateBeneficiario(@PathVariable("matricula") long matricula, @RequestBody Beneficiario beneficiario) {
-//		Optional<Beneficiario> informacoesBeneficiario = beneficiarioService.findById(matricula);
+//	@PutMapping(value = "/beneficiario/{id}")
+//	public ResponseEntity<Beneficiario> updateBeneficiario(@PathVariable("id") long id, @RequestBody Beneficiario beneficiario) {
+//		Optional<Beneficiario> informacoesBeneficiario = beneficiarioService.findById(id);
 //				
 //		if (informacoesBeneficiario.isPresent()) {
 //			Beneficiario auxiliar = informacoesBeneficiario.get();
