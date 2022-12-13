@@ -9,11 +9,24 @@ import com.sisrest.model.entities.Conta;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-
+@MappedSuperclass
+@Getter
+@Setter
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class ContaDto {
 	
 	@Size(min = 2, max = 50)
@@ -30,46 +43,7 @@ public class ContaDto {
 	@Column(name = "Admin")
 	private boolean isAdmin;
 
-	public ContaDto(Conta conta) {
+	
 
-		this.nome = conta.getNome();
-
-		this.email = conta.getEmail();
-		this.isAdmin = conta.isAdmin();
-	}
-
-	public ContaDto() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public boolean isAdmin() {
-		return isAdmin;
-	}
-
-	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
-	}
-
-	public static List<ContaDto> convert(List<Conta> contas) {
-
-		return contas.stream().map(ContaDto::new).collect(Collectors.toList());
-	}
 
 }

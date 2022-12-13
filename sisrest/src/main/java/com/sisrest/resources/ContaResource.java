@@ -61,10 +61,10 @@ public class ContaResource {
 		}
 	}
 
-	@DeleteMapping(value = "/{email}")
-	public ResponseEntity<HttpStatus> delete(@PathVariable("email") String email) {
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<HttpStatus> delete(@PathVariable("id") long id) {
 		try {
-			contaService.deleteById(email);
+			contaService.deleteById(id);
 
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
@@ -90,16 +90,16 @@ public class ContaResource {
 
 
 	
-	@PutMapping(value = "/conta/{email}")
+	@PutMapping(value = "/conta/{id}")
 
-	public ResponseEntity<Object> updateConta(@RequestBody Conta conta, @PathVariable String email) {
+	public ResponseEntity<Object> updateConta(@RequestBody Conta conta, @PathVariable long id) {
 
-		Optional<ContaRepository> contOptional = contaRepository.findById(email);
+		Optional<ContaRepository> contOptional = contaRepository.findById(id);
 
-		if (((CharSequence) contaRepository).isEmpty())
+		if (( (List<Conta>) contaRepository).isEmpty())
 			return ResponseEntity.notFound().build();
 
-		conta.setEmail(email);
+		conta.setId(id);
 		
 		contaRepository.save(conta);
 

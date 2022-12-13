@@ -21,25 +21,24 @@ public class BeneficiarioService {
 		return beneficiarioRepository.save(beneficiarioRepository);
 	}
 
-	public void deleteById(Long matricula) {
-		Beneficiario beneficiario = findById(matricula);
+	public void deleteById(long id) {
+		Beneficiario beneficiario = findById(id);
 		if (beneficiario == null) {
-			throw new IllegalStateException(String.format("Could not find a entity with id=%1", matricula));
+			throw new IllegalStateException(String.format("Could not find a entity with id=%1", id));
 
 		}
-		beneficiarioRepository.deleteById(matricula);
-
+		beneficiarioRepository.deleteById(id);
 	}
 
-	private Beneficiario findById(Long matricula) {
+	private Beneficiario findById(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	private Beneficiario update(Long matricula) {
-		Beneficiario beneficiario = (Beneficiario) beneficiarioRepository.getById(matricula);
-		if (matricula == null) {
-			throw new IllegalStateException("Matricula cannot be null");
+	private Beneficiario update(long id) {
+		Beneficiario beneficiario = (Beneficiario) beneficiarioRepository.getById(id);
+		if (id == null) {
+			throw new IllegalStateException("Id cannot be null");
 		}
 		return beneficiarioRepository.save(beneficiario);
 	}

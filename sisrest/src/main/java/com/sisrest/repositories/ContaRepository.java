@@ -7,7 +7,7 @@ import com.sisrest.model.entities.Conta;
 
 @Repository
 
-public interface ContaRepository extends JpaRepository<ContaRepository, String> {
+public interface ContaRepository extends JpaRepository<ContaRepository, Long> {
 
 	Conta save(Conta conta);
 

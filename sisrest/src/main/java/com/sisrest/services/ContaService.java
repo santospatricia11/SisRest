@@ -24,12 +24,12 @@ public class ContaService {
 		return contaRepository.save(conta);
 	}
 
-	public Conta deleteById(String email) {
+	public Conta deleteById(long id) {
 		return null;
 	}
 
-	public Optional<Optional<ContaRepository>> findById(String email) {
-		return Optional.of(contaRepository.findById(email));
+	public Optional<Optional<ContaRepository>> findById(long id) {
+		return Optional.of(contaRepository.findById(id));
 	}
 
 	public Optional<List<ContaRepository>> findAll() {
@@ -37,7 +37,7 @@ public class ContaService {
 		return Optional.of(contaRepository.findAll());
 	}
 
-	public Conta update(String email, Conta conta) {
+	public Conta update(long id, Conta conta) {
 		return contaRepository.save(conta);
 	}
 
