@@ -1,13 +1,8 @@
 package com.sisrest.model.entities;
 
-import java.io.Serializable;
-import java.util.Objects;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,23 +17,22 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public abstract class Conta implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "conta_id")
-	private long id;
-
-	@Column(name = "conta_nome")
+public abstract class Conta {
+	
+	@NotNull
+	@NotEmpty
 	private String nome;
-
-	@Column(name = "conta_email")
+	
+	@NotNull
+	@NotEmpty
 	private String email;
-
+	
+	@NotNull
+	@NotEmpty
 	private String senha;
-	@Column(name = "conta_isAdmin")
+	
+	@NotNull
+	@NotEmpty
 	private boolean isAdmin;
 
 }

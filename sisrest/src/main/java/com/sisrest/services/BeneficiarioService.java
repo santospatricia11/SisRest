@@ -21,13 +21,9 @@ public class BeneficiarioService {
 		return beneficiarioRepository.save(beneficiarioRepository);
 	}
 
-<<<<<<< HEAD
 	public void deleteById(long id) {
 		Beneficiario beneficiario = findById(id);
-=======
-	public void deleteById(long matricula) {
-		Beneficiario beneficiario = findById(matricula);
->>>>>>> gabriel
+
 		if (beneficiario == null) {
 			throw new IllegalStateException(String.format("Could not find a entity with id=%1", id));
 
@@ -35,26 +31,18 @@ public class BeneficiarioService {
 		beneficiarioRepository.deleteById(id);
 	}
 
-<<<<<<< HEAD
-	private Beneficiario findById(long id) {
-		// TODO Auto-generated method stub
-		return null;
-=======
 	public Beneficiario findById(long id) {
 		Beneficiario beneficiario = (Beneficiario) beneficiarioRepository.getById(id);
 		return beneficiario;
->>>>>>> gabriel
+
 	}
 
 	private Beneficiario update(long id) {
 		Beneficiario beneficiario = (Beneficiario) beneficiarioRepository.getById(id);
-<<<<<<< HEAD
-		if (id == null) {
-			throw new IllegalStateException("Id cannot be null");
-=======
+
 		if (id == 0) {
-			throw new IllegalStateException("Matricula cannot be null");
->>>>>>> gabriel
+			throw new IllegalStateException("Id cannot be null");
+
 		}
 		return beneficiarioRepository.save(beneficiario);
 	}
