@@ -87,7 +87,7 @@ public class ContaResource {
 			con.setNome(conta.getNome());
 			con.setEmail(conta.getSenha());
 			con.setAdmin(false);
-			con.setSenha(conta.getSenha());
+			//con.setSenha(conta.getSenha());
 			
 		
 
