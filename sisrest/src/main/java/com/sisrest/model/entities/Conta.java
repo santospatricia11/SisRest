@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -24,33 +23,30 @@ import lombok.ToString;
 @ToString
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public  class Conta {
-	
+public class Conta {
+
 	@NotNull
 	@NotEmpty
-
-    @Column
+	@Column
 	private String nome;
+
 	@Id
 	@Column
 	private long id;
-	
+
 	@NotNull
 	@NotEmpty
-
-    @Column
+	@Column
 	private String email;
-	
+
 	@NotNull
 	@NotEmpty
-
-    @Column
+	@Column
 	private String senha;
-	
+
 	@NotNull
 	@NotEmpty
-
-    @Column
+	@Column
 	private boolean isAdmin;
 
 }
