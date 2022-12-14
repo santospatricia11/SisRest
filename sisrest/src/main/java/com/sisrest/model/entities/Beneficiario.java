@@ -24,16 +24,13 @@ import lombok.ToString;
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
-
 @Embeddable
 @AllArgsConstructor
 @ToString
 @Entity
-
 public class Beneficiario extends Conta implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "beneficiario_id")
@@ -41,7 +38,5 @@ public class Beneficiario extends Conta implements Serializable {
 
 	@Column
 	private long matricula;
-
-
 
 }

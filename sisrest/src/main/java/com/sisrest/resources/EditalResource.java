@@ -24,14 +24,12 @@ import com.sisrest.services.EditalService;
 @RestController
 @RequestMapping("/api/edital")
 public class EditalResource {
-	
 
-	@Autowired(required=true)
+	@Autowired(required = true)
 	private EditalService editalService;
 
-	@PostMapping(value="edital")
-	
-	public ResponseEntity<Edital> create(@RequestBody Edital edital) {
+	@PostMapping(value = "edital")
+	public ResponseEntity<Edital> createEdital(@RequestBody Edital edital) {
 		try {
 			Edital dest = editalService.save(edital);
 			return new ResponseEntity<>(dest, HttpStatus.CREATED);
@@ -40,8 +38,8 @@ public class EditalResource {
 		}
 	}
 
-	@DeleteMapping(value="/{id}")
-	public ResponseEntity<HttpStatus> delete(@PathVariable("id") long id) {
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<HttpStatus> deleteEdital(@PathVariable("id") long id) {
 		try {
 			editalService.deleteById(id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -50,19 +48,20 @@ public class EditalResource {
 		}
 	}
 
-	@GetMapping(value="/edital/{id}")
-	public ResponseEntity<Edital> getById(@PathVariable("id") long id) {
-		Optional<Edital> informacoesEditais = editalService.findById(id);
-		if (informacoesEditais.isPresent()) {
-			return new ResponseEntity<>(informacoesEditais.get(), HttpStatus.OK);
+	@GetMapping(value = "/edital/{id}")
+	public ResponseEntity<Edital> getEditalById(@PathVariable("id") long id) {
+		Edital informacoesEdital = editalService.findById(id);
+
+		if (informacoesEdital != null) {
+			return new ResponseEntity<>(informacoesEdital, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
-	@GetMapping(value="/edital")
-	
-	public ResponseEntity<List<Edital>> getAll() {
+	@GetMapping(value = "/edital")
+
+	public ResponseEntity<List<Edital>> getAllEdital() {
 		try {
 			List<Edital> editals = new ArrayList<Edital>();
 
@@ -76,24 +75,13 @@ public class EditalResource {
 		}
 	}
 
-	@PutMapping(value="/edital/{id}")
+	@PutMapping(value = "/edital/{id}")
 	public ResponseEntity<Edital> update(@PathVariable("id") long id, @RequestBody Edital edital) {
-		Optional<Edital> informacoesEditais = editalService.deleteById(id);
-				//contaService.findById(id);
-		if (informacoesEditais.isPresent()) {
-			Edital edt = informacoesEditais.get();
+		Edital informacoesEditais = editalService.deleteById(id);
 
-		
-			edt.setNome(edital.getNome());
-			edt.setNumero(edital.getNumero());
-			edt.setVigenteInicio(edital.getVigenteInicio());
-			edt.setVigenteFinal(edital.getVigenteFinal());
-			edt.setAno(edital.getAno());
-			
-			
-		
+		if (informacoesEditais != null) {
 
-			return new ResponseEntity<>(editalService.save(edt), HttpStatus.OK);
+			return new ResponseEntity<>(editalService.save(informacoesEditais), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
