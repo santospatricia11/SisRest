@@ -7,8 +7,8 @@ import com.sisrest.model.entities.Beneficiario;
 
 @Repository
 
-public interface BeneficiarioRepository extends JpaRepository<BeneficiarioRepository, Long> {
+public interface BeneficiarioRepository extends JpaRepository<Beneficiario, Long> {
 
-	Beneficiario save(Beneficiario beneficiario);
+
 
 }

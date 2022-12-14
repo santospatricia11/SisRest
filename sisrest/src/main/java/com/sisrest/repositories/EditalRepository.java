@@ -7,7 +7,7 @@ import com.sisrest.model.entities.Edital;
 
 @Repository
 
-public interface EditalRepository extends JpaRepository<EditalRepository, String> {
+public interface EditalRepository extends JpaRepository<Edital, Long> {
 
-	Edital save(Edital edital);
+
 }

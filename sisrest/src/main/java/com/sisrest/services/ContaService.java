@@ -28,17 +28,17 @@ public class ContaService {
 		return null;
 	}
 
-	public Optional<Optional<ContaRepository>> findById(long id) {
-		return Optional.of(contaRepository.findById(id));
+	public Optional<Conta> findById(long id) {
+		return Optional.of(contaRepository.findById(id).get());
 	}
 
-	public Optional<List<ContaRepository>> findAll() {
-		
-		return Optional.of(contaRepository.findAll());
+	public List<Conta> findAll() {
+		return (List<Conta>) contaRepository.findAll();
 	}
 
 	public Conta update(long id, Conta conta) {
 		return contaRepository.save(conta);
 	}
+	
 
 }
