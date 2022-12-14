@@ -1,6 +1,5 @@
 package com.sisrest.resources;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -17,12 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sisrest.dto.ContaDto;
 import com.sisrest.model.entities.Conta;
-import com.sisrest.repositories.ContaRepository;
 import com.sisrest.services.ContaService;
 
-import jakarta.transaction.Transactional;
 
 @RestController
 @RequestMapping("/api/conta")

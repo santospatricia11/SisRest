@@ -21,11 +21,14 @@ public class ContaService {
 	}
 
 	public Conta deleteById(long id) {
-		return null;
+		Optional<Conta> conta = contaRepository.findById(id);
+		contaRepository.deleteById(id);
+		return conta.get();
 	}
 
-	public Optional<Conta> findById(long id) {
-		return Optional.of(contaRepository.findById(id).get());
+	public Conta findById(long id) {
+		Optional<Conta> conta = contaRepository.findById(id);
+		return conta.get();
 	}
 
 	public List<Conta> findAll() {

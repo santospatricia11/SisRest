@@ -20,11 +20,14 @@ public class BeneficiarioService {
 	}
 
 	public Beneficiario deleteById(long id) {
-		return null;
+		Optional<Beneficiario> beneficiario = beneficiarioRepository.findById(id);
+		beneficiarioRepository.deleteById(id);
+		return beneficiario.get();
 	}
 
-	public Optional<Beneficiario> findById(long id) {
-		return Optional.of(beneficiarioRepository.findById(id).get());
+	public Beneficiario findById(long id) {
+		Optional<Beneficiario> beneficiario = beneficiarioRepository.findById(id);
+		return beneficiario.get();
 
 	}
 
