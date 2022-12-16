@@ -19,26 +19,25 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sisrest.model.entities.Conta;
 import com.sisrest.services.ContaService;
 
-
 @RestController
 @RequestMapping("/api/conta")
 public class ContaResource {
-	
-	@Autowired(required=true)
-	private ContaService contaService;
 
-	@PostMapping(value="conta")
+	@Autowired(required = true)
+	private ContaService contaService;
 	
+	//Não funcionou!
+	@PostMapping(value = "/conta")
 	public ResponseEntity<Conta> create(@RequestBody Conta conta) {
 		try {
-			Conta dest =contaService.save(conta);
+			Conta dest = contaService.save(conta);
 			return new ResponseEntity<>(dest, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
-	@DeleteMapping(value="/{id}")
+	
+	@DeleteMapping(value = "/conta/{id}")
 	public ResponseEntity<HttpStatus> delete(@PathVariable("id") long id) {
 		try {
 			contaService.deleteById(id);
@@ -48,18 +47,18 @@ public class ContaResource {
 		}
 	}
 
-	@GetMapping(value="/conta/{id}")
+	@GetMapping(value = "/conta/{id}")
 	public ResponseEntity<Conta> getDetinoById(@PathVariable("id") long id) {
-		Optional<Conta> informacoesContas = contaService.findById(id);
-		if (informacoesContas.isPresent()) {
-			return new ResponseEntity<>(informacoesContas.get(), HttpStatus.OK);
+		Conta informacoesContas = contaService.findById(id);
+		if (informacoesContas != null) {
+			return new ResponseEntity<>(informacoesContas, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-
-	@GetMapping(value="/conta")
 	
+	//Não funcionou!
+	@GetMapping(value = "/conta")
 	public ResponseEntity<List<Conta>> getAllConta() {
 		try {
 			List<Conta> contas = new ArrayList<Conta>();
@@ -73,21 +72,13 @@ public class ContaResource {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
-	@PutMapping(value="/conta/{id}")
+	//Não funcionou!
+	@PutMapping(value = "/atualizar/{id}")
 	public ResponseEntity<Conta> update(@PathVariable("id") long id, @RequestBody Conta conta) {
-		Optional<Conta> informacoesContas = contaService.findById(id);
-		if (informacoesContas.isPresent()) {
-			Conta con = informacoesContas.get();
+		Conta informacoesContas = contaService.findById(id);
+		if (informacoesContas != null) {
 
-			con.setNome(conta.getNome());
-			con.setEmail(conta.getSenha());
-			con.setAdmin(false);
-			//con.setSenha(conta.getSenha());
-			
-		
-
-			return new ResponseEntity<>(contaService.save(con), HttpStatus.OK);
+			return new ResponseEntity<>(contaService.save(informacoesContas), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}

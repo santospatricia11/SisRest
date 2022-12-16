@@ -49,9 +49,9 @@ public class BeneficiarioResource {
 
 	@GetMapping(value = "/beneficiario/{id}")
 	public ResponseEntity<Beneficiario> getDetinoById(@PathVariable("id") long id) {
-		Optional<Beneficiario> informacoesContas = beneficiarioService.findById(id);
-		if (informacoesContas.isPresent()) {
-			return new ResponseEntity<>(informacoesContas.get(), HttpStatus.OK);
+		Beneficiario informacoesContas = beneficiarioService.findById(id);
+		if (informacoesContas != null) {
+			return new ResponseEntity<>(informacoesContas, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -75,17 +75,9 @@ public class BeneficiarioResource {
 
 	@PutMapping(value = "/beneficiarios/{id}")
 	public ResponseEntity<Beneficiario> update(@PathVariable("id") long id, @RequestBody Beneficiario beneficiario) {
-		Optional<Beneficiario> informacoesBeneficiarios = beneficiarioService.findById(id);
-		if (informacoesBeneficiarios.isPresent()) {
-			Beneficiario bene = informacoesBeneficiarios.get();
-
-			bene.setNome(beneficiario.getNome());
-			bene.setEmail(beneficiario.getEmail());
-			bene.setMatricula(beneficiario.getMatricula());
-			bene.setAdmin(false);
-			bene.setId(beneficiario.getId());
-
-			return new ResponseEntity<>(beneficiarioService.save(bene), HttpStatus.OK);
+		Beneficiario informacoesBeneficiarios = beneficiarioService.findById(id);
+		if (informacoesBeneficiarios != null) {
+			return new ResponseEntity<>(informacoesBeneficiarios, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
