@@ -36,23 +36,21 @@ public abstract class Conta {
 	@Column
 	private String nome;
 
-	@Id
+	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
 	@Column
 	private long id;
 
 	@NotNull
-	@NotEmpty
 	@Column
 	private String email;
 
 	@NotNull
-	@NotEmpty
 	@Column
 	private String senha;
 
 	@NotNull
-
 	@Column
 	private boolean isAdmin;
 	
