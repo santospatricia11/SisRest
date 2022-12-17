@@ -14,23 +14,43 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sisrest.dto.BeneficiarioDto;
 import com.sisrest.model.entities.Beneficiario;
+import com.sisrest.model.entities.Conta;
 import com.sisrest.services.BeneficiarioService;
+import com.sisrest.services.BeneficiarioServiceConvert;
+import com.sisrest.services.ContaService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/beneficiario")
 public class BeneficiarioResource {
 
-	@Autowired(required = true)
+	@Autowired
 	private BeneficiarioService beneficiarioService;
 
+	@Autowired
+	private BeneficiarioServiceConvert beneficiarioServiceConvert;
+	
+	@Autowired
+	private ContaService contaService;
+
 	@PostMapping(value = "/criar")
-	public ResponseEntity<Beneficiario> create(@RequestBody Beneficiario beneficiario) {
+
+	public ResponseEntity create(@RequestBody @Valid BeneficiarioDto dto) {
+
 		try {
-			Beneficiario dest = beneficiarioService.save(beneficiario);
-			return new ResponseEntity<>(dest, HttpStatus.CREATED);
+			Beneficiario entity = beneficiarioServiceConvert.dtoToBeneficiario(dto);
+
+			entity = beneficiarioService.save(entity);
+
+			dto = beneficiarioServiceConvert.beneficiarioToDTO(entity);
+
+			return new ResponseEntity(dto, HttpStatus.CREATED);
+
 		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
 

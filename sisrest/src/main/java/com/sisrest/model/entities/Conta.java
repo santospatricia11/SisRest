@@ -52,7 +52,7 @@ public abstract class Conta {
 	private String senha;
 
 	@NotNull
-	@NotEmpty
+
 	@Column
 	private boolean isAdmin;
 	
