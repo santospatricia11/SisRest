@@ -1,6 +1,9 @@
 package com.sisrest.model.entities;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.DiscriminatorType;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,7 +26,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo", length = 1, discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue("C")
 public abstract class Conta {
 
 	@NotNull
@@ -50,5 +55,8 @@ public abstract class Conta {
 	@NotEmpty
 	@Column
 	private boolean isAdmin;
+	
+	@Column(insertable=false, updatable=false)
+	private String tipo;
 
 }
