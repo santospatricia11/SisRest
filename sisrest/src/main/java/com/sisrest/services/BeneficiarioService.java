@@ -3,9 +3,11 @@ package com.sisrest.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sisrest.dto.BeneficiarioRequest;
 import com.sisrest.model.entities.Beneficiario;
 import com.sisrest.repositories.BeneficiarioRepository;
 
@@ -14,8 +16,12 @@ public class BeneficiarioService {
 
 	@Autowired
 	private BeneficiarioRepository beneficiarioRepository;
-
-	public Beneficiario save(Beneficiario beneficiario) {
+	
+	@Autowired
+	private ModelMapper mapper;
+	
+	public Beneficiario save(BeneficiarioRequest beneficiarioDTO) {
+		Beneficiario beneficiario = mapper.map(beneficiarioDTO, Beneficiario.class);
 		return beneficiarioRepository.save(beneficiario);
 	}
 

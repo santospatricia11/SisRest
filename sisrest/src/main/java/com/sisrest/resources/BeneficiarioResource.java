@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sisrest.dto.BeneficiarioDto;
+import com.sisrest.dto.BeneficiarioRequest;
+import com.sisrest.dto.BeneficiarioResponse;
 import com.sisrest.model.entities.Beneficiario;
-import com.sisrest.model.entities.Conta;
 import com.sisrest.services.BeneficiarioService;
-import com.sisrest.services.BeneficiarioServiceConvert;
 import com.sisrest.services.ContaService;
+import com.sisrest.services.convertes.BeneficiarioServiceConvert;
 
 import jakarta.validation.Valid;
 
@@ -32,26 +32,16 @@ public class BeneficiarioResource {
 
 	@Autowired
 	private BeneficiarioServiceConvert beneficiarioServiceConvert;
-	
-	@Autowired
-	private ContaService contaService;
 
 	@PostMapping(value = "/criar")
 
-	public ResponseEntity create(@RequestBody @Valid BeneficiarioDto dto) {
+	public ResponseEntity<BeneficiarioResponse> create(@RequestBody @Valid BeneficiarioRequest dto) {
 
-		try {
-			Beneficiario entity = beneficiarioServiceConvert.dtoToBeneficiario(dto);
+		Beneficiario beneficiario;
+		beneficiario = beneficiarioService.save(dto);
+		BeneficiarioResponse responseDto = beneficiarioServiceConvert.beneficiarioToDTO(beneficiario);
+		return new ResponseEntity(responseDto, HttpStatus.CREATED);
 
-			entity = beneficiarioService.save(entity);
-
-			dto = beneficiarioServiceConvert.beneficiarioToDTO(entity);
-
-			return new ResponseEntity(dto, HttpStatus.CREATED);
-
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
-		}
 	}
 
 	@DeleteMapping(value = "/deletar/{id}")
