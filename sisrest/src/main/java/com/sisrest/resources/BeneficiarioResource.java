@@ -1,8 +1,6 @@
 package com.sisrest.resources;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,22 +20,21 @@ import com.sisrest.services.BeneficiarioService;
 @RestController
 @RequestMapping("/api/beneficiario")
 public class BeneficiarioResource {
+
 	@Autowired(required = true)
 	private BeneficiarioService beneficiarioService;
 
-	@PostMapping(value = "beneficiario")
-
+	@PostMapping(value = "/criar")
 	public ResponseEntity<Beneficiario> create(@RequestBody Beneficiario beneficiario) {
 		try {
 			Beneficiario dest = beneficiarioService.save(beneficiario);
-
 			return new ResponseEntity<>(dest, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
-	@DeleteMapping(value = "/{id}")
+	@DeleteMapping(value = "/deletar/{id}")
 	public ResponseEntity<HttpStatus> delete(@PathVariable("id") long id) {
 		try {
 			beneficiarioService.deleteById(id);
@@ -47,7 +44,7 @@ public class BeneficiarioResource {
 		}
 	}
 
-	@GetMapping(value = "/beneficiario/{id}")
+	@GetMapping(value = "/buscarPorID/{id}")
 	public ResponseEntity<Beneficiario> getDetinoById(@PathVariable("id") long id) {
 		Beneficiario informacoesContas = beneficiarioService.findById(id);
 		if (informacoesContas != null) {
@@ -57,12 +54,10 @@ public class BeneficiarioResource {
 		}
 	}
 
-	@GetMapping(value = "/beneficiario")
-
+	@GetMapping(value = "/buscarTodos")
 	public ResponseEntity<List<Beneficiario>> getAllConta() {
 		try {
-			List<Beneficiario> beneficiarios = new ArrayList<Beneficiario>();
-
+			List<Beneficiario> beneficiarios = beneficiarioService.findAll();
 			if (beneficiarios.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			} else {
@@ -73,7 +68,7 @@ public class BeneficiarioResource {
 		}
 	}
 
-	@PutMapping(value = "/beneficiarios/{id}")
+	@PutMapping(value = "/atualizar/{id}")
 	public ResponseEntity<Beneficiario> update(@PathVariable("id") long id, @RequestBody Beneficiario beneficiario) {
 		Beneficiario informacoesBeneficiarios = beneficiarioService.findById(id);
 		if (informacoesBeneficiarios != null) {

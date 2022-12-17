@@ -2,7 +2,6 @@ package com.sisrest.resources;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -60,6 +59,7 @@ public class ContaResource {
 	//Não funcionou!
 	@GetMapping(value = "/conta")
 	public ResponseEntity<List<Conta>> getAllConta() {
+		
 		try {
 			List<Conta> contas = new ArrayList<Conta>();
 
