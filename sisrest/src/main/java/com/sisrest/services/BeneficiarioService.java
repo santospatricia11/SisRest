@@ -59,7 +59,6 @@ public class BeneficiarioService {
 		}else if (atualizar.getTipo() == null) {
 			atualizar.setTipo(original.getTipo());
 		}
-		beneficiarioRepository.deleteById(original.getId());
 		return beneficiarioRepository.save(atualizar);
 	}
 
