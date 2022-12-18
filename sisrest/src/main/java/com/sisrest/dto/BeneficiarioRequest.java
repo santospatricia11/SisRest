@@ -13,28 +13,26 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 public class BeneficiarioRequest {
-	
+
 	@NotBlank
 	@NotNull
 	private String nome;
-	
-	@NotBlank
+
 	@NotNull
-	@Size(min = 12, max = 12)
 	private long matricula;
-	
+
 	@Email
 	@NotBlank
 	@NotNull
 	private String email;
-	
+
 	@NotBlank
 	@NotNull
-	@Size(min=8, max=30)
+	@Size(min = 8, max = 30)
 	@Pattern(regexp = "^[^\\s]+$", message = "Campo inválido")
 	private String senha;
-	
+
 	@NotNull
 	private boolean isAdmin;
-	
+
 }

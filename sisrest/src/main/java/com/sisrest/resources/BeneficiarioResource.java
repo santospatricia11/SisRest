@@ -18,7 +18,6 @@ import com.sisrest.dto.BeneficiarioRequest;
 import com.sisrest.dto.BeneficiarioResponse;
 import com.sisrest.model.entities.Beneficiario;
 import com.sisrest.services.BeneficiarioService;
-import com.sisrest.services.ContaService;
 import com.sisrest.services.convertes.BeneficiarioServiceConvert;
 
 import jakarta.validation.Valid;
@@ -34,14 +33,11 @@ public class BeneficiarioResource {
 	private BeneficiarioServiceConvert beneficiarioServiceConvert;
 
 	@PostMapping(value = "/criar")
-
 	public ResponseEntity<BeneficiarioResponse> create(@RequestBody @Valid BeneficiarioRequest dto) {
-
 		Beneficiario beneficiario;
 		beneficiario = beneficiarioService.save(dto);
 		BeneficiarioResponse responseDto = beneficiarioServiceConvert.beneficiarioToDTO(beneficiario);
 		return new ResponseEntity(responseDto, HttpStatus.CREATED);
-
 	}
 
 	@DeleteMapping(value = "/deletar/{id}")
@@ -55,23 +51,25 @@ public class BeneficiarioResource {
 	}
 
 	@GetMapping(value = "/buscarPorID/{id}")
-	public ResponseEntity<Beneficiario> getDetinoById(@PathVariable("id") long id) {
-		Beneficiario informacoesContas = beneficiarioService.findById(id);
-		if (informacoesContas != null) {
-			return new ResponseEntity<>(informacoesContas, HttpStatus.OK);
+	public ResponseEntity<BeneficiarioResponse> getById(@PathVariable("id") long id) {
+		Beneficiario beneficiario = beneficiarioService.findById(id);
+		BeneficiarioResponse responseDto = beneficiarioServiceConvert.beneficiarioToDTO(beneficiario);
+		if (responseDto != null) {
+			return new ResponseEntity<>(responseDto, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
 	@GetMapping(value = "/buscarTodos")
-	public ResponseEntity<List<Beneficiario>> getAllConta() {
+	public ResponseEntity<List<BeneficiarioResponse>> getAllConta() {
 		try {
 			List<Beneficiario> beneficiarios = beneficiarioService.findAll();
-			if (beneficiarios.isEmpty()) {
+			List<BeneficiarioResponse> beneficiariosResponse = beneficiarioServiceConvert.usersToResponses(beneficiarios);
+			if (beneficiariosResponse.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			} else {
-				return new ResponseEntity<>(beneficiarios, HttpStatus.OK);
+				return new ResponseEntity<>(beneficiariosResponse, HttpStatus.OK);
 			}
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -79,10 +77,14 @@ public class BeneficiarioResource {
 	}
 
 	@PutMapping(value = "/atualizar/{id}")
-	public ResponseEntity<Beneficiario> update(@PathVariable("id") long id, @RequestBody Beneficiario beneficiario) {
-		Beneficiario informacoesBeneficiarios = beneficiarioService.findById(id);
-		if (informacoesBeneficiarios != null) {
-			return new ResponseEntity<>(informacoesBeneficiarios, HttpStatus.OK);
+	public ResponseEntity<BeneficiarioResponse> update(@PathVariable("id") long id, @RequestBody @Valid BeneficiarioRequest dto) {
+		Beneficiario beneficiario = beneficiarioServiceConvert.dtoToBeneficiario(dto);
+		beneficiario.setId(id);
+		Beneficiario atualizado = beneficiarioService.update(id, beneficiario);
+		BeneficiarioResponse responseDto = beneficiarioServiceConvert.beneficiarioToDTO(atualizado);
+		
+		if (responseDto != null) {
+			return new ResponseEntity<>(responseDto, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
