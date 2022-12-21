@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,12 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sisrest.dto.BeneficiarioDto;
+import com.sisrest.dto.BeneficiarioRequest;
+import com.sisrest.dto.BeneficiarioResponse;
 import com.sisrest.model.entities.Beneficiario;
-import com.sisrest.model.entities.Conta;
 import com.sisrest.services.BeneficiarioService;
-import com.sisrest.services.BeneficiarioServiceConvert;
-import com.sisrest.services.ContaService;
+import com.sisrest.services.convertes.BeneficiarioServiceConvert;
 
 import jakarta.validation.Valid;
 
@@ -32,26 +32,13 @@ public class BeneficiarioResource {
 
 	@Autowired
 	private BeneficiarioServiceConvert beneficiarioServiceConvert;
-	
-	@Autowired
-	private ContaService contaService;
 
 	@PostMapping(value = "/criar")
-
-	public ResponseEntity create(@RequestBody @Valid BeneficiarioDto dto) {
-
-		try {
-			Beneficiario entity = beneficiarioServiceConvert.dtoToBeneficiario(dto);
-
-			entity = beneficiarioService.save(entity);
-
-			dto = beneficiarioServiceConvert.beneficiarioToDTO(entity);
-
-			return new ResponseEntity(dto, HttpStatus.CREATED);
-
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
-		}
+	public ResponseEntity<BeneficiarioResponse> create(@RequestBody @Valid BeneficiarioRequest dto) {
+		Beneficiario beneficiario;
+		beneficiario = beneficiarioService.save(dto);
+		BeneficiarioResponse responseDto = beneficiarioServiceConvert.beneficiarioToDTO(beneficiario);
+		return new ResponseEntity(responseDto, HttpStatus.CREATED);
 	}
 
 	@DeleteMapping(value = "/deletar/{id}")
@@ -65,23 +52,25 @@ public class BeneficiarioResource {
 	}
 
 	@GetMapping(value = "/buscarPorID/{id}")
-	public ResponseEntity<Beneficiario> getDetinoById(@PathVariable("id") long id) {
-		Beneficiario informacoesContas = beneficiarioService.findById(id);
-		if (informacoesContas != null) {
-			return new ResponseEntity<>(informacoesContas, HttpStatus.OK);
+	public ResponseEntity<BeneficiarioResponse> getById(@PathVariable("id") long id) {
+		Beneficiario beneficiario = beneficiarioService.findById(id);
+		BeneficiarioResponse responseDto = beneficiarioServiceConvert.beneficiarioToDTO(beneficiario);
+		if (responseDto != null) {
+			return new ResponseEntity<>(responseDto, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
 	@GetMapping(value = "/buscarTodos")
-	public ResponseEntity<List<Beneficiario>> getAllConta() {
+	public ResponseEntity<List<BeneficiarioResponse>> getAllConta() {
 		try {
 			List<Beneficiario> beneficiarios = beneficiarioService.findAll();
-			if (beneficiarios.isEmpty()) {
+			List<BeneficiarioResponse> beneficiariosResponse = beneficiarioServiceConvert.usersToResponses(beneficiarios);
+			if (beneficiariosResponse.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			} else {
-				return new ResponseEntity<>(beneficiarios, HttpStatus.OK);
+				return new ResponseEntity<>(beneficiariosResponse, HttpStatus.OK);
 			}
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -89,10 +78,14 @@ public class BeneficiarioResource {
 	}
 
 	@PutMapping(value = "/atualizar/{id}")
-	public ResponseEntity<Beneficiario> update(@PathVariable("id") long id, @RequestBody Beneficiario beneficiario) {
-		Beneficiario informacoesBeneficiarios = beneficiarioService.findById(id);
-		if (informacoesBeneficiarios != null) {
-			return new ResponseEntity<>(informacoesBeneficiarios, HttpStatus.OK);
+	public ResponseEntity<BeneficiarioResponse> update(@PathVariable("id") long id, @RequestBody @Valid BeneficiarioRequest dto) {
+		Beneficiario beneficiario = beneficiarioServiceConvert.dtoToBeneficiario(dto);
+		beneficiario.setId(id);
+		Beneficiario atualizado = beneficiarioService.update(id, beneficiario);
+		BeneficiarioResponse responseDto = beneficiarioServiceConvert.beneficiarioToDTO(atualizado);
+		
+		if (responseDto != null) {
+			return new ResponseEntity<>(responseDto, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
