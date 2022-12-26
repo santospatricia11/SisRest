@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sisrest.dto.BeneficiarioRequest;
+import com.sisrest.exception.EmailEmUsoException;
 import com.sisrest.model.entities.Beneficiario;
 import com.sisrest.repositories.BeneficiarioRepository;
 
@@ -20,8 +21,13 @@ public class BeneficiarioService {
 	@Autowired
 	private ModelMapper mapper;
 
-	public Beneficiario save(BeneficiarioRequest beneficiarioDto) {
+	public Beneficiario save(BeneficiarioRequest beneficiarioDto) throws EmailEmUsoException {
 		Beneficiario beneficiario = mapper.map(beneficiarioDto, Beneficiario.class);
+		boolean verificado = beneficiarioRepository.existsByEmail(beneficiarioDto.getEmail());
+
+		if (verificado)
+			throw new EmailEmUsoException(beneficiarioDto.getEmail());
+
 		return beneficiarioRepository.save(beneficiario);
 	}
 
@@ -41,22 +47,27 @@ public class BeneficiarioService {
 		return (List<Beneficiario>) beneficiarioRepository.findAll();
 	}
 
-	public Beneficiario update(long id, Beneficiario beneficiarioDto) {
+	public Beneficiario update(long id, Beneficiario beneficiarioDto) throws EmailEmUsoException{
 		Optional<Beneficiario> beneficiario = beneficiarioRepository.findById(id);
-
+		
 		Beneficiario original = beneficiario.get();
 		Beneficiario atualizar = mapper.map(beneficiarioDto, Beneficiario.class);
+		boolean verificado = beneficiarioRepository.existsByEmail(beneficiarioDto.getEmail());
+
+		if (verificado)
+			throw new EmailEmUsoException(beneficiarioDto.getEmail());
+		
 
 		atualizar.setId(beneficiario.get().getId());
 		if (atualizar.getEmail() == null) {
 			atualizar.setEmail(original.getEmail());
-		}else if(atualizar.getMatricula() == 0) {
+		} else if (atualizar.getMatricula() == 0) {
 			atualizar.setMatricula(original.getMatricula());
-		}else if (atualizar.getNome() == null) {
+		} else if (atualizar.getNome() == null) {
 			atualizar.setNome(original.getNome());
-		}else if (atualizar.getSenha() == null) {
+		} else if (atualizar.getSenha() == null) {
 			atualizar.setSenha(original.getSenha());
-		}else if (atualizar.getTipo() == null) {
+		} else if (atualizar.getTipo() == null) {
 			atualizar.setTipo(original.getTipo());
 		}
 		return beneficiarioRepository.save(atualizar);

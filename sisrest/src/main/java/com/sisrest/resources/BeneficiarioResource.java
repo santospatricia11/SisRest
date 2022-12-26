@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sisrest.dto.BeneficiarioRequest;
 import com.sisrest.dto.BeneficiarioResponse;
+import com.sisrest.exception.EmailEmUsoException;
 import com.sisrest.model.entities.Beneficiario;
 import com.sisrest.services.BeneficiarioService;
 import com.sisrest.services.convertes.BeneficiarioServiceConvert;
@@ -34,7 +35,8 @@ public class BeneficiarioResource {
 	private BeneficiarioServiceConvert beneficiarioServiceConvert;
 
 	@PostMapping(value = "/criar")
-	public ResponseEntity<BeneficiarioResponse> create(@RequestBody @Valid BeneficiarioRequest dto) {
+	public ResponseEntity<BeneficiarioResponse> create(@RequestBody @Valid BeneficiarioRequest dto)
+			throws EmailEmUsoException {
 		Beneficiario beneficiario;
 		beneficiario = beneficiarioService.save(dto);
 		BeneficiarioResponse responseDto = beneficiarioServiceConvert.beneficiarioToDTO(beneficiario);
@@ -66,7 +68,8 @@ public class BeneficiarioResource {
 	public ResponseEntity<List<BeneficiarioResponse>> getAllConta() {
 		try {
 			List<Beneficiario> beneficiarios = beneficiarioService.findAll();
-			List<BeneficiarioResponse> beneficiariosResponse = beneficiarioServiceConvert.usersToResponses(beneficiarios);
+			List<BeneficiarioResponse> beneficiariosResponse = beneficiarioServiceConvert
+					.usersToResponses(beneficiarios);
 			if (beneficiariosResponse.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			} else {
@@ -78,12 +81,13 @@ public class BeneficiarioResource {
 	}
 
 	@PutMapping(value = "/atualizar/{id}")
-	public ResponseEntity<BeneficiarioResponse> update(@PathVariable("id") long id, @RequestBody @Valid BeneficiarioRequest dto) {
+	public ResponseEntity<BeneficiarioResponse> update(@PathVariable("id") long id,
+			@RequestBody @Valid BeneficiarioRequest dto) throws EmailEmUsoException {
 		Beneficiario beneficiario = beneficiarioServiceConvert.dtoToBeneficiario(dto);
 		beneficiario.setId(id);
 		Beneficiario atualizado = beneficiarioService.update(id, beneficiario);
 		BeneficiarioResponse responseDto = beneficiarioServiceConvert.beneficiarioToDTO(atualizado);
-		
+
 		if (responseDto != null) {
 			return new ResponseEntity<>(responseDto, HttpStatus.OK);
 		} else {
