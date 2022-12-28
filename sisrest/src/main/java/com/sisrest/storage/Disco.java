@@ -12,10 +12,10 @@ import org.springframework.web.multipart.MultipartFile;
 @Component
 public class Disco {
 
-	@Value("..D")
+	@Value("D:\\GitHub\\Sisrest\\sisrest\\src\\resources\\files")
 	private String raiz;
 
-	@Value("..Sisrest/src/main/java/com/sisrest/files")
+	@Value("CSV")
 	private String diretorioCSV;
 
 	public void salvarCSV(MultipartFile arquivoCSV) {
