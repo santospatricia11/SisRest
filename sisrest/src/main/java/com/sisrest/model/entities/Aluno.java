@@ -46,5 +46,33 @@ public class Aluno {
 	@Column
 	@Pattern(regexp = "^[A-Z]+(.)*", message = "Campo nome deve iniciar com letra maiúscula")
 	private String curso;
+	
+	@NotNull
+	@NotEmpty
+	@NotBlank(message = "Campo não informado")
+	@Column
+	private String email;
+	
+	@NotNull
+	@NotEmpty
+	@NotBlank(message = "Campo não informado")
+	@Column
+	private long CPF;
+	@NotNull
+	@NotEmpty
+	@NotBlank(message = "Campo não informado")
+	@Column
+	private String programa;
+	@NotNull
+	@NotEmpty
+	@NotBlank(message = "Campo não informado")
+	@Column
+	private String modalidade;
+	@NotNull
+	@NotEmpty
+	@NotBlank(message = "Campo não informado")
+	@Column
+	private String classificacao;
+	
 
 }
