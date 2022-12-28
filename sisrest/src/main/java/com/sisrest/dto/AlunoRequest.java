@@ -13,15 +13,16 @@ public class AlunoRequest {
 	@NotBlank
 	@NotNull
 	private String nome;
+	
 	@NotBlank
 	@NotNull
 	private long id;
+	
 	@NotBlank
 	@NotNull
 	private long matricula;
 
-	@NotBlank
-	@NotNull
+	
 	private String email;
 
 	@NotBlank

@@ -16,15 +16,17 @@ import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 
 @Component
-public class Disco {
-	
-	private static final Disco INSTANCIA_DISCO = new Disco();
-	
-	private Disco() {}
-	
-	public Disco getInstancia() {
+public class StorageCSV {
+
+	private static final StorageCSV INSTANCIA_DISCO = new StorageCSV();
+
+	private StorageCSV() {
+	}
+
+	public StorageCSV getInstancia() {
 		return INSTANCIA_DISCO;
 	}
+
 	@Value("D:\\GitHub\\Sisrest\\sisrest\\src\\resources\\files")
 	private String raiz;
 
@@ -58,6 +60,6 @@ public class Disco {
 		} catch (IOException e) {
 			throw new RuntimeException("Erro ao Recuperar!");
 		}
-		
+
 	}
 }

@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.opencsv.exceptions.CsvException;
-import com.sisrest.storage.Disco;
+import com.sisrest.storage.StorageCSV;
 
 @RestController
 @RequestMapping("/api/aluno")
 public class AlunoResource {
 
 	@Autowired
-	private Disco disco;
+	private StorageCSV disco;
 
 	@PostMapping(value = "/uploadCSV")
 	public void uploadCSV(@RequestParam("file") MultipartFile arquivoCSV) throws IOException, CsvException {
