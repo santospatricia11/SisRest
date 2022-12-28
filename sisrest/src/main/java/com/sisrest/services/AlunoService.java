@@ -34,14 +34,14 @@ public class AlunoService {
 		return alunoRepository.save(aluno);
 	}
 
-	public Aluno deleteById(long cpf) {
-		Optional<Aluno> aluno = alunoRepository.findById(cpf);
-		alunoRepository.deleteById(cpf);
+	public Aluno deleteById(long id) {
+		Optional<Aluno> aluno = alunoRepository.findById(id);
+		alunoRepository.deleteById(id);
 		return aluno.get();
 	}
 
-	public Aluno findById(long cpf) {
-		Optional<Aluno> aluno = alunoRepository.findById(cpf);
+	public Aluno findById(long id) {
+		Optional<Aluno> aluno = alunoRepository.findById(id);
 		return aluno.get();
 
 	}
@@ -50,8 +50,8 @@ public class AlunoService {
 		return (List<Aluno>) alunoRepository.findAll();
 	}
 
-	public Aluno update(long cpf, Aluno alunoDto) throws EmailEmUsoException {
-		Optional<Aluno> aluno = alunoRepository.findById(cpf);
+	public Aluno update(long id, Aluno alunoDto) throws EmailEmUsoException {
+		Optional<Aluno> aluno = alunoRepository.findById(id);
 
 		Aluno original = aluno.get();
 		Aluno atualizar = mapper.map(alunoDto, Aluno.class);
@@ -60,7 +60,7 @@ public class AlunoService {
 		if (verificado)
 			throw new EmailEmUsoException(alunoDto.getEmail());
 
-		atualizar.setCPF(aluno.get().getCPF());
+		atualizar.setId(aluno.get().getId());
 		if (atualizar.getEmail() == null) {
 			atualizar.setEmail(original.getEmail());
 		} else if (atualizar.getMatricula() == 0) {
@@ -69,10 +69,12 @@ public class AlunoService {
 			atualizar.setNome(original.getNome());
 		} else if (atualizar.getCurso() == null) {
 			atualizar.setCurso(original.getCurso());
+		} else if (atualizar.getCPF() == 0) {
+			atualizar.setCPF(original.getCPF());
 		} else if (atualizar.getPrograma() == null) {
 			atualizar.setPrograma(original.getPrograma());
+
 		}
 		return alunoRepository.save(atualizar);
 	}
-
 }

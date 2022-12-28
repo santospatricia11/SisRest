@@ -38,6 +38,11 @@ public class Aluno {
 	@Column
 	@NotNull
 	@NotEmpty
+	private long id;
+	@Id
+	@Column
+	@NotNull
+	@NotEmpty
 	private long matricula;
 
 	@NotNull
