@@ -13,10 +13,10 @@ public class AlunoResource {
 
 	private Aluno aluno;
 	
-	@PostMapping("/arquivo")
-	public void upload(@RequestParam MultipartFile file) {
-		aluno.salvarCSV(file);
-	}
-	
+//	@PostMapping("/arquivo")
+//	public void upload(@RequestParam MultipartFile file) {
+//		aluno.salvarCSV(file);
+//	}
+//	
 
 }
