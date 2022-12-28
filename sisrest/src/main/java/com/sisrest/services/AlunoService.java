@@ -8,12 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sisrest.dto.AlunoRequest;
-import com.sisrest.dto.BeneficiarioRequest;
 import com.sisrest.exception.EmailEmUsoException;
 import com.sisrest.model.entities.Aluno;
-import com.sisrest.model.entities.Beneficiario;
 import com.sisrest.repositories.AlunoRepository;
-import com.sisrest.repositories.BeneficiarioRepository;
 
 @Service
 public class AlunoService {

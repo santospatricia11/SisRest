@@ -35,7 +35,7 @@ public class Aluno {
 	@NotNull
 	@NotEmpty
 	private long id;
-	@Id
+	
 	@Column
 	@NotNull
 	@NotEmpty

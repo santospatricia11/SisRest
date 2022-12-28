@@ -18,13 +18,13 @@ import com.opencsv.exceptions.CsvException;
 @Component
 public class StorageCSV {
 
-	private static final StorageCSV INSTANCIA_DISCO = new StorageCSV();
+	private static final StorageCSV instanciaStorage = new StorageCSV();
 
 	private StorageCSV() {
 	}
 
 	public StorageCSV getInstancia() {
-		return INSTANCIA_DISCO;
+		return instanciaStorage;
 	}
 
 	@Value("D:\\GitHub\\Sisrest\\sisrest\\src\\resources\\files")

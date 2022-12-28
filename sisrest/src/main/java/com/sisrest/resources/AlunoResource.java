@@ -19,17 +19,18 @@ import com.sisrest.storage.StorageCSV;
 public class AlunoResource {
 
 	@Autowired
-	private StorageCSV disco;
+	private StorageCSV storage;
 
 	@PostMapping(value = "/uploadCSV")
 	public void uploadCSV(@RequestParam("file") MultipartFile arquivoCSV) throws IOException, CsvException {
-		disco.salvarCSV(arquivoCSV);
+		storage.salvarCSV(arquivoCSV);
 		
 	}
 	
 	@GetMapping(value = "/recuperarCSV")
 	public List<String[]> recuperarCSV() throws CsvException{
-		return disco.recuperarCSV();
+		return storage.recuperarCSV();
+		
 	}
 		
 
