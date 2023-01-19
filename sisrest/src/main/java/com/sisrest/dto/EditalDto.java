@@ -2,7 +2,7 @@ package com.sisrest.dto;
 
 import com.sisrest.model.entities.Conta;
 
-import jakarta.persistence.MappedSuperclass;
+import javax.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

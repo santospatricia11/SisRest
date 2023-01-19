@@ -2,11 +2,11 @@ package com.sisrest.model.entities;
 
 import java.io.Serializable;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
-import jakarta.validation.constraints.NotNull;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
