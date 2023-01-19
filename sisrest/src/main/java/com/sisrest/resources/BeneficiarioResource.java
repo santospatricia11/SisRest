@@ -22,7 +22,7 @@ import com.sisrest.model.entities.Beneficiario;
 import com.sisrest.services.BeneficiarioService;
 import com.sisrest.services.convertes.BeneficiarioServiceConvert;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/beneficiario")
