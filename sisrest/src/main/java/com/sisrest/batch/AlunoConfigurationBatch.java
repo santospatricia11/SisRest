@@ -8,6 +8,8 @@ import org.springframework.batch.core.configuration.annotation.EnableBatchProces
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
+import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
@@ -104,4 +106,57 @@ public class AlunoConfigurationBatch {
 		return jobBuilderFactory.get("processAluno").flow(executeAlunoStep()).end().build();
 
 	}
+	///////////////////////////////banco//////////////////
+	@Bean
+	public FlatFileItemReader<Aluno> readFromCsv() {
+		FlatFileItemReader<Aluno> reader = new FlatFileItemReader<Aluno>();
+		reader.setResource(new FileSystemResource(""));
+		// reader.setResource(new ClassPathResource("alunos.csv"));
+		reader.setResource(new FileSystemResource("C:\\Users\\Cliente\\Downloads\\alunos.csv"));
+		reader.setLineMapper(new DefaultLineMapper<Aluno>() {
+			{
+				setLineTokenizer(new DelimitedLineTokenizer() {
+					{
+						setNames(Aluno.fields());
+					}
+				});
+				setFieldSetMapper(new BeanWrapperFieldSetMapper<Aluno>() {
+					{
+						setTargetType(Aluno.class);
+					}
+				});
+
+			}
+		});
+		return reader;
+	}
+
+	
+	@Bean 
+	public JdbcBatchItemWriter<Aluno> writerIntoDb(){
+		JdbcBatchItemWriter<Aluno>writer= new JdbcBatchItemWriter<Aluno>();
+		writer.setDataSource(dataSource);
+		writer.setSql("insert into csvtodbdata(id,nome,matricula,email,CPF)values(:id,:nome,:matricula,:email,:CPF)");
+		writer.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<Aluno>());
+		return writer;
+	}
+	
+	@Bean
+	public Step step() {
+		
+		return stepBuilderFactory.get("step")
+				.<Aluno,Aluno>chunk(10)
+				.reader(readFromCsv())
+				.writer(writerIntoDb())
+				.build();
+	
+		
+	}
+
+	@Bean(name = "launcher")
+	public Job job() {
+		return jobBuilderFactory.get("job").flow(step()).end().build();
+		
+	}
 }
+
