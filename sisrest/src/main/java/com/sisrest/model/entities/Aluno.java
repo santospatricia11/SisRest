@@ -22,7 +22,7 @@ import lombok.ToString;
 @ToString
 @Entity
 public class Aluno {
-	
+
 	@NotNull
 	@NotEmpty
 	@NotBlank(message = "Campo não informado")
@@ -35,7 +35,7 @@ public class Aluno {
 	@NotNull
 	@NotEmpty
 	private long id;
-	
+
 	@Column
 	@NotNull
 	@NotEmpty
@@ -47,13 +47,13 @@ public class Aluno {
 	@Column
 	@Pattern(regexp = "^[A-Z]+(.)*", message = "Campo nome deve iniciar com letra maiúscula")
 	private String curso;
-	
+
 	@NotNull
 	@NotEmpty
 	@NotBlank(message = "Campo não informado")
 	@Column
 	private String email;
-	
+
 	@NotNull
 	@NotEmpty
 	@NotBlank(message = "Campo não informado")
@@ -74,6 +74,10 @@ public class Aluno {
 	@NotBlank(message = "Campo não informado")
 	@Column
 	private String classificacao;
-	
+
+	public static String[] fields() {
+
+		return new String[] { "id", "nome", "matricula", "email", "CPF" };
+	}
 
 }

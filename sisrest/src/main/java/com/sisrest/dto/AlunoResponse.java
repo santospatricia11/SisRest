@@ -9,9 +9,9 @@ import lombok.Setter;
 @EqualsAndHashCode
 public class AlunoResponse {
 	private String nome;
-	private long id;
-	private long matricula;
+	private String id;
+	private String matricula;
 	private String email;
-	private long CPF;
+	private String CPF;
 
 }
