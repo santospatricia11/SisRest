@@ -2,6 +2,8 @@ package com.sisrest.resources;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +24,7 @@ import com.sisrest.model.entities.Beneficiario;
 import com.sisrest.services.BeneficiarioService;
 import com.sisrest.services.convertes.BeneficiarioServiceConvert;
 
-import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping("/api/beneficiario")

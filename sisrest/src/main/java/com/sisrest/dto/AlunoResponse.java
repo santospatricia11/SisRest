@@ -8,10 +8,22 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 public class AlunoResponse {
+
 	private String nome;
-	private long id;
-	private long matricula;
+	private String id;
+	private String matricula;
 	private String email;
-	private long CPF;
+	private String CPF;
+	public AlunoResponse(String nome, String id, String matricula, String email, String CPF) {
+		
+		this.nome = nome;
+		this.id = id;
+		this.matricula = matricula;
+		this.email = email;
+		CPF = CPF;
+	}
+	public AlunoResponse(String string) {
+		// TODO Auto-generated constructor stub
+	}
 
 }
