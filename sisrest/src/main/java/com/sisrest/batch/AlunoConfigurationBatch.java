@@ -1,4 +1,11 @@
+
 package com.sisrest.batch;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.sql.DataSource;
 
@@ -18,11 +25,13 @@ import org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor;
 import org.springframework.batch.item.file.transform.DelimitedLineAggregator;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sisrest.model.entities.Aluno;
 import com.sisrest.repositories.AlunoRepository;
@@ -40,12 +49,37 @@ public class AlunoConfigurationBatch {
 	@Autowired
 	private DataSource dataSource;
 	private AlunoRepository alunoRepository;
-	@Bean
+	
+	@Value("D:\\GitHub\\Sisrest\\sisrest\\src\\resources\\files")
+	private String raiz;
 
+	@Value("CSV")
+	private String diretorioCSV;
+
+	private File file;
+
+	public void salvarCSV(MultipartFile arquivoCSV) {
+		this.salvar(this.diretorioCSV, arquivoCSV);
+	}
+
+	private void salvar(String diretorio, MultipartFile arquivo) {
+		Path diretorioPath = Paths.get(this.raiz, diretorio);
+		Path arquivoPath = diretorioPath.resolve(arquivo.getOriginalFilename());
+		file = arquivoPath.toFile();
+		try {
+			Files.createDirectories(diretorioPath);
+			arquivo.transferTo(arquivoPath.toFile());
+
+		} catch (IOException e) {
+			throw new RuntimeException("Erro ao Salvar!!");
+		}
+	}
+		
+	@Bean
 	public FlatFileItemReader<Aluno> readerDataFromCsv() {
 
 		FlatFileItemReader<Aluno> reader = new FlatFileItemReader<>();
-		reader.setResource(new FileSystemResource("C:\\Users\\Cliente\\Downloads\\alunos.csv"));
+		reader.setResource(new FileSystemResource(raiz));
 		reader.setLineMapper(new DefaultLineMapper<Aluno>() {
 
 			{
@@ -78,7 +112,7 @@ public class AlunoConfigurationBatch {
 	public FlatFileItemWriter<Aluno> writer() {
 
 		FlatFileItemWriter<Aluno> writer = new FlatFileItemWriter<Aluno>();
-		writer.setResource(new FileSystemResource("C:\\Users\\Cliente\\Downloads\\Autalunos.csv"));
+		writer.setResource(new FileSystemResource(raiz));
 		DelimitedLineAggregator<Aluno> aggregator = new DelimitedLineAggregator<>();
 		BeanWrapperFieldExtractor<Aluno> fieldExtractor = new BeanWrapperFieldExtractor<>();
 		fieldExtractor.setNames(Aluno.fields());
@@ -112,7 +146,7 @@ public class AlunoConfigurationBatch {
 		FlatFileItemReader<Aluno> reader = new FlatFileItemReader<Aluno>();
 		reader.setResource(new FileSystemResource(""));
 		// reader.setResource(new ClassPathResource("alunos.csv"));
-		reader.setResource(new FileSystemResource("C:\\Users\\Cliente\\Downloads\\alunos.csv"));
+		reader.setResource(new FileSystemResource(raiz));
 		reader.setLineMapper(new DefaultLineMapper<Aluno>() {
 			{
 				setLineTokenizer(new DelimitedLineTokenizer() {
@@ -159,4 +193,3 @@ public class AlunoConfigurationBatch {
 		
 	}
 }
-
