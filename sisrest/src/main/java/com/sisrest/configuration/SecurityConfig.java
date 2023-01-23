@@ -1,6 +1,7 @@
 package com.sisrest.configuration;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -95,32 +96,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .cors()
-                    .and()
-                .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                    .and()
-                .csrf()
-                    .disable()
-                .formLogin()
-                    .disable()
-                .httpBasic()
-                    .disable()
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .csrf().disable()
+                .formLogin().disable()
+                .httpBasic().disable()
                 .exceptionHandling()
-                    .authenticationEntryPoint(new RestAuthenticationEntryPoint())
-                    .and()
+                .authenticationEntryPoint(new RestAuthenticationEntryPoint())
+                .and()
                 .authorizeRequests()
-                    .antMatchers("/",
-                        "/error",
-                        "/favicon.ico",
-                        "/**/*.png",
-                        "/**/*.gif",
-                        "/**/*.svg",
-                        "/**/*.jpg",
-                        "/**/*.html",
-                        "/**/*.css",
-                        "/**/*.js")
-                        .permitAll()
-                    .antMatchers("/auth/**", "/oauth2/**","/oauth/**", "/api/**").permitAll()
+                    .antMatchers("/","/error","/favicon.ico","/**/*.png","/**/*.gif",
+                        "/**/*.svg","/**/*.jpg","/**/*.html","/**/*.css","/**/*.js").permitAll()
+                    .antMatchers("/auth/**", "/oauth2/**","/oauth/**").permitAll()//
+                    .antMatchers(HttpMethod.GET, "/actuator/**").permitAll()//
+    				.antMatchers(HttpMethod.POST, "/api/login").permitAll()//
+    				.antMatchers(HttpMethod.POST, "/api/auth").permitAll()//
+    				.antMatchers(HttpMethod.POST, "/api/isValidToken").permitAll()//
+    				.antMatchers(HttpMethod.POST, "/api/user").permitAll()//
+    				//.antMatchers(HttpMethod.DELETE, "/api/user").hasRole(SystemRoleService.AVAILABLE_ROLES.ADMIN.name())
                     .anyRequest()
                         .authenticated()
                     .and()
@@ -139,6 +133,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .failureHandler(oAuth2AuthenticationFailureHandler);
 
         // Add our custom Token based authentication filter
+        //Adicionar nosso filtro de autenticação personalizado baseado em Token
         http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 }
