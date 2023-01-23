@@ -2,6 +2,8 @@ package com.sisrest.model.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -30,10 +32,9 @@ public class Aluno {
 	@Pattern(regexp = "^[A-Z]+(.)*", message = "Campo nome deve iniciar com letra maiúscula")
 	private String nome;
 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	@Column
-	@NotNull
-	@NotEmpty
 	private long id;
 
 	@Column
@@ -45,38 +46,15 @@ public class Aluno {
 	@NotEmpty
 	@NotBlank(message = "Campo não informado")
 	@Column
-	@Pattern(regexp = "^[A-Z]+(.)*", message = "Campo nome deve iniciar com letra maiúscula")
-	private String curso;
-
-	@NotNull
-	@NotEmpty
-	@NotBlank(message = "Campo não informado")
-	@Column
 	private String email;
 
 	@NotNull
 	@NotEmpty
 	@NotBlank(message = "Campo não informado")
 	@Column
-	private long CPF;
-	@NotNull
-	@NotEmpty
-	@NotBlank(message = "Campo não informado")
-	@Column
-	private String programa;
-	@NotNull
-	@NotEmpty
-	@NotBlank(message = "Campo não informado")
-	@Column
-	private String modalidade;
-	@NotNull
-	@NotEmpty
-	@NotBlank(message = "Campo não informado")
-	@Column
-	private String classificacao;
+	private String CPF;
 
 	public static String[] fields() {
-
 		return new String[] { "id", "nome", "matricula", "email", "CPF" };
 	}
 
