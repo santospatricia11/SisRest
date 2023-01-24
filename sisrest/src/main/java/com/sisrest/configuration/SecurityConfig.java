@@ -108,7 +108,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers("/","/error","/favicon.ico","/**/*.png","/**/*.gif",
                         "/**/*.svg","/**/*.jpg","/**/*.html","/**/*.css","/**/*.js").permitAll()
-                    .antMatchers("/auth/**", "/oauth2/**","/oauth/**").permitAll()//
+                    .antMatchers("/auth/**", "/api/oauth2/**","/oauth/**").permitAll()//
                     .antMatchers(HttpMethod.GET, "/actuator/**").permitAll()//
     				.antMatchers(HttpMethod.POST, "/api/login").permitAll()//
     				.antMatchers(HttpMethod.POST, "/api/auth").permitAll()//

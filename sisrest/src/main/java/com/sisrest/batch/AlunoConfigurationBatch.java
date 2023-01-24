@@ -7,14 +7,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import javax.batch.api.chunk.ItemProcessor;
 import javax.sql.DataSource;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
-import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
-import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
@@ -25,21 +22,17 @@ import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilde
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
-import org.springframework.batch.item.file.mapping.DefaultLineMapper;
-import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sisrest.dto.AlunoResponse;
 import com.sisrest.model.entities.Aluno;
-import com.sisrest.repositories.AlunoRepository;
 
 @Configuration
 @EnableBatchProcessing
@@ -71,50 +64,50 @@ public class AlunoConfigurationBatch {
 		}
 	}
 
-	@Bean
-	public FlatFileItemReader<Aluno> reader() {
-		return new FlatFileItemReaderBuilder<Aluno>().name("alunoItemReader")
-				.resource(new ClassPathResource("alunos.csv")).delimited()
-				.names(new String[] { "nome", "matricula", "email", "CPF" })
-				.fieldSetMapper(new BeanWrapperFieldSetMapper<Aluno>() {
-					{
-						setTargetType(Aluno.class);
-					}
-				}).build();
-	}
-
-	@Bean
-	public AlunoItemProcessor processor() {
-		return new AlunoItemProcessor();
-	}
-
-	@Bean
-	public JdbcBatchItemWriter<Aluno> writer(DataSource dataSource) {
-		return new JdbcBatchItemWriterBuilder<Aluno>()
-				.itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
-				.sql("insert into alunos(id,nome,matricula,email,CPF)values(:id,:nome,:matricula,:email,:CPF)")
-				.dataSource(dataSource).build();
-	}
-
-	@Bean
-	public Job importUserJob(JobRepository jobRepository,
-			JobNotificacaoConclusao listener, Step step1) {
-		return new JobBuilder("importUserJob", jobRepository)
-			.incrementer(new RunIdIncrementer())
-			.listener(listener)
-			.flow(step1)
-			.end()
-			.build();
-	}
-
-	@Bean
-	public Step step1(JobRepository jobRepository,
-			PlatformTransactionManager transactionManager, JdbcBatchItemWriter<Aluno> writer) {
-		return new StepBuilder("step1", jobRepository)
-			.<Aluno, Aluno> chunk(10, transactionManager)
-			.reader(reader())
-			.processor(processor())
-			.writer(writer)
-			.build();
-	}
+//	@Bean
+//	public FlatFileItemReader<AlunoResponse> reader() {
+//		return new FlatFileItemReaderBuilder<AlunoResponse>().name("alunoItemReader")
+//				.resource(new ClassPathResource("alunos.csv")).delimited()
+//				.names(new String[] { "nome", "matricula", "email", "CPF" })
+//				.fieldSetMapper(new BeanWrapperFieldSetMapper<AlunoResponse>() {
+//					{
+//						setTargetType(AlunoResponse.class);
+//					}
+//				}).build();
+//	}
+//
+//	@Bean
+//	public AlunoItemProcessor processor() {
+//		return new AlunoItemProcessor();
+//	}
+//
+//	@Bean
+//	public JdbcBatchItemWriter<Aluno> writer(DataSource dataSource) {
+//		return new JdbcBatchItemWriterBuilder<Aluno>()
+//				.itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
+//				.sql("insert into aluno(id,nome,matricula,email,CPF)values(:id,:nome,:matricula,:email,:CPF)")
+//				.dataSource(dataSource).build();
+//	}
+//
+//	@Bean
+//	public Job importUserJob(JobRepository jobRepository,
+//			JobNotificacaoConclusao listener, Step step1) {
+//		return new JobBuilder("importUserJob")
+//			.incrementer(new RunIdIncrementer())
+//			.listener(listener)
+//			.flow(step1)
+//			.end()
+//			.build();
+//	}
+//
+//	@Bean
+//	public Step step1(JobRepository jobRepository,
+//			PlatformTransactionManager transactionManager, JdbcBatchItemWriter<Aluno> writer) {
+//		return new StepBuilder("step1")
+//			.<AlunoResponse, Aluno> chunk(10)
+//			.reader(reader())
+//			.processor(processor())
+//			.writer(writer)
+//			.build();
+//	}
 }

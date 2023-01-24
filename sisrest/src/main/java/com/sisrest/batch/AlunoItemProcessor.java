@@ -17,9 +17,9 @@ public class AlunoItemProcessor implements ItemProcessor<AlunoResponse, Aluno> {
 		final long matricula = item.getMatricula();
 		final String email = item.getEmail().toUpperCase();
 		final String CPF = item.getCPF().toUpperCase();
-		
+
 		final Aluno itemTransformado = new Aluno();
-		
+
 		itemTransformado.setNome(nome);
 		itemTransformado.setMatricula(matricula);
 		itemTransformado.setEmail(email);
