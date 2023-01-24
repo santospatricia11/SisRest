@@ -32,9 +32,9 @@ public class Aluno {
 	@Pattern(regexp = "^[A-Z]+(.)*", message = "Campo nome deve iniciar com letra maiúscula")
 	private String nome;
 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	@Column
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	@Column

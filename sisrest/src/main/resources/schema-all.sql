@@ -1,0 +1,9 @@
+DROP TABLE alunos IF EXISTS;
+
+CREATE TABLE alunos  (
+    id BIGINT IDENTITY NOT NULL PRIMARY KEY,
+    nome VARCHAR(20),
+    matricula BIGINT,
+    email VARCHAR(50),
+    CPF VARCHAR(20)
+);
