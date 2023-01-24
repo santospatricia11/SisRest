@@ -64,13 +64,6 @@ public class AlunoService {
 			atualizar.setMatricula(original.getMatricula());
 		} else if (atualizar.getNome() == null) {
 			atualizar.setNome(original.getNome());
-		} else if (atualizar.getCurso() == null) {
-			atualizar.setCurso(original.getCurso());
-		} else if (atualizar.getCPF() == 0) {
-			atualizar.setCPF(original.getCPF());
-		} else if (atualizar.getPrograma() == null) {
-			atualizar.setPrograma(original.getPrograma());
-
 		}
 		return alunoRepository.save(atualizar);
 	}
