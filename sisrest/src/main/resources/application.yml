@@ -7,9 +7,17 @@ spring:
             clientId: 965349476239-1o9e0e1emo8nf7s9qcbpl4b5g2hm94uj.apps.googleusercontent.com
             clientSecret: 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
             redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            accessTokenUri: https://www.googleapis.com/oauth2/v3/token
+            userAuthorizationUri: https://accounts.google.com/o/oauth2/auth
+            tokenName: oauth_token
+            authenticationScheme: query
+            clientAuthenticationScheme: form
             scope:
                 - email
                 - profile
+    resource:
+            userInfoUri: https://www.googleapis.com/userinfo/v2/me
+            preferTokenInfo: false         
 app:
   auth:
     tokenSecret: 04ca023b39512e46d0c2cf4b48d5aac61d34302994c87ed4eff225dcf3b0a218739f3897051a057f9b846a69ea2927a587044164b7bae5e1306219d50b588cb1
@@ -25,3 +33,16 @@ app:
       - http://localhost:3000/oauth2/redirect
       - myandroidapp://oauth2/redirect
       - myiosapp://oauth2/redirect
+      
+#spring:
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          google:
+#            clientId: 965349476239-1o9e0e1emo8nf7s9qcbpl4b5g2hm94uj.apps.googleusercontent.com
+#            clientSecret: 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
+#            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+#            scope:
+#                - email
+#                - profile
