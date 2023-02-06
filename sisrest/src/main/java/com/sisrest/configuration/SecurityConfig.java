@@ -109,12 +109,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/","/error","/favicon.ico","/**/*.png","/**/*.gif",
                         "/**/*.svg","/**/*.jpg","/**/*.html","/**/*.css","/**/*.js").permitAll()
                     .antMatchers("/auth/**", "/api/oauth2/**","/oauth/**").permitAll()//
-                    .antMatchers(HttpMethod.GET, "/actuator/**").permitAll()//
+                    .antMatchers(HttpMethod.GET, "/api/beneficiario/**").permitAll()//
     				.antMatchers(HttpMethod.POST, "/api/login").permitAll()//
     				.antMatchers(HttpMethod.POST, "/api/auth").permitAll()//
     				.antMatchers(HttpMethod.POST, "/api/isValidToken").permitAll()//
     				.antMatchers(HttpMethod.POST, "/api/user").permitAll()
     				.antMatchers(HttpMethod.POST, "/api/**").hasRole("ADMIN")
+//    				.antMatchers(HttpMethod.GET, "/api/beneficiario/**").hasRole("ADMIN")
     				.antMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
     				.antMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN")
 //    				.antMatchers(HttpMethod.DELETE, "/api/edital/**").hasRole("ADMIN")
