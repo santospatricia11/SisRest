@@ -1,22 +1,9 @@
 package com.sisrest.configuration;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import com.sisrest.configuration.security.CustomUserDetailsService;
-import com.sisrest.configuration.security.RestAuthenticationEntryPoint;
-import com.sisrest.configuration.security.TokenAuthenticationFilter;
-import com.sisrest.configuration.security.oauth2.*;
-import com.sisrest.configuration.security.oauth2.CustomOAuth2UserService;
-import com.sisrest.configuration.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
-import com.sisrest.configuration.security.oauth2.OAuth2AuthenticationFailureHandler;
-import com.sisrest.configuration.security.oauth2.OAuth2AuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -27,20 +14,19 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.client.web.AuthorizationRequestRepository;
-import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
-
+import com.sisrest.configuration.security.CustomUserDetailsService;
+import com.sisrest.configuration.security.RestAuthenticationEntryPoint;
+import com.sisrest.configuration.security.TokenAuthenticationFilter;
+import com.sisrest.configuration.security.oauth2.CustomOAuth2UserService;
+import com.sisrest.configuration.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
+import com.sisrest.configuration.security.oauth2.OAuth2AuthenticationFailureHandler;
+import com.sisrest.configuration.security.oauth2.OAuth2AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(
-        securedEnabled = true,
-        jsr250Enabled = true,
-        prePostEnabled = true
-)
+@EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -86,7 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-    @Bean(BeanIds.AUTHENTICATION_MANAGER)
+    @Bean(BeanIds.AUTHENTICATION_MANAGER) 
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
@@ -141,16 +127,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //Adicionar nosso filtro de autenticação personalizado baseado em Token
         http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
+
 }
 
-
-//@Configuration
-//public class SecurityConfig implements WebMvcConfigurer {
-//	
-//	@Override
-//    public void addCorsMappings(CorsRegistry registry) {
-//        registry.addMapping("/**")
-//            .allowedOrigins("http://localhost:3000")
-//            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT");
-//    }
-//}

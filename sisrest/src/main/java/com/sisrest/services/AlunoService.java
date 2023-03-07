@@ -60,7 +60,7 @@ public class AlunoService {
 		atualizar.setId(aluno.get().getId());
 		if (atualizar.getEmail() == null) {
 			atualizar.setEmail(original.getEmail());
-		} else if (atualizar.getMatricula() == 0) {
+		} else if (atualizar.getMatricula().equals("0")) {
 			atualizar.setMatricula(original.getMatricula());
 		} else if (atualizar.getNome() == null) {
 			atualizar.setNome(original.getNome());

@@ -47,16 +47,15 @@ public class BeneficiarioService {
 		return (List<Beneficiario>) beneficiarioRepository.findAll();
 	}
 
-	public Beneficiario update(long id, Beneficiario beneficiarioDto) throws EmailEmUsoException{
+	public Beneficiario update(long id, Beneficiario beneficiarioDto) throws EmailEmUsoException {
 		Optional<Beneficiario> beneficiario = beneficiarioRepository.findById(id);
-		
+
 		Beneficiario original = beneficiario.get();
 		Beneficiario atualizar = mapper.map(beneficiarioDto, Beneficiario.class);
 		boolean verificado = beneficiarioRepository.existsByEmail(beneficiarioDto.getEmail());
 
 		if (verificado)
 			throw new EmailEmUsoException(beneficiarioDto.getEmail());
-		
 
 		atualizar.setId(beneficiario.get().getId());
 		if (atualizar.getEmail() == null) {

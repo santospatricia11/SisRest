@@ -9,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -37,25 +38,87 @@ public class Aluno {
 	@Column
 	private long id;
 
-	@Column
+	@Column(unique = true)
 	@NotNull
 	@NotEmpty
-	private long matricula;
+	private String matricula;
 
 	@NotNull
 	@NotEmpty
 	@NotBlank(message = "Campo não informado")
-	@Column
+	@Column(unique = true)
 	private String email;
 
 	@NotNull
 	@NotEmpty
 	@NotBlank(message = "Campo não informado")
-	@Column
+	@Column(unique = true)
 	private String CPF;
 
-	public static String[] fields() {
-		return new String[] { "id", "nome", "matricula", "email", "CPF" };
-	}
+	@NotNull
+	@NotEmpty
+	@NotBlank(message = "Campo não informado")
+	@Column
+	private String curso;
+
+	@NotNull
+	@NotEmpty
+	@NotBlank(message = "Campo não informado")
+	@Column
+	private String classificacao;
+
+	@NotNull
+	@NotEmpty
+	@NotBlank(message = "Campo não informado")
+	@Column
+	private String situacao;
+
+	@NotNull
+	@NotEmpty
+	@NotBlank(message = "Campo não informado")
+	@Column
+	private String valor;
+
+	@NotNull
+	@NotEmpty
+	@NotBlank(message = "Campo não informado")
+	@Column
+	private String cota;
+	@NotNull
+	@NotEmpty
+	@NotBlank(message = "Campo não informado")
+	@Column
+	private String quantidade;
+	@NotNull
+	@NotEmpty
+	@NotBlank(message = "Campo não informado")
+	@Column
+	private String modalidade;
+	@NotNull
+	@NotEmpty
+	@NotBlank(message = "Campo não informado")
+	@Column
+	private String renda;
+	@NotNull
+	@NotEmpty
+	@NotBlank(message = "Campo não informado")
+	@Column
+	private String pontuacao;
+	@NotNull
+	@NotEmpty
+	@NotBlank(message = "Campo não informado")
+	@Column
+	private String nascimento;
+	@NotNull
+	@NotEmpty
+	@NotBlank(message = "Campo não informado")
+	@Column
+	private String percapta;
+
+	@NotNull
+	@NotEmpty
+	@NotBlank(message = "Campo não informado")
+	@Column
+	private String programa;
 
 }
