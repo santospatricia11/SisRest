@@ -9,15 +9,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SignUpRequest {
-	
+
 	@NotBlank
-    private String name;
+	private String name;
 
-    @NotBlank
-    @Email
-    private String email;
+	@NotBlank
+	@Email
+	private String email;
 
-    @NotBlank
-    private String password;
+	@NotBlank
+	private String password;
 
 }

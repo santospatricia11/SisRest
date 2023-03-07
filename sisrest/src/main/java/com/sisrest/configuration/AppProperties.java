@@ -1,9 +1,9 @@
 package com.sisrest.configuration;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "app")
 public class AppProperties {
@@ -49,7 +49,7 @@ public class AppProperties {
     }
 
     public OAuth2 getOauth2() {
-        return oauth2;
-    }
+		return oauth2;
+	}
 
 }
