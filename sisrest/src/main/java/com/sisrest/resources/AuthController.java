@@ -28,7 +28,7 @@ import com.sisrest.model.enums.AuthProvider;
 import com.sisrest.repositories.UserRepository;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
 	@Autowired
