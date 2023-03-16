@@ -44,7 +44,7 @@ public class AlunoConfigurationBatch {
 	@Autowired
 	private DataSource dataSource;
 	private AlunoRepository alunoRepository;
-
+	
 	@Bean
 	public FlatFileItemReader<AlunoResponse> reader() {
 		return new FlatFileItemReaderBuilder<AlunoResponse>().name("alunoItemReader")
