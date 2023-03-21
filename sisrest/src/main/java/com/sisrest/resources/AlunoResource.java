@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sisrest.configuration.batch.SpringBatchExampleJobLauncher;
 import com.sisrest.configuration.batch.UploadDeArquivos;
 
 @RestController
@@ -31,20 +32,23 @@ public class AlunoResource {
 
 	private static final String DATA_RECEIVE = "C:/data/receive";
 	private String filename;
-
-	private Job job;
+	
 	@Autowired
-	private JobLauncher jobLauncher;
-
+	private SpringBatchExampleJobLauncher meuJobService;
+	
+	@Autowired
 	private UploadDeArquivos upload;
 
 	@PostMapping(value = "/upload")
 	public ResponseEntity<HttpStatus> upload(@RequestParam("arquivo") MultipartFile file)
 			throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException,
 			JobInstanceAlreadyCompleteException {
-		upload.salvarCSV(file);
-
-		return null;
+		boolean resultado = upload.salvarCSV(file);
+		if (resultado) {
+			meuJobService.execute();
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
 	}
 
@@ -71,10 +75,4 @@ public class AlunoResource {
 		this.filename = filename;
 	}
 
-	/*
-	 * public void uploadArquivoCSV(@RequestParam("file") MultipartFile arquivoCSV)
-	 * { // batch.salvarCSV(arquivoCSV);
-	 * 
-	 * }
-	 */
 }

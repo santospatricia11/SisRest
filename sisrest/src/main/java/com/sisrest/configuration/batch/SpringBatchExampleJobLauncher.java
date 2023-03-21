@@ -17,8 +17,10 @@ import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 @Component
+@Service
 public class SpringBatchExampleJobLauncher {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SpringBatchExampleJobLauncher.class);
@@ -32,8 +34,8 @@ public class SpringBatchExampleJobLauncher {
 		this.jobLauncher = jobLauncher;
 	}
 
-	@Scheduled(cron = "0/10 * * * * *")
-	public void runSpringBatchExampleJob() throws JobParametersInvalidException, JobExecutionAlreadyRunningException,
+	//@Scheduled(cron = "0/10 * * * * *")
+	public void execute() throws JobParametersInvalidException, JobExecutionAlreadyRunningException,
 			JobRestartException, JobInstanceAlreadyCompleteException {
 		// LOGGER.info("Spring Batch exemplo job start");
 
