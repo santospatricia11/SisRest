@@ -65,5 +65,10 @@ public abstract class Conta {
 
 	@Column(insertable = false, updatable = false)
 	private String tipo;
+	
+	
+	@NotNull
+	@Column
+	private boolean isSuspenso;
 
 }

@@ -1,5 +1,6 @@
 package com.sisrest.dto.beneficiario;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -35,5 +36,14 @@ public class BeneficiarioRequest {
 
 	@NotNull
 	private boolean isAdmin;
-
+	
+	
+	@NotNull
+	private boolean vinculo;
+	
+	
+	@NotNull
+	private String motivo;
 }
+
+

@@ -31,5 +31,12 @@ public class Beneficiario extends Conta implements Serializable {
 	@Column
 	@NotNull
 	private long matricula;
-
+	
+	@Column
+	@NotNull
+	private boolean vinculo;
+	
+	@Column
+	@NotNull
+	private String motivo;
 }
