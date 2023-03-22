@@ -1,4 +1,4 @@
-package com.sisrest.dto;
+package com.sisrest.dto.beneficiario;
 
 import lombok.Getter;
 import lombok.Setter;

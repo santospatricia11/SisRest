@@ -6,8 +6,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sisrest.dto.BeneficiarioRequest;
-import com.sisrest.dto.BeneficiarioResponse;
+import com.sisrest.dto.beneficiario.BeneficiarioRequest;
+import com.sisrest.dto.beneficiario.BeneficiarioResponse;
 import com.sisrest.model.entities.Beneficiario;
 
 @Service

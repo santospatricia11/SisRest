@@ -1,4 +1,4 @@
-package com.sisrest.dto;
+package com.sisrest.dto.beneficiario;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
