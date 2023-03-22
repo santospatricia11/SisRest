@@ -3,9 +3,11 @@ package com.sisrest.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sisrest.dto.edital.EditalRequest;
 import com.sisrest.model.entities.Edital;
 import com.sisrest.repositories.EditalRepository;
 
@@ -15,8 +17,15 @@ public class EditalService {
 	@Autowired
 	private EditalRepository editalRepository;
 
-	public Edital save(Edital edital) {
-		return editalRepository.save(edital);
+	@Autowired
+	private ModelMapper mapper;
+
+	public Edital save(EditalRequest editalDto) {
+		Edital edital = mapper.map(editalDto, Edital.class);
+		boolean verificado = editalRepository.existsByNome(editalDto.getNome());
+		if (verificado)
+			return editalRepository.save(edital);
+		return null;
 	}
 
 	public Edital deleteById(long id) {
@@ -34,7 +43,27 @@ public class EditalService {
 		return (List<Edital>) editalRepository.findAll();
 	}
 
-	public Edital update(long id, Edital edital) {
-		return editalRepository.save(edital);
+	public Edital update(long id, EditalRequest editalDto) {
+		Optional<Edital> edital = editalRepository.findById(id);
+		Edital original = edital.get();
+		Edital atualizar = mapper.map(editalDto, Edital.class);
+		boolean verificado = editalRepository.existsByNome(editalDto.getNome());
+
+		if (verificado)
+			atualizar.setId(edital.get().getId());
+
+		if (atualizar.getNome() == null) {
+			atualizar.setNome(original.getNome());
+		} else if (atualizar.getNumero() == 0) {
+			atualizar.setNumero(original.getNumero());
+		} else if (atualizar.getAno() == null) {
+			atualizar.setAno(original.getAno());
+		} else if (atualizar.getVigenteInicio() == null) {
+			atualizar.setVigenteInicio(original.getVigenteInicio());
+		} else if (atualizar.getVigenteFinal() == null) {
+			atualizar.setVigenteFinal(original.getVigenteFinal());
+		}
+		return editalRepository.save(atualizar);
 	}
+
 }

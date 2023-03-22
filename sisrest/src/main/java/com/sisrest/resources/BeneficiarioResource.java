@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sisrest.dto.BeneficiarioRequest;
-import com.sisrest.dto.BeneficiarioResponse;
+import com.sisrest.dto.beneficiario.BeneficiarioRequest;
+import com.sisrest.dto.beneficiario.BeneficiarioResponse;
 import com.sisrest.exception.EmailEmUsoException;
 import com.sisrest.model.entities.Beneficiario;
 import com.sisrest.services.BeneficiarioService;
