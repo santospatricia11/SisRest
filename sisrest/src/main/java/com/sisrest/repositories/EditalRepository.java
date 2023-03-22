@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.sisrest.model.entities.Edital;
-import com.sisrest.model.entities.User;
 
 @Repository
 public interface EditalRepository extends JpaRepository<Edital, Long> {
@@ -18,8 +17,8 @@ public interface EditalRepository extends JpaRepository<Edital, Long> {
 	boolean existsByNumeroAno(int numero, String ano);
 
 	// buscar Editais por nome
-	Optional<User> findByNome(String nome);
+	Optional<Edital> findByNome(String nome);
 
 	// Buscar Editais por Data Vigente
-	Optional<User> findByDataVigenteInicioEFinal(Date vigenteInicio, Date vigenteFinal);
+	Optional<Edital> findByDataVigenteInicioEFinal(Date vigenteInicio, Date vigenteFinal);
 }
