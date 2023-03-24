@@ -1,4 +1,4 @@
-package com.sisrest.configuration.response;
+package com.sisrest.dto.usuarioGoogle;
 
 import lombok.Getter;
 import lombok.Setter;

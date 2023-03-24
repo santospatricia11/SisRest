@@ -32,7 +32,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "users", uniqueConstraints = { @UniqueConstraint(columnNames = "email") })
-public class User {
+public class UsuarioGoogle {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

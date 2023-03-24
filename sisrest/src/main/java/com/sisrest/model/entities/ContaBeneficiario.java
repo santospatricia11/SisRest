@@ -24,7 +24,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @DiscriminatorValue(value = "B")
-public class Beneficiario extends Conta implements Serializable {
+public class ContaBeneficiario extends Conta implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -32,11 +32,4 @@ public class Beneficiario extends Conta implements Serializable {
 	@NotNull
 	private long matricula;
 	
-	@Column
-	@NotNull
-	private boolean vinculo;
-	
-	@Column
-	@NotNull
-	private String motivo;
 }

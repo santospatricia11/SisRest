@@ -8,19 +8,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sisrest.exception.ResourceNotFoundException;
-import com.sisrest.model.entities.User;
-import com.sisrest.repositories.UserRepository;
+import com.sisrest.model.entities.UsuarioGoogle;
+import com.sisrest.repositories.UsuarioGoogleRepository;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	UserRepository userRepository;
+	UsuarioGoogleRepository userRepository;
 
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		User user = userRepository.findByEmail(email)
+		UsuarioGoogle user = userRepository.findByEmail(email)
 				.orElseThrow(() -> new UsernameNotFoundException("User not found with email : " + email));
 
 		return UserPrincipal.create(user);
@@ -28,7 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 	@Transactional
 	public UserDetails loadUserById(Long id) {
-		User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+		UsuarioGoogle user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
 
 		return UserPrincipal.create(user);
 	}

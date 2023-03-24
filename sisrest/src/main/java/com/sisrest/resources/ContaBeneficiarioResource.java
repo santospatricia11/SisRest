@@ -16,29 +16,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sisrest.dto.beneficiario.BeneficiarioRequest;
-import com.sisrest.dto.beneficiario.BeneficiarioResponse;
+import com.sisrest.dto.contaBeneficiario.ContaBeneficiarioRequest;
+import com.sisrest.dto.contaBeneficiario.ContaBeneficiarioResponse;
 import com.sisrest.exception.EmailEmUsoException;
-import com.sisrest.model.entities.Beneficiario;
-import com.sisrest.services.BeneficiarioService;
-import com.sisrest.services.convertes.BeneficiarioServiceConvert;
+import com.sisrest.model.entities.ContaBeneficiario;
+import com.sisrest.services.ContaBeneficiarioService;
+import com.sisrest.services.convertes.ContaBeneficiarioServiceConvert;
 
 @RestController
-@RequestMapping("/api/beneficiario")
-public class BeneficiarioResource {
+@RequestMapping("/api/contaBeneficiario")
+public class ContaBeneficiarioResource {
 
 	@Autowired
-	private BeneficiarioService beneficiarioService;
+	private ContaBeneficiarioService beneficiarioService;
 
 	@Autowired
-	private BeneficiarioServiceConvert beneficiarioServiceConvert;
+	private ContaBeneficiarioServiceConvert beneficiarioServiceConvert;
 
 	@PostMapping(value = "/criar")
-	public ResponseEntity<BeneficiarioResponse> create(@RequestBody @Valid BeneficiarioRequest dto)
+	public ResponseEntity<ContaBeneficiarioResponse> create(@RequestBody @Valid ContaBeneficiarioRequest dto)
 			throws EmailEmUsoException {
-		Beneficiario beneficiario;
+		ContaBeneficiario beneficiario;
 		beneficiario = beneficiarioService.save(dto);
-		BeneficiarioResponse responseDto = beneficiarioServiceConvert.beneficiarioToDTO(beneficiario);
+		ContaBeneficiarioResponse responseDto = beneficiarioServiceConvert.beneficiarioToDTO(beneficiario);
 		return new ResponseEntity(responseDto, HttpStatus.CREATED);
 	}
 
@@ -53,9 +53,9 @@ public class BeneficiarioResource {
 	}
 
 	@GetMapping(value = "/buscarPorID/{id}")
-	public ResponseEntity<BeneficiarioResponse> getById(@PathVariable("id") long id) {
-		Beneficiario beneficiario = beneficiarioService.findById(id);
-		BeneficiarioResponse responseDto = beneficiarioServiceConvert.beneficiarioToDTO(beneficiario);
+	public ResponseEntity<ContaBeneficiarioResponse> getById(@PathVariable("id") long id) {
+		ContaBeneficiario beneficiario = beneficiarioService.findById(id);
+		ContaBeneficiarioResponse responseDto = beneficiarioServiceConvert.beneficiarioToDTO(beneficiario);
 		if (responseDto != null) {
 			return new ResponseEntity<>(responseDto, HttpStatus.OK);
 		} else {
@@ -64,10 +64,10 @@ public class BeneficiarioResource {
 	}
 
 	@GetMapping(value = "/buscarTodos")
-	public ResponseEntity<List<BeneficiarioResponse>> getAllConta() {
+	public ResponseEntity<List<ContaBeneficiarioResponse>> getAllConta() {
 		try {
-			List<Beneficiario> beneficiarios = beneficiarioService.findAll();
-			List<BeneficiarioResponse> beneficiariosResponse = beneficiarioServiceConvert
+			List<ContaBeneficiario> beneficiarios = beneficiarioService.findAll();
+			List<ContaBeneficiarioResponse> beneficiariosResponse = beneficiarioServiceConvert
 					.usersToResponses(beneficiarios);
 			if (beneficiariosResponse.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -80,12 +80,12 @@ public class BeneficiarioResource {
 	}
 
 	@PutMapping(value = "/atualizar/{id}")
-	public ResponseEntity<BeneficiarioResponse> update(@PathVariable("id") long id,
-			@RequestBody @Valid BeneficiarioRequest dto) throws EmailEmUsoException {
-		Beneficiario beneficiario = beneficiarioServiceConvert.dtoToBeneficiario(dto);
+	public ResponseEntity<ContaBeneficiarioResponse> update(@PathVariable("id") long id,
+			@RequestBody @Valid ContaBeneficiarioRequest dto) throws EmailEmUsoException {
+		ContaBeneficiario beneficiario = beneficiarioServiceConvert.dtoToBeneficiario(dto);
 		beneficiario.setId(id);
-		Beneficiario atualizado = beneficiarioService.update(id, beneficiario);
-		BeneficiarioResponse responseDto = beneficiarioServiceConvert.beneficiarioToDTO(atualizado);
+		ContaBeneficiario atualizado = beneficiarioService.update(id, beneficiario);
+		ContaBeneficiarioResponse responseDto = beneficiarioServiceConvert.beneficiarioToDTO(atualizado);
 
 		if (responseDto != null) {
 			return new ResponseEntity<>(responseDto, HttpStatus.OK);

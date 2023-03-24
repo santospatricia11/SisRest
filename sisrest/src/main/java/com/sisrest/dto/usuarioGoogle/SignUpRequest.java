@@ -1,4 +1,4 @@
-package com.sisrest.configuration.request;
+package com.sisrest.dto.usuarioGoogle;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -8,7 +8,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class LoginRequest {
+public class SignUpRequest {
+
+	@NotBlank
+	private String name;
 
 	@NotBlank
 	@Email

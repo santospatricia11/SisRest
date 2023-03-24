@@ -16,15 +16,15 @@ import com.sisrest.configuration.security.UserPrincipal;
 import com.sisrest.configuration.security.oauth2.user.OAuth2UserInfo;
 import com.sisrest.configuration.security.oauth2.user.OAuth2UserInfoFactory;
 import com.sisrest.exception.OAuth2AuthenticationProcessingException;
-import com.sisrest.model.entities.User;
+import com.sisrest.model.entities.UsuarioGoogle;
 import com.sisrest.model.enums.AuthProvider;
-import com.sisrest.repositories.UserRepository;
+import com.sisrest.repositories.UsuarioGoogleRepository;
 
 @Service
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
 	@Autowired
-	private UserRepository userRepository;
+	private UsuarioGoogleRepository userRepository;
 
 	@Override
 	public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
@@ -45,11 +45,11 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 		OAuth2UserInfo oAuth2UserInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(
 				oAuth2UserRequest.getClientRegistration().getRegistrationId(), oAuth2User.getAttributes());
 		if (StringUtils.isEmpty(oAuth2UserInfo.getEmail())) {
-			throw new OAuth2AuthenticationProcessingException("Email not found from OAuth2 provider");
+			throw new OAuth2AuthenticationProcessingException("Email encontrado para OAuth2 provider");
 		}
 
-		Optional<User> userOptional = userRepository.findByEmail(oAuth2UserInfo.getEmail());
-		User user;
+		Optional<UsuarioGoogle> userOptional = userRepository.findByEmail(oAuth2UserInfo.getEmail());
+		UsuarioGoogle user;
 		if (userOptional.isPresent()) {
 			user = userOptional.get();
 			if (!user.getProvider()
@@ -66,8 +66,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 		return UserPrincipal.create(user, oAuth2User.getAttributes());
 	}
 
-	private User registerNewUser(OAuth2UserRequest oAuth2UserRequest, OAuth2UserInfo oAuth2UserInfo) {
-		User user = new User();
+	private UsuarioGoogle registerNewUser(OAuth2UserRequest oAuth2UserRequest, OAuth2UserInfo oAuth2UserInfo) {
+		UsuarioGoogle user = new UsuarioGoogle();
 
 		user.setProvider(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()));
 		user.setProviderId(oAuth2UserInfo.getId());
@@ -77,7 +77,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 		return userRepository.save(user);
 	}
 
-	private User updateExistingUser(User existingUser, OAuth2UserInfo oAuth2UserInfo) {
+	private UsuarioGoogle updateExistingUser(UsuarioGoogle existingUser, OAuth2UserInfo oAuth2UserInfo) {
 		existingUser.setName(oAuth2UserInfo.getName());
 		existingUser.setImageUrl(oAuth2UserInfo.getImageUrl());
 		return userRepository.save(existingUser);
