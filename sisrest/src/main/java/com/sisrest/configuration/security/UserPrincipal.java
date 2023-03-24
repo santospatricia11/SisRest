@@ -10,7 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import com.sisrest.model.entities.User;
+import com.sisrest.model.entities.UsuarioGoogle;
 
 public class UserPrincipal implements OAuth2User, UserDetails {
 	private Long id;
@@ -26,13 +26,13 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 		this.authorities = authorities;
 	}
 
-	public static UserPrincipal create(User user) {
+	public static UserPrincipal create(UsuarioGoogle user) {
 		List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
 
 		return new UserPrincipal(user.getId(), user.getEmail(), user.getPassword(), authorities);
 	}
 
-	public static UserPrincipal create(User user, Map<String, Object> attributes) {
+	public static UserPrincipal create(UsuarioGoogle user, Map<String, Object> attributes) {
 		UserPrincipal userPrincipal = UserPrincipal.create(user);
 		userPrincipal.setAttributes(attributes);
 		return userPrincipal;

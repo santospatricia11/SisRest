@@ -7,13 +7,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sisrest.dto.beneficiario.BeneficiarioRequest;
+import com.sisrest.dto.contaBeneficiario.ContaBeneficiarioRequest;
 import com.sisrest.exception.EmailEmUsoException;
-import com.sisrest.model.entities.Beneficiario;
+import com.sisrest.model.entities.ContaBeneficiario;
 import com.sisrest.repositories.BeneficiarioRepository;
 
 @Service
-public class BeneficiarioService {
+public class ContaBeneficiarioService {
 
 	@Autowired
 	private BeneficiarioRepository beneficiarioRepository;
@@ -21,8 +21,8 @@ public class BeneficiarioService {
 	@Autowired
 	private ModelMapper mapper;
 
-	public Beneficiario save(BeneficiarioRequest beneficiarioDto) throws EmailEmUsoException {
-		Beneficiario beneficiario = mapper.map(beneficiarioDto, Beneficiario.class);
+	public ContaBeneficiario save(ContaBeneficiarioRequest beneficiarioDto) throws EmailEmUsoException {
+		ContaBeneficiario beneficiario = mapper.map(beneficiarioDto, ContaBeneficiario.class);
 		boolean verificado = beneficiarioRepository.existsByEmail(beneficiarioDto.getEmail());
 
 		if (verificado)
@@ -31,27 +31,27 @@ public class BeneficiarioService {
 		return beneficiarioRepository.save(beneficiario);
 	}
 
-	public Beneficiario deleteById(long id) {
-		Optional<Beneficiario> beneficiario = beneficiarioRepository.findById(id);
+	public ContaBeneficiario deleteById(long id) {
+		Optional<ContaBeneficiario> beneficiario = beneficiarioRepository.findById(id);
 		beneficiarioRepository.deleteById(id);
 		return beneficiario.get();
 	}
 
-	public Beneficiario findById(long id) {
-		Optional<Beneficiario> beneficiario = beneficiarioRepository.findById(id);
+	public ContaBeneficiario findById(long id) {
+		Optional<ContaBeneficiario> beneficiario = beneficiarioRepository.findById(id);
 		return beneficiario.get();
 
 	}
 
-	public List<Beneficiario> findAll() {
-		return (List<Beneficiario>) beneficiarioRepository.findAll();
+	public List<ContaBeneficiario> findAll() {
+		return (List<ContaBeneficiario>) beneficiarioRepository.findAll();
 	}
 
-	public Beneficiario update(long id, Beneficiario beneficiarioDto) throws EmailEmUsoException {
-		Optional<Beneficiario> beneficiario = beneficiarioRepository.findById(id);
+	public ContaBeneficiario update(long id, ContaBeneficiario beneficiarioDto) throws EmailEmUsoException {
+		Optional<ContaBeneficiario> beneficiario = beneficiarioRepository.findById(id);
 
-		Beneficiario original = beneficiario.get();
-		Beneficiario atualizar = mapper.map(beneficiarioDto, Beneficiario.class);
+		ContaBeneficiario original = beneficiario.get();
+		ContaBeneficiario atualizar = mapper.map(beneficiarioDto, ContaBeneficiario.class);
 		boolean verificado = beneficiarioRepository.existsByEmail(beneficiarioDto.getEmail());
 
 		if (verificado)

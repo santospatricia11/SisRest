@@ -1,11 +1,11 @@
-package com.sisrest.dto.beneficiario;
+package com.sisrest.dto.contaBeneficiario;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class BeneficiarioResponse {
+public class ContaBeneficiarioResponse {
 
 	private String nome;
 

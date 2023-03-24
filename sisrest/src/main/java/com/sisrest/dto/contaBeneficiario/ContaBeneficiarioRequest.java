@@ -1,4 +1,4 @@
-package com.sisrest.dto.beneficiario;
+package com.sisrest.dto.contaBeneficiario;
 
 import javax.persistence.Column;
 import javax.validation.constraints.Email;
@@ -14,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class BeneficiarioRequest {
+public class ContaBeneficiarioRequest {
 
 	@NotBlank
 	@NotNull

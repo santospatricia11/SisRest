@@ -17,15 +17,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.sisrest.configuration.request.LoginRequest;
-import com.sisrest.configuration.request.SignUpRequest;
-import com.sisrest.configuration.response.ApiResponse;
-import com.sisrest.configuration.response.AuthResponse;
 import com.sisrest.configuration.security.TokenProvider;
+import com.sisrest.dto.usuarioGoogle.ApiResponse;
+import com.sisrest.dto.usuarioGoogle.AuthResponse;
+import com.sisrest.dto.usuarioGoogle.LoginRequest;
+import com.sisrest.dto.usuarioGoogle.SignUpRequest;
 import com.sisrest.exception.BadRequestException;
-import com.sisrest.model.entities.User;
+import com.sisrest.model.entities.UsuarioGoogle;
 import com.sisrest.model.enums.AuthProvider;
-import com.sisrest.repositories.UserRepository;
+import com.sisrest.repositories.UsuarioGoogleRepository;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -35,7 +35,7 @@ public class AuthController {
 	private AuthenticationManager authenticationManager;
 
 	@Autowired
-	private UserRepository userRepository;
+	private UsuarioGoogleRepository userRepository;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -62,7 +62,7 @@ public class AuthController {
 		}
 
 		// Creating user's account
-		User user = new User();
+		UsuarioGoogle user = new UsuarioGoogle();
 		user.setName(signUpRequest.getName());
 		user.setEmail(signUpRequest.getEmail());
 		user.setPassword(signUpRequest.getPassword());
@@ -70,7 +70,7 @@ public class AuthController {
 
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-		User result = userRepository.save(user);
+		UsuarioGoogle result = userRepository.save(user);
 
 		URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/me")
 				.buildAndExpand(result.getId()).toUri();
