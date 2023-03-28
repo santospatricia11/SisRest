@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.sisrest.model.entities.ContaBeneficiario;
 
 @Repository
-public interface BeneficiarioRepository extends JpaRepository<ContaBeneficiario, Long> {
+public interface ContaBeneficiarioRepository extends JpaRepository<ContaBeneficiario, Long> {
 
 	Optional<ContaBeneficiario> findByEmail(String email);
 

@@ -1,4 +1,4 @@
-package com.sisrest.dto.contaBeneficiario;
+ package com.sisrest.dto.contaBeneficiario;
 
 import javax.persistence.Column;
 import javax.validation.constraints.Email;
