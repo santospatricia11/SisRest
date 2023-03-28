@@ -13,9 +13,11 @@ public class EditalResponse {
 
 	private int numero;
 
-	private String ano;
+	private int ano;
 
 	private String nome;
+	
+	private String link;
 
 	private Date vigenteInicio;
 

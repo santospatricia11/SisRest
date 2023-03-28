@@ -16,19 +16,23 @@ import lombok.Setter;
 @EqualsAndHashCode
 public class EditalRequest {
 	
-	
+	@NotBlank(message = "Numero não informado!")
 	@NotNull
 	private int numero;
 	
 	@NotBlank(message = "Ano não informado!")
 	@NotNull
 	@Size(min = 4, max = 4)
-	private String ano;
+	private int ano;
 	
 	@NotBlank(message = "Nome não informado!")
 	@NotNull
 	@Pattern(regexp = "^[A-Z]+(.)*", message = "Nome deve iniciar com letra maiúscula")
 	private String nome;
+	
+	@NotBlank(message = "Link não informado!")
+	@NotNull
+	private String link;
 	
 	@NotBlank
 	@NotNull

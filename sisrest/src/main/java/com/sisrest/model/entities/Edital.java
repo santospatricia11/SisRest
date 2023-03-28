@@ -39,11 +39,14 @@ public class Edital implements Serializable {
 	private int numero;
 
 	@Column(name = "edital_ano")
-	private String ano;
+	private int ano;
 
 	@Column(name = "edital_nome")
 	@Pattern(regexp = "^[A-Z]+(.)*", message = "Campo nome deve iniciar com letra maiúscula")
 	private String nome;
+	
+	@Column(name = "edital_link")
+	private String link;
 
 	@Column(name = "edital_vigente_inicio")
 	@Pattern(regexp = "^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/(19|20)\\d\\d$", message = "Data inválida")

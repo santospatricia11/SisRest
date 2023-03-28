@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sisrest.dto.edital.EditalRequest;
+import com.sisrest.dto.edital.EditalResponse;
 import com.sisrest.model.entities.Edital;
 import com.sisrest.repositories.EditalRepository;
+import com.sisrest.services.convertes.EditalServiceConvert;
 
 @Service
 public class EditalService {
@@ -18,36 +20,44 @@ public class EditalService {
 	private EditalRepository editalRepository;
 
 	@Autowired
-	private ModelMapper mapper;
+	EditalServiceConvert editalServiceConvert;
 
-	public Edital save(EditalRequest editalDto) {
-		Edital edital = mapper.map(editalDto, Edital.class);
-		boolean verificado = editalRepository.existsByNome(editalDto.getNome());
-		if (verificado)
-			return editalRepository.save(edital);
-		return null;
+	public EditalResponse save(EditalRequest editalDto) {
+		Edital edital = editalServiceConvert.dtoToEdital(editalDto);
+		boolean verificado = editalRepository.existsByNomeNumeroAno(editalDto.getNome(), editalDto.getNumero(),
+				editalDto.getAno());
+		if (!verificado) {
+			editalRepository.save(edital);
+			EditalResponse responseDto = editalServiceConvert.editalToDTO(edital);
+			return responseDto;
+		} else {
+			return null;
+		}
+
 	}
 
-	public Edital deleteById(long id) {
+	public EditalResponse deleteById(long id) {
 		Optional<Edital> edital = editalRepository.findById(id);
 		editalRepository.deleteById(id);
-		return edital.get();
+		EditalResponse responseDto = editalServiceConvert.editalToDTO(edital.get());
+		return responseDto;
 	}
 
-	public Edital findById(long id) {
+	public EditalResponse findById(long id) {
 		Optional<Edital> edital = editalRepository.findById(id);
-		return edital.get();
+		EditalResponse responseDto = editalServiceConvert.editalToDTO(edital.get());
+		return responseDto;
 	}
 
-	public List<Edital> findAll() {
-		return (List<Edital>) editalRepository.findAll();
+	public List<EditalResponse> findAll() {
+		return editalServiceConvert.editaisToResponses(editalRepository.findAll());
 	}
 
-	public Edital update(long id, EditalRequest editalDto) {
+	public EditalResponse update(long id, EditalRequest editalDto) {
 		Optional<Edital> edital = editalRepository.findById(id);
 		Edital original = edital.get();
-		Edital atualizar = mapper.map(editalDto, Edital.class);
-		boolean verificado = editalRepository.existsByNome(editalDto.getNome());
+		Edital atualizar = editalServiceConvert.dtoToEdital(editalDto);
+		boolean verificado = editalRepository.existsById(edital.get().getId());
 
 		if (verificado)
 			atualizar.setId(edital.get().getId());
@@ -56,14 +66,15 @@ public class EditalService {
 			atualizar.setNome(original.getNome());
 		} else if (atualizar.getNumero() == 0) {
 			atualizar.setNumero(original.getNumero());
-		} else if (atualizar.getAno() == null) {
+		} else if (atualizar.getAno() == 0) {
 			atualizar.setAno(original.getAno());
 		} else if (atualizar.getVigenteInicio() == null) {
 			atualizar.setVigenteInicio(original.getVigenteInicio());
 		} else if (atualizar.getVigenteFinal() == null) {
 			atualizar.setVigenteFinal(original.getVigenteFinal());
 		}
-		return editalRepository.save(atualizar);
+		EditalResponse responseDto = editalServiceConvert.editalToDTO(editalRepository.save(atualizar));
+		return responseDto;
 	}
 
 }
