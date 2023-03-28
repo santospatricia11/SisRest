@@ -34,19 +34,16 @@ public class EditalResource {
 
 	@PostMapping(value = "/criar")
 	public ResponseEntity<EditalResponse> createEdital(@RequestBody @Valid EditalRequest dto) {
-
-		Edital edital;
-		edital = editalService.save(dto);
-		EditalResponse responseDto = editalServiceConvert.editalToDTO(edital);
+		EditalResponse responseDto = editalService.save(dto);
 		return new ResponseEntity(responseDto, HttpStatus.CREATED);
 
 	}
 
 	@DeleteMapping(value = "/deletar/{id}")
-	public ResponseEntity<HttpStatus> deleteEdital(@PathVariable("id") long id) {
+	public ResponseEntity<EditalResponse> deleteEdital(@PathVariable("id") long id) {
 		try {
-			editalService.deleteById(id);
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			EditalResponse responseDto = editalService.deleteById(id);
+			return new ResponseEntity<>(responseDto, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -54,8 +51,7 @@ public class EditalResource {
 
 	@GetMapping(value = "/buscarPorID/{id}")
 	public ResponseEntity<EditalResponse> getEditalById(@PathVariable("id") long id) {
-		Edital edital = editalService.findById(id);
-		EditalResponse responseDto = editalServiceConvert.editalToDTO(edital);
+		EditalResponse responseDto = editalService.findById(id);
 		if (responseDto != null) {
 			return new ResponseEntity<>(responseDto, HttpStatus.OK);
 		} else {
@@ -67,9 +63,7 @@ public class EditalResource {
 	@GetMapping(value = "/buscarTodos")
 	public ResponseEntity<List<EditalResponse>> getAllEdital() {
 		try {
-			List<Edital> editais = editalService.findAll();
-			List<EditalResponse> editaisReponse = editalServiceConvert.editaisToResponses(editais);
-
+			List<EditalResponse> editaisReponse = editalService.findAll();
 			if (editaisReponse.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			} else {
@@ -82,9 +76,7 @@ public class EditalResource {
 
 	@PutMapping(value = "/atualizar/{id}")
 	public ResponseEntity<EditalResponse> update(@PathVariable("id") long id, @RequestBody EditalRequest dto) {
-		Edital atualizado = editalService.update(id, dto);
-		EditalResponse responseDto = editalServiceConvert.editalToDTO(atualizado);
-
+		EditalResponse responseDto = editalService.update(id, dto);
 		if (responseDto != null) {
 			return new ResponseEntity<>(responseDto, HttpStatus.OK);
 		} else {
