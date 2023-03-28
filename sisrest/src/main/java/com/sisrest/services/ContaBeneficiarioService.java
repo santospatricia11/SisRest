@@ -10,49 +10,49 @@ import org.springframework.stereotype.Service;
 import com.sisrest.dto.contaBeneficiario.ContaBeneficiarioRequest;
 import com.sisrest.exception.EmailEmUsoException;
 import com.sisrest.model.entities.ContaBeneficiario;
-import com.sisrest.repositories.BeneficiarioRepository;
+import com.sisrest.repositories.ContaBeneficiarioRepository;
 
 @Service
 public class ContaBeneficiarioService {
 
 	@Autowired
-	private BeneficiarioRepository beneficiarioRepository;
+	private ContaBeneficiarioRepository contaBeneficiarioRepository;
 
 	@Autowired
 	private ModelMapper mapper;
 
 	public ContaBeneficiario save(ContaBeneficiarioRequest beneficiarioDto) throws EmailEmUsoException {
 		ContaBeneficiario beneficiario = mapper.map(beneficiarioDto, ContaBeneficiario.class);
-		boolean verificado = beneficiarioRepository.existsByEmail(beneficiarioDto.getEmail());
+		boolean verificado = contaBeneficiarioRepository.existsByEmail(beneficiarioDto.getEmail());
 
 		if (verificado)
 			throw new EmailEmUsoException(beneficiarioDto.getEmail());
 
-		return beneficiarioRepository.save(beneficiario);
+		return contaBeneficiarioRepository.save(beneficiario);
 	}
 
 	public ContaBeneficiario deleteById(long id) {
-		Optional<ContaBeneficiario> beneficiario = beneficiarioRepository.findById(id);
-		beneficiarioRepository.deleteById(id);
+		Optional<ContaBeneficiario> beneficiario = contaBeneficiarioRepository.findById(id);
+		contaBeneficiarioRepository.deleteById(id);
 		return beneficiario.get();
 	}
 
 	public ContaBeneficiario findById(long id) {
-		Optional<ContaBeneficiario> beneficiario = beneficiarioRepository.findById(id);
+		Optional<ContaBeneficiario> beneficiario = contaBeneficiarioRepository.findById(id);
 		return beneficiario.get();
 
 	}
 
 	public List<ContaBeneficiario> findAll() {
-		return (List<ContaBeneficiario>) beneficiarioRepository.findAll();
+		return (List<ContaBeneficiario>) contaBeneficiarioRepository.findAll();
 	}
 
 	public ContaBeneficiario update(long id, ContaBeneficiario beneficiarioDto) throws EmailEmUsoException {
-		Optional<ContaBeneficiario> beneficiario = beneficiarioRepository.findById(id);
+		Optional<ContaBeneficiario> beneficiario = contaBeneficiarioRepository.findById(id);
 
 		ContaBeneficiario original = beneficiario.get();
 		ContaBeneficiario atualizar = mapper.map(beneficiarioDto, ContaBeneficiario.class);
-		boolean verificado = beneficiarioRepository.existsByEmail(beneficiarioDto.getEmail());
+		boolean verificado = contaBeneficiarioRepository.existsByEmail(beneficiarioDto.getEmail());
 
 		if (verificado)
 			throw new EmailEmUsoException(beneficiarioDto.getEmail());
@@ -69,7 +69,7 @@ public class ContaBeneficiarioService {
 		} else if (atualizar.getTipo() == null) {
 			atualizar.setTipo(original.getTipo());
 		}
-		return beneficiarioRepository.save(atualizar);
+		return contaBeneficiarioRepository.save(atualizar);
 	}
 
 }
