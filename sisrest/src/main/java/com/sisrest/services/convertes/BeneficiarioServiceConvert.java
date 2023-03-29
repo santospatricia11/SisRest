@@ -2,15 +2,19 @@ package com.sisrest.services.convertes;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sisrest.dto.AlunoResponse;
+import com.sisrest.dto.beneficiario.BeneficiarioRequest;
 import com.sisrest.dto.beneficiario.BeneficiarioResponse;
 import com.sisrest.model.entities.Aluno;
 import com.sisrest.model.entities.Beneficiario;
 
 public class BeneficiarioServiceConvert {
+
 	@Autowired
 	private ModelMapper mapper;
 
@@ -26,6 +30,7 @@ public class BeneficiarioServiceConvert {
 
 	public BeneficiarioResponse beneficiarioToDTO(Beneficiario beneficiario) {
 		BeneficiarioResponse response = mapper.map(beneficiario, BeneficiarioResponse.class);
+
 		return response;
 	}
 
