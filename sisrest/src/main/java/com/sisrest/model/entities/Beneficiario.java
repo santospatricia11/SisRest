@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,11 +29,12 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Entity
+
 public class Beneficiario extends ContaBeneficiario implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
-	private Image QRCode;
+	//private Image QRCode;
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id

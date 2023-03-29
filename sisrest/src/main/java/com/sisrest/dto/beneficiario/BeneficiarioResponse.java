@@ -9,7 +9,7 @@ import javax.persistence.Id;
 
 public class BeneficiarioResponse {
 	
-	private Image QRCode;
+	//private Image QRCode;
 	
 	private long id;
 	private boolean ativo;
