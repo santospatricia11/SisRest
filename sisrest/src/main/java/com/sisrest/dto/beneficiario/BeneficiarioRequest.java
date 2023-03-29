@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 
 public class BeneficiarioRequest {
 	
-	private Image QRCode;
+	//private Image QRCode;
 
 	
 	@Id
