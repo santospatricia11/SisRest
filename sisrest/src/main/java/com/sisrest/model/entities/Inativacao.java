@@ -6,6 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -23,19 +26,27 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Entity
+@Table(name = "inativacao")
 public class Inativacao {
 	
 	@Id
-	@Column
+	@Column(name = "inativacao_id")
 	private long id;
-	@Column
+	
 	@NotNull
+	@Column(name = "inativacao_data_inicio")
 	private Date inicio;
-	@Column
+
 	@NotNull
+	@Column(name = "inativacao_data_termino")
 	private Date termino;
-	@Column
+	
 	@NotNull
+	@Column(name = "inativacao_motivo")
 	private String motivo;
+	
+	@ManyToOne
+	@JoinColumn(name = "beneficiario_id")
+	private Beneficiario beneficiario;
 
 }

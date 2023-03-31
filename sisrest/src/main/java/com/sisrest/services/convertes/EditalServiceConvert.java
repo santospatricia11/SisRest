@@ -10,6 +10,7 @@ import com.sisrest.dto.edital.EditalRequest;
 import com.sisrest.dto.edital.EditalResponse;
 import com.sisrest.model.entities.Edital;
 
+@Service
 public class EditalServiceConvert {
 
 	@Autowired
