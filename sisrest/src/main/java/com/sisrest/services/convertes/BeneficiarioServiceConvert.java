@@ -5,9 +5,7 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.sisrest.dto.AlunoResponse;
 import com.sisrest.dto.beneficiario.BeneficiarioResponse;
-import com.sisrest.model.entities.Aluno;
 import com.sisrest.model.entities.Beneficiario;
 
 public class BeneficiarioServiceConvert {
