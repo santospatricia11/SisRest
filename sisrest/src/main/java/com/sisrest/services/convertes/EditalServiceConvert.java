@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.sisrest.dto.edital.EditalRequest;
 import com.sisrest.dto.edital.EditalResponse;
 import com.sisrest.model.entities.Edital;
 
+@Service
 public class EditalServiceConvert {
 
 	@Autowired

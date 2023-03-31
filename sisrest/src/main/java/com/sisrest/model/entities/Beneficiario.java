@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
@@ -32,8 +33,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Entity
-
+@Table(name = "beneficiario")
 public class Beneficiario  implements Serializable{
+
 	
 	private static final long serialVersionUID = 1L;
 
@@ -41,7 +43,7 @@ public class Beneficiario  implements Serializable{
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	@Column
+	@Column(name = "beneficiario_id")
 	private long id;
 	
 	@Column

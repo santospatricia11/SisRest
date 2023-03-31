@@ -1,11 +1,15 @@
 package com.sisrest.dto.edital;
 
 import java.sql.Date;
+import java.time.format.DateTimeFormatter;
 
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -15,32 +19,32 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 public class EditalRequest {
-	
-	@NotBlank(message = "Numero não informado!")
+
 	@NotNull
 	private int numero;
+
 	
-	@NotBlank(message = "Ano não informado!")
 	@NotNull
-	@Size(min = 4, max = 4)
+	@Digits(integer = 4, fraction = 0, message = "O ano deve ter no máximo 4 dígitos")
 	private int ano;
-	
+
 	@NotBlank(message = "Nome não informado!")
 	@NotNull
 	@Pattern(regexp = "^[A-Z]+(.)*", message = "Nome deve iniciar com letra maiúscula")
 	private String nome;
-	
+
 	@NotBlank(message = "Link não informado!")
 	@NotNull
 	private String link;
-	
-	@NotBlank
+
 	@NotNull
-	@Pattern(regexp = "^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/(19|20)\\d\\d$", message = "Data inválida")
-	private Date vigenteInicio;
-	
-	@NotBlank
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "A data deve estar no formato dd-MM-yyyy")
+	private String vigenteInicio;
+
 	@NotNull
-	@Pattern(regexp = "^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/(19|20)\\d\\d$", message = "Data inválida")
-	private Date vigenteFinal;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "A data deve estar no formato dd-MM-yyyy")
+	private String vigenteFinal;
+
 }

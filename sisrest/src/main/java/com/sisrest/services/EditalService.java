@@ -24,11 +24,12 @@ public class EditalService {
 
 	public EditalResponse save(EditalRequest editalDto) {
 		Edital edital = editalServiceConvert.dtoToEdital(editalDto);
-		boolean verificado = editalRepository.existsByNomeNumeroAno(editalDto.getNome(), editalDto.getNumero(),
+		Optional<Edital> verificado = editalRepository.findByNomeNumeroAno(editalDto.getNome(), editalDto.getNumero(),
 				editalDto.getAno());
-		if (!verificado) {
+		if (!(verificado == null)) {
 			editalRepository.save(edital);
 			EditalResponse responseDto = editalServiceConvert.editalToDTO(edital);
+			System.out.println("Teste");
 			return responseDto;
 		} else {
 			return null;
