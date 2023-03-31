@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -31,5 +33,9 @@ public class ContaBeneficiario extends Conta implements Serializable {
 	@Column
 	@NotNull
 	private long matricula;
+	
+	@OneToOne
+    @JoinColumn(name = "beneficiario_id")
+    private Beneficiario beneficiario;
 	
 }

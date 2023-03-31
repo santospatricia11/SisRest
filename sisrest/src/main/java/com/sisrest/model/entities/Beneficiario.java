@@ -3,16 +3,19 @@ package com.sisrest.model.entities;
 import java.awt.Image;
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -31,7 +34,8 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "beneficiario")
-public class Beneficiario extends ContaBeneficiario implements Serializable{
+public class Beneficiario  implements Serializable{
+
 	
 	private static final long serialVersionUID = 1L;
 
@@ -49,4 +53,8 @@ public class Beneficiario extends ContaBeneficiario implements Serializable{
 	@ManyToOne
     @JoinColumn(name = "edital_id")
     private Edital edital;
+	
+	@OneToOne
+    @JoinColumn(name = "contaBeneficiario_id")
+    private ContaBeneficiario contaBeneficiario;
 }
