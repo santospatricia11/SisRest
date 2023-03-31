@@ -53,6 +53,6 @@ public class Beneficiario  implements Serializable{
     private Edital edital;
 	
 	@OneToOne
-    @JoinColumn(name = "inativacao_id")
-    private Inativacao inativacao;
+    @JoinColumn(name = "contaBeneficiario_id")
+    private ContaBeneficiario contaBeneficiario;
 }

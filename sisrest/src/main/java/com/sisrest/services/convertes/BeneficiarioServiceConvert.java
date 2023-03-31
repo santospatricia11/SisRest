@@ -6,16 +6,17 @@ import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.sisrest.dto.AlunoResponse;
 import com.sisrest.dto.beneficiario.BeneficiarioRequest;
 import com.sisrest.dto.beneficiario.BeneficiarioResponse;
 import com.sisrest.model.entities.Aluno;
 import com.sisrest.model.entities.Beneficiario;
-
+@Service
 public class BeneficiarioServiceConvert {
 
-	@Autowired
+
 	private ModelMapper mapper;
 
 	public List<BeneficiarioResponse> beneficiariosToResponses(List<Beneficiario> beneficiarios) {
