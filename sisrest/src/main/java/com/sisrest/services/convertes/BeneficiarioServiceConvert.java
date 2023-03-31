@@ -13,6 +13,7 @@ import com.sisrest.dto.beneficiario.BeneficiarioRequest;
 import com.sisrest.dto.beneficiario.BeneficiarioResponse;
 import com.sisrest.model.entities.Aluno;
 import com.sisrest.model.entities.Beneficiario;
+
 @Service
 public class BeneficiarioServiceConvert {
 
