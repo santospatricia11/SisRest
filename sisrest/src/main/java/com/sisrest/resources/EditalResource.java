@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sisrest.dto.edital.EditalRequest;
 import com.sisrest.dto.edital.EditalResponse;
-import com.sisrest.model.entities.Edital;
 import com.sisrest.services.EditalService;
 import com.sisrest.services.convertes.EditalServiceConvert;
 

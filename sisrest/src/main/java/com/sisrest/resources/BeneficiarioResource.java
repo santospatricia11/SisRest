@@ -1,7 +1,5 @@
 package com.sisrest.resources;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sisrest.dto.beneficiario.BeneficiarioRequest;
 import com.sisrest.dto.beneficiario.BeneficiarioResponse;
-import com.sisrest.dto.contaBeneficiario.ContaBeneficiarioRequest;
-import com.sisrest.dto.contaBeneficiario.ContaBeneficiarioResponse;
-import com.sisrest.dto.edital.EditalResponse;
 import com.sisrest.exception.EmailEmUsoException;
 import com.sisrest.model.entities.Beneficiario;
-import com.sisrest.model.entities.ContaBeneficiario;
 import com.sisrest.services.BeneficiarioService;
-import com.sisrest.services.ContaBeneficiarioService;
 import com.sisrest.services.convertes.BeneficiarioServiceConvert;
-import com.sisrest.services.convertes.ContaBeneficiarioServiceConvert;
 
 @RestController
 @RequestMapping("/api/beneficiario")
@@ -83,5 +75,10 @@ public class BeneficiarioResource {
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+	}
+
+	public ResponseEntity getAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
