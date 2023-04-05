@@ -84,4 +84,9 @@ public class BeneficiarioResource {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
+
+	public ResponseEntity getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
