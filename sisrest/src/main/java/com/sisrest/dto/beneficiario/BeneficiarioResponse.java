@@ -1,14 +1,5 @@
 package com.sisrest.dto.beneficiario;
 
-import java.awt.Image;
-import java.sql.Date;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-
 import com.sisrest.model.entities.Edital;
 import com.sisrest.model.entities.Inativacao;
 

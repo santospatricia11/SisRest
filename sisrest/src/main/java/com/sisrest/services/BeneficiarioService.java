@@ -10,15 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sisrest.dto.beneficiario.BeneficiarioRequest;
-import com.sisrest.dto.beneficiario.BeneficiarioResponse;
-import com.sisrest.dto.contaBeneficiario.ContaBeneficiarioRequest;
-import com.sisrest.exception.EmailEmUsoException;
+
 import com.sisrest.model.entities.Beneficiario;
-import com.sisrest.model.entities.Conta;
-import com.sisrest.model.entities.ContaBeneficiario;
 import com.sisrest.repositories.BeneficiarioRepository;
-import com.sisrest.repositories.ContaBeneficiarioRepository;
-import com.sisrest.repositories.ContaRepository;
 @Service
 public class BeneficiarioService {
 	@Autowired
