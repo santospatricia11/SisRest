@@ -21,7 +21,7 @@ public class BeneficiarioServiceConvert {
 
 	}
 
-	public Beneficiario dtoToBeneficiario(Beneficiario dto) {
+	public Beneficiario dtoToBeneficiario(@Valid BeneficiarioResponse dto) {
 		Beneficiario beneficiario = mapper.map(dto, Beneficiario.class);
 		return beneficiario;
 	}

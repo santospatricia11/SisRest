@@ -39,54 +39,34 @@ public class BeneficiarioResource {
 	@Autowired
 	private BeneficiarioServiceConvert beneficiarioServiceConvert;
 
-	@PostMapping(value = "/criar")
-	public ResponseEntity<BeneficiarioResponse> create(@RequestBody @Valid BeneficiarioRequest dto)
-			throws EmailEmUsoException {
-		Beneficiario beneficiario;
-		beneficiario = beneficiarioService.save(dto);
-		BeneficiarioResponse responseDto = beneficiarioServiceConvert.beneficiarioToDTO(beneficiario);
-		return new ResponseEntity(responseDto, HttpStatus.CREATED);
-	}
-
-	@DeleteMapping(value = "/deletar/{id}")
-	public ResponseEntity<HttpStatus> delete(@PathVariable("id") long id) {
+	
+	@Autowired
+	private ContaBeneficiarioService contaBeneficiarioService;
+	
+	
+	//SAVE
+	@PostMapping
+	public ResponseEntity save(@RequestBody @Valid BeneficiarioResponse dto) {
 		try {
-			beneficiarioService.deleteById(id);
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			if (dto.getId() == 0) {
+				throw new IllegalStateException("beneficiarioId cannot be null");
+			}
+			
+			Long beneficiarioId = dto.getId();
+			Beneficiario beneficiario =  beneficiarioService.findById(beneficiarioId);
+						
+			if(beneficiario == null) {
+				throw new IllegalStateException(String.format("Cound not find any beneficiario with id=%1", beneficiarioId));
+			}
+			
+			Beneficiario entity = beneficiarioServiceConvert.dtoToBeneficiario(dto);
+			
+		
+			
+		} catch(Exception e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
 		}
-	}
-
-	@GetMapping(value = "/buscarPorID/{id}")
-	public ResponseEntity<BeneficiarioResponse> getById(@PathVariable("id") long id) {
-		Beneficiario beneficiario = beneficiarioService.findById(id);
-		BeneficiarioResponse responseDto = beneficiarioServiceConvert.beneficiarioToDTO(beneficiario);
-		if (responseDto != null) {
-			return new ResponseEntity<>(responseDto, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
-
-	@PutMapping(value = "/atualizar/{id}")
-	public ResponseEntity<BeneficiarioResponse> update(@PathVariable("id") long id,
-			@RequestBody @Valid Beneficiario dto) throws EmailEmUsoException {
-		Beneficiario beneficiario = beneficiarioServiceConvert.dtoToBeneficiario(dto);
-
-		beneficiario.setId(id);
-		Beneficiario atualizado = beneficiarioService.update(id, beneficiario);
-		BeneficiarioResponse responseDto = beneficiarioServiceConvert.beneficiarioToDTO(atualizado);
-
-		if (responseDto != null) {
-			return new ResponseEntity<>(responseDto, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
-
-	public ResponseEntity getAll() {
-		// TODO Auto-generated method stub
 		return null;
 	}
+	
 }

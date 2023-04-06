@@ -3,11 +3,14 @@ package com.sisrest.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sisrest.dto.beneficiario.BeneficiarioRequest;
+import com.sisrest.dto.beneficiario.BeneficiarioResponse;
 import com.sisrest.dto.contaBeneficiario.ContaBeneficiarioRequest;
 import com.sisrest.exception.EmailEmUsoException;
 import com.sisrest.model.entities.Beneficiario;
@@ -24,8 +27,8 @@ public class BeneficiarioService {
 	@Autowired
 	private ModelMapper mapper;
 
-	public Beneficiario save(BeneficiarioRequest beneficiarioDto)  {
-		Beneficiario beneficiario = mapper.map(beneficiarioDto, Beneficiario.class);
+	public Beneficiario save(@Valid BeneficiarioResponse dto)  {
+		Beneficiario beneficiario = mapper.map(dto, Beneficiario.class);
 		
 		return beneficiarioRepository.save(beneficiario);
 	}

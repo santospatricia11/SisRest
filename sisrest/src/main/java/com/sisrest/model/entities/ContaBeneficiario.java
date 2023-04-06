@@ -1,12 +1,16 @@
 package com.sisrest.model.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
@@ -34,8 +38,7 @@ public class ContaBeneficiario extends Conta implements Serializable {
 	@NotNull
 	private long matricula;
 	
-	@OneToOne
-    @JoinColumn(name = "beneficiario_id")
-    private Beneficiario beneficiario;
+	 @OneToMany
+    private List<Beneficiario> beneficiarios;
 	
 }
