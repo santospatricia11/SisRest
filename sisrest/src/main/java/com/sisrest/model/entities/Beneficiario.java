@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -30,27 +31,26 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "beneficiario")
-public class Beneficiario  implements Serializable{
+public class Beneficiario implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
 
-	//private Image QRCode;
+	// private Image QRCode;
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	@Column(name = "beneficiario_id")
 	private long id;
-	
+
 	@Column
 	@NotNull
 	private boolean ativo;
-	
+
 	@ManyToOne
-    @JoinColumn(name = "edital_id")
-    private Edital edital;
-	
-	@OneToOne
-    @JoinColumn(name = "contaBeneficiario_id")
-    private ContaBeneficiario contaBeneficiario;
+	@JoinColumn(name = "edital_id")
+	private Edital edital;
+
+	@ManyToOne
+	@JoinColumn(name = "contaBeneficiario_id")
+	private ContaBeneficiario contaBeneficiario;
 }

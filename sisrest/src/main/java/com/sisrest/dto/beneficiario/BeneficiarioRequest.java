@@ -9,8 +9,7 @@ import com.sisrest.model.entities.Inativacao;
 
 import lombok.Getter;
 import lombok.Setter;
-@Getter
-@Setter
+
 public class BeneficiarioRequest {
 	
 	//private Image QRCode;
