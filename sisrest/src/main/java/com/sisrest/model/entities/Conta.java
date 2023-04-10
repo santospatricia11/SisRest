@@ -47,7 +47,7 @@ public abstract class Conta {
 	@Id
 	@Column
 	private long id;
-
+	
 	@NotNull
 	@Email(message = "Campo inválido")
 	@Column
@@ -59,16 +59,6 @@ public abstract class Conta {
 	@Pattern(regexp = "^[^\\s]+$", message = "Campo inválido")
 	private String senha;
 
-	@NotNull
-	@Column
-	private boolean isAdmin;
 
-	@Column(insertable = false, updatable = false)
-	private String tipo;
-	
-	
-	@NotNull
-	@Column
-	private boolean isSuspenso;
 
 }
