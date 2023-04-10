@@ -51,7 +51,7 @@ public class EditalResource {
 		}
 	}
 
-	@GetMapping(value = "/buscarPorID/{id}")
+	@GetMapping(value = "/{id}")
 	public ResponseEntity<EditalResponse> getEditalById(@PathVariable("id") long id) {
 		EditalResponse responseDto = editalService.findById(id);
 		if (responseDto != null) {
@@ -76,7 +76,7 @@ public class EditalResource {
 		}
 	}
 
-	@PutMapping(value = "/atualizar/{id}")
+	@PutMapping(value = "{id}")
 	public ResponseEntity<EditalResponse> update(@PathVariable("id") long id, @RequestBody EditalRequest dto) {
 		EditalResponse responseDto = editalService.update(id, dto);
 		if (responseDto != null) {
