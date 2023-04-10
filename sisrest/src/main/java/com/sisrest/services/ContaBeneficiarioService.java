@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sisrest.dto.contaBeneficiario.ContaBeneficiarioRequest;
+import com.sisrest.dto.contaBeneficiario.ContaBeneficiarioResponse;
 import com.sisrest.exception.EmailEmUsoException;
 import com.sisrest.model.entities.ContaBeneficiario;
 import com.sisrest.repositories.ContaBeneficiarioRepository;
@@ -21,7 +22,7 @@ public class ContaBeneficiarioService {
 	@Autowired
 	private ModelMapper mapper;
 
-	public ContaBeneficiario save(ContaBeneficiarioRequest beneficiarioDto) throws EmailEmUsoException {
+	public ContaBeneficiario save(ContaBeneficiarioResponse beneficiarioDto) throws EmailEmUsoException {
 		ContaBeneficiario beneficiario = mapper.map(beneficiarioDto, ContaBeneficiario.class);
 		boolean verificado = contaBeneficiarioRepository.existsByEmail(beneficiarioDto.getEmail());
 
@@ -66,9 +67,7 @@ public class ContaBeneficiarioService {
 			atualizar.setNome(original.getNome());
 		} else if (atualizar.getSenha() == null) {
 			atualizar.setSenha(original.getSenha());
-		} else if (atualizar.getTipo() == null) {
-			atualizar.setTipo(original.getTipo());
-		}
+		} 
 		return contaBeneficiarioRepository.save(atualizar);
 	}
 

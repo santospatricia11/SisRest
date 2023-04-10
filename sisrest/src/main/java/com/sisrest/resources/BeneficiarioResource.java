@@ -1,5 +1,7 @@
 package com.sisrest.resources;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +14,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.sisrest.dto.beneficiario.BeneficiarioRequest;
 import com.sisrest.dto.beneficiario.BeneficiarioResponse;
+import com.sisrest.dto.edital.EditalResponse;
 import com.sisrest.exception.EmailEmUsoException;
 import com.sisrest.model.entities.Beneficiario;
+import com.sisrest.model.entities.ContaBeneficiario;
+import com.sisrest.model.entities.Edital;
+import com.sisrest.repositories.BeneficiarioRepository;
 import com.sisrest.services.BeneficiarioService;
+import com.sisrest.services.ContaBeneficiarioService;
+import com.sisrest.services.EditalService;
+import com.sisrest.services.InativacaoService;
 import com.sisrest.services.convertes.BeneficiarioServiceConvert;
 
 @RestController
@@ -26,39 +37,49 @@ import com.sisrest.services.convertes.BeneficiarioServiceConvert;
 public class BeneficiarioResource {
 
 	@Autowired
-	private BeneficiarioService beneficiarioService;
+	private EditalService editalService;
 
 	@Autowired
 	private BeneficiarioServiceConvert beneficiarioServiceConvert;
 
-	
+	@Autowired
+	private BeneficiarioService beneficiarioService;
+
 	@Autowired
 	private ContaBeneficiarioService contaBeneficiarioService;
-	
-	
-	//SAVE
-	@PostMapping
-	public ResponseEntity save(@RequestBody @Valid BeneficiarioResponse dto) {
+
+	@GetMapping("/{id}")
+	public ResponseEntity<BeneficiarioResponse> getById(@PathVariable Long id) {
+		BeneficiarioResponse beneficiarioDTO = beneficiarioService.getById(id);
+		return ResponseEntity.ok(beneficiarioDTO);
+	}
+
+	@PostMapping("/{criar}")
+	public ResponseEntity<BeneficiarioResponse> create(@RequestBody BeneficiarioResponse beneficiarioDTO,
+			@RequestParam("edital") Edital edital,
+			@RequestParam("contaBeneficiario") ContaBeneficiario contaBeneficiario) {
+
+		beneficiarioDTO.setEdital(edital);
+		beneficiarioDTO.setContaBeneficiario(contaBeneficiario);
+
+		BeneficiarioResponse novoBeneficiario = beneficiarioService.save(beneficiarioDTO, edital, contaBeneficiario);
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(novoBeneficiario);
+	}
+
+	// PUT
+	@PutMapping("{id}")
+
+	// DELETE
+	@DeleteMapping("{id}")
+	public ResponseEntity delete(@PathVariable("id") Long id) {
 		try {
-			if (dto.getId() == 0) {
-				throw new IllegalStateException("beneficiarioId cannot be null");
-			}
-			
-			Long beneficiarioId = dto.getId();
-			Beneficiario beneficiario =  beneficiarioService.findById(beneficiarioId);
-						
-			if(beneficiario == null) {
-				throw new IllegalStateException(String.format("Cound not find any beneficiario with id=%1", beneficiarioId));
-			}
-			
-			Beneficiario entity = beneficiarioServiceConvert.dtoToBeneficiario(dto);
-			
-		
-			
-		} catch(Exception e) {
+			beneficiarioService.deleteById(id);
+
+			return new ResponseEntity(HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
-		return null;
 	}
-	
+
 }

@@ -1,5 +1,8 @@
 package com.sisrest.dto.contaBeneficiario;
 
+import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,14 +11,9 @@ import lombok.Setter;
 public class ContaBeneficiarioResponse {
 
 	private String nome;
-
-	private long id;
-
+	
+	private String senha;
 	private String email;
-
-	private boolean isAdmin;
-
-	private String tipo;
-
+	
 	private long matricula;
 }

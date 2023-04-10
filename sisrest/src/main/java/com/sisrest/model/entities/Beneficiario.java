@@ -2,6 +2,7 @@ package com.sisrest.model.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
@@ -50,7 +51,9 @@ public class Beneficiario implements Serializable {
 	@JoinColumn(name = "edital_id")
 	private Edital edital;
 
+	
+	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "contaBeneficiario_id")
+	@JoinColumn(name = "contaBeneficiario")
 	private ContaBeneficiario contaBeneficiario;
 }

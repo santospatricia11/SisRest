@@ -1,5 +1,6 @@
  package com.sisrest.dto.contaBeneficiario;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -14,35 +15,18 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 public class ContaBeneficiarioRequest {
-
-	@NotBlank
+	@NotNull
+	private String senha;
 	@NotNull
 	private String nome;
-
-	@NotNull
-	private long matricula;
-
-	@Email
-	@NotBlank
+	
 	@NotNull
 	private String email;
+	@NotNull
+	private long matricula;
+	
+	
 
-	@NotBlank
-	@NotNull
-	@Size(min = 8, max = 30)
-	@Pattern(regexp = "^[^\\s]+$", message = "Campo inválido")
-	private String senha;
-
-	@NotNull
-	private boolean isAdmin;
-	
-	
-	@NotNull
-	private boolean vinculo;
-	
-	
-	@NotNull
-	private String motivo;
 }
 
 

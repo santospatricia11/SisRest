@@ -1,5 +1,6 @@
 package com.sisrest.dto.beneficiario;
 
+import com.sisrest.model.entities.ContaBeneficiario;
 import com.sisrest.model.entities.Edital;
 import com.sisrest.model.entities.Inativacao;
 
@@ -14,7 +15,7 @@ public class BeneficiarioResponse {
 	private long id;
 	private boolean ativo;
 	private Edital edital;
-
-	private Inativacao inativacao;
+	private ContaBeneficiario contaBeneficiario;
+	
 
 }
