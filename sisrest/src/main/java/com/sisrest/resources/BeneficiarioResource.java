@@ -1,5 +1,7 @@
 package com.sisrest.resources;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +14,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.sisrest.dto.beneficiario.BeneficiarioRequest;
 import com.sisrest.dto.beneficiario.BeneficiarioResponse;
+import com.sisrest.dto.edital.EditalResponse;
 import com.sisrest.exception.EmailEmUsoException;
 import com.sisrest.model.entities.Beneficiario;
+import com.sisrest.model.entities.ContaBeneficiario;
+import com.sisrest.model.entities.Edital;
+import com.sisrest.repositories.BeneficiarioRepository;
 import com.sisrest.services.BeneficiarioService;
+import com.sisrest.services.ContaBeneficiarioService;
+import com.sisrest.services.EditalService;
+import com.sisrest.services.InativacaoService;
 import com.sisrest.services.convertes.BeneficiarioServiceConvert;
 
 @RestController
@@ -26,59 +37,49 @@ import com.sisrest.services.convertes.BeneficiarioServiceConvert;
 public class BeneficiarioResource {
 
 	@Autowired
-	private BeneficiarioService beneficiarioService;
+	private EditalService editalService;
 
 	@Autowired
 	private BeneficiarioServiceConvert beneficiarioServiceConvert;
 
-	@PostMapping(value = "/criar")
-	public ResponseEntity<BeneficiarioResponse> create(@RequestBody @Valid BeneficiarioRequest dto)
-			throws EmailEmUsoException {
-		Beneficiario beneficiario;
-		beneficiario = beneficiarioService.save(dto);
-		BeneficiarioResponse responseDto = beneficiarioServiceConvert.beneficiarioToDTO(beneficiario);
-		return new ResponseEntity(responseDto, HttpStatus.CREATED);
+	@Autowired
+	private BeneficiarioService beneficiarioService;
+
+	@Autowired
+	private ContaBeneficiarioService contaBeneficiarioService;
+
+	@GetMapping("/{id}")
+	public ResponseEntity<BeneficiarioResponse> getById(@PathVariable Long id) {
+		BeneficiarioResponse beneficiarioDTO = beneficiarioService.getById(id);
+		return ResponseEntity.ok(beneficiarioDTO);
 	}
 
-	@DeleteMapping(value = "/deletar/{id}")
-	public ResponseEntity<HttpStatus> delete(@PathVariable("id") long id) {
+	@PostMapping("/{criar}")
+	public ResponseEntity<BeneficiarioResponse> create(@RequestBody BeneficiarioResponse beneficiarioDTO,
+			@RequestParam("edital") Edital edital,
+			@RequestParam("contaBeneficiario") ContaBeneficiario contaBeneficiario) {
+
+		beneficiarioDTO.setEdital(edital);
+		beneficiarioDTO.setContaBeneficiario(contaBeneficiario);
+
+		BeneficiarioResponse novoBeneficiario = beneficiarioService.save(beneficiarioDTO, edital, contaBeneficiario);
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(novoBeneficiario);
+	}
+
+	// PUT
+	@PutMapping("{id}")
+
+	// DELETE
+	@DeleteMapping("{id}")
+	public ResponseEntity delete(@PathVariable("id") Long id) {
 		try {
 			beneficiarioService.deleteById(id);
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+			return new ResponseEntity(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
 
-	@GetMapping(value = "/buscarPorID/{id}")
-	public ResponseEntity<BeneficiarioResponse> getById(@PathVariable("id") long id) {
-		Beneficiario beneficiario = beneficiarioService.findById(id);
-		BeneficiarioResponse responseDto = beneficiarioServiceConvert.beneficiarioToDTO(beneficiario);
-		if (responseDto != null) {
-			return new ResponseEntity<>(responseDto, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
-
-	@PutMapping(value = "/atualizar/{id}")
-	public ResponseEntity<BeneficiarioResponse> update(@PathVariable("id") long id,
-			@RequestBody @Valid Beneficiario dto) throws EmailEmUsoException {
-		Beneficiario beneficiario = beneficiarioServiceConvert.dtoToBeneficiario(dto);
-
-		beneficiario.setId(id);
-		Beneficiario atualizado = beneficiarioService.update(id, beneficiario);
-		BeneficiarioResponse responseDto = beneficiarioServiceConvert.beneficiarioToDTO(atualizado);
-
-		if (responseDto != null) {
-			return new ResponseEntity<>(responseDto, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
-
-	public ResponseEntity getAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

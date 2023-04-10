@@ -2,15 +2,17 @@ package com.sisrest.dto.beneficiario;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import com.sisrest.model.entities.ContaBeneficiario;
 import com.sisrest.model.entities.Edital;
 import com.sisrest.model.entities.Inativacao;
 
 import lombok.Getter;
 import lombok.Setter;
-@Getter
-@Setter
+
 public class BeneficiarioRequest {
 	
 	//private Image QRCode;
@@ -26,9 +28,11 @@ public class BeneficiarioRequest {
 	@Column
 	@NotNull
     private Edital edital;
-	
-	@Column
+
 	@NotNull
-    private Inativacao inativacao;
+	@Column
+	private ContaBeneficiario contaBeneficiario;
+
+	
 
 }

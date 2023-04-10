@@ -2,6 +2,7 @@ package com.sisrest.model.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
@@ -29,27 +30,27 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "beneficiario")
-public class Beneficiario  implements Serializable{
+public class Beneficiario implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
 
-	//private Image QRCode;
+	// private Image QRCode;
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	@Column(name = "beneficiario_id")
 	private long id;
-	
+
 	@Column
 	@NotNull
 	private boolean ativo;
-	
+
 	@ManyToOne
-    @JoinColumn(name = "edital_id")
-    private Edital edital;
-	
+	@JoinColumn(name = "edital_id")
+	private Edital edital;
+
+	@NotNull
 	@ManyToOne
-    @JoinColumn(name = "contaBeneficiario_id")
-    private ContaBeneficiario contaBeneficiario;
+	@JoinColumn(name = "contaBeneficiario")
+	private ContaBeneficiario contaBeneficiario;
 }

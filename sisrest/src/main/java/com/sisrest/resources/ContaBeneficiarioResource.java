@@ -34,7 +34,7 @@ public class ContaBeneficiarioResource {
 	private ContaBeneficiarioServiceConvert beneficiarioServiceConvert;
 
 	@PostMapping(value = "/criar")
-	public ResponseEntity<ContaBeneficiarioResponse> create(@RequestBody @Valid ContaBeneficiarioRequest dto)
+	public ResponseEntity<ContaBeneficiarioResponse> create(@RequestBody @Valid ContaBeneficiarioResponse dto)
 			throws EmailEmUsoException {
 		ContaBeneficiario beneficiario;
 		beneficiario = beneficiarioService.save(dto);

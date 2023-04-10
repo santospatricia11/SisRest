@@ -2,6 +2,8 @@ package com.sisrest.services.convertes;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,7 @@ public class BeneficiarioServiceConvert {
 
 	}
 
-	public Beneficiario dtoToBeneficiario(Beneficiario dto) {
+	public Beneficiario dtoToBeneficiario(@Valid BeneficiarioResponse dto) {
 		Beneficiario beneficiario = mapper.map(dto, Beneficiario.class);
 		return beneficiario;
 	}
