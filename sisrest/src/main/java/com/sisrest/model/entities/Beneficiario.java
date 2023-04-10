@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -50,7 +49,7 @@ public class Beneficiario  implements Serializable{
     @JoinColumn(name = "edital_id")
     private Edital edital;
 	
-	@OneToOne
+	@ManyToOne
     @JoinColumn(name = "contaBeneficiario_id")
     private ContaBeneficiario contaBeneficiario;
 }

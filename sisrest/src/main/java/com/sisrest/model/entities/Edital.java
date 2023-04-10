@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,11 +36,8 @@ public class Edital implements Serializable {
 	@Column(name = "edital_id")
 	private long id;
 
-	@Column(name = "edital_numero")
-	private int numero;
-
-	@Column(name = "edital_ano")
-	private int ano;
+	@EmbeddedId
+	private EditalNumero numero;
 
 	@Column(name = "edital_nome")
 	@Pattern(regexp = "^[A-Z]+(.)*", message = "Campo nome deve iniciar com letra maiúscula")
