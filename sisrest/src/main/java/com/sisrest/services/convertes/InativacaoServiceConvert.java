@@ -4,20 +4,19 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.sisrest.dto.edital.EditalRequest;
-import com.sisrest.dto.edital.EditalResponse;
 import com.sisrest.dto.inativacao.InativacaoRequest;
 import com.sisrest.dto.inativacao.InativacaoResponse;
-import com.sisrest.model.entities.Edital;
 import com.sisrest.model.entities.Inativacao;
 
+@Service
 public class InativacaoServiceConvert {
-	
+
 	@Autowired
 	private ModelMapper mapper;
 
-	public List<InativacaoResponse> inativacaoToResponses(List<Inativacao> inativacoes) {
+	public List<InativacaoResponse> inativacoesToResponses(List<Inativacao> inativacoes) {
 		return inativacoes.stream().map(this::inativacaoToDTO).toList();
 	}
 
