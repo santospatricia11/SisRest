@@ -5,12 +5,12 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.sisrest.model.entities.ContaBeneficiario;
+import com.sisrest.model.entities.ContaEstudante;
 
 @Repository
-public interface ContaBeneficiarioRepository extends JpaRepository<ContaBeneficiario, Long> {
+public interface ContaEstudanteRepository extends JpaRepository<ContaEstudante, Long> {
 
-	Optional<ContaBeneficiario> findByEmail(String email);
+	Optional<ContaEstudante> findByEmail(String email);
 
 	boolean existsByEmail(String email);
 }

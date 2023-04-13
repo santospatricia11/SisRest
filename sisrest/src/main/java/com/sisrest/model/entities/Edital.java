@@ -35,11 +35,11 @@ public class Edital implements Serializable {
 	@Column(name = "edital_id")
 	private long id;
 
-	@Column(name = "edital_numero")
-	private int numero;
-
 	@Column(name = "edital_ano")
 	private int ano;
+
+	@Column(name = "edital_numero")
+	private int numero;
 
 	@Column(name = "edital_nome")
 	@Pattern(regexp = "^[A-Z]+(.)*", message = "Campo nome deve iniciar com letra maiúscula")

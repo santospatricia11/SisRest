@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.sisrest.dto.edital.EditalRequest;
 import com.sisrest.dto.edital.EditalResponse;
+import com.sisrest.exception.edital.EditalJaCadastradoException;
 import com.sisrest.model.entities.Edital;
 import com.sisrest.repositories.EditalRepository;
 import com.sisrest.services.convertes.EditalServiceConvert;
@@ -19,21 +20,19 @@ public class EditalService {
 	private EditalRepository editalRepository;
 
 	@Autowired
-	EditalServiceConvert editalServiceConvert;
+	private EditalServiceConvert editalServiceConvert;
 
-	public EditalResponse save(EditalRequest editalDto) {
+	public EditalResponse save(EditalRequest editalDto) throws EditalJaCadastradoException {
 		Edital edital = editalServiceConvert.dtoToEdital(editalDto);
-		Optional<Edital> verificado = editalRepository.findByNomeNumeroAno(editalDto.getNome(), editalDto.getNumero(),
-				editalDto.getAno());
-		if (!(verificado == null)) {
+		boolean verificado = editalRepository.existsByNumeroAndAno(editalDto.getNumero(), editalDto.getAno());
+
+		if (verificado) {
+			throw new EditalJaCadastradoException("Edital já cadastrado!");
+		} else {
 			editalRepository.save(edital);
 			EditalResponse responseDto = editalServiceConvert.editalToDTO(edital);
-			System.out.println("Teste");
 			return responseDto;
-		} else {
-			return null;
 		}
-
 	}
 
 	public EditalResponse deleteById(long id) {
@@ -76,7 +75,4 @@ public class EditalService {
 		EditalResponse responseDto = editalServiceConvert.editalToDTO(editalRepository.save(atualizar));
 		return responseDto;
 	}
-
-	
-
 }
