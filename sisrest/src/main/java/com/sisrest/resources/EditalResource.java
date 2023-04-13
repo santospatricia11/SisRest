@@ -7,9 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.web.bind.annotation.DeleteMapping;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,9 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sisrest.dto.edital.EditalRequest;
 import com.sisrest.dto.edital.EditalResponse;
-
+import com.sisrest.exception.edital.EditalJaCadastradoException;
 import com.sisrest.services.EditalService;
-import com.sisrest.services.convertes.EditalServiceConvert;
 
 @RestController
 @RequestMapping("/api/edital")
@@ -31,13 +28,14 @@ public class EditalResource {
 	@Autowired(required = true)
 	private EditalService editalService;
 
-	@Autowired
-	private EditalServiceConvert editalServiceConvert;
-
 	@PostMapping(value = "/criar")
 	public ResponseEntity<EditalResponse> createEdital(@RequestBody @Valid EditalRequest dto) {
-		EditalResponse responseDto = editalService.save(dto);
-		return new ResponseEntity(responseDto, HttpStatus.CREATED);
+		try {
+			EditalResponse responseDto = editalService.save(dto);
+			return new ResponseEntity(responseDto, HttpStatus.CREATED);
+		} catch (EditalJaCadastradoException ex) {
+			return new ResponseEntity(dto, HttpStatus.CONFLICT);
+		}
 
 	}
 
@@ -85,6 +83,5 @@ public class EditalResource {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-
 
 }
