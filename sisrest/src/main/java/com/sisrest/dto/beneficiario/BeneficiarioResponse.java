@@ -10,9 +10,12 @@ import lombok.Setter;
 @Setter
 public class BeneficiarioResponse {
 
-	private long id;
-	private boolean ativo;
-	private EditalResponse edital;
-	private ContaEstudanteResponse contaEstudante;
+    private long id;
+    private boolean ativo;
+    private String CPF;
+    private String programa;
+    private String situacao;
+    private EditalResponse edital;
+    private ContaEstudanteResponse contaEstudante;
 
 }

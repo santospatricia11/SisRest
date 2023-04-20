@@ -11,21 +11,21 @@ import lombok.Setter;
 
 public class AlunoRequest {
 
-	@NotBlank
-	@NotNull
-	private String nome;
+    @NotBlank
+    @NotNull
+    private String nome;
 
-	@NotBlank
-	@NotNull
-	private long id;
+    @NotBlank
+    @NotNull
+    private long id;
 
-	@NotBlank
-	@NotNull
-	private long matricula;
+    @NotBlank
+    @NotNull
+    private long matricula;
 
-	private String email;
+    private String email;
 
-	@NotBlank
-	@NotNull
-	private long CPF;
+    @NotBlank
+    @NotNull
+    private long CPF;
 }

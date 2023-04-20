@@ -9,7 +9,7 @@ import com.sisrest.model.entities.Edital;
 @Repository
 public interface EditalRepository extends JpaRepository<Edital, Long> {
 
-	@Query("SELECT COUNT(e) > 0 FROM Edital e WHERE e.numero = :numero AND e.ano = :ano")
-	boolean existsByNumeroAndAno(int numero, int ano);
+    @Query("SELECT COUNT(e) > 0 FROM Edital e WHERE e.numero = :numero AND e.ano = :ano")
+    boolean existsByNumeroAndAno(int numero, int ano);
 
 }

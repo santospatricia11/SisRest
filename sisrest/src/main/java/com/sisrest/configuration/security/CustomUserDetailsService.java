@@ -14,23 +14,23 @@ import com.sisrest.repositories.UsuarioGoogleRepository;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-	@Autowired
-	UsuarioGoogleRepository userRepository;
+    @Autowired
+    UsuarioGoogleRepository userRepository;
 
-	@Override
-	@Transactional
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		UsuarioGoogle user = userRepository.findByEmail(email)
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with email : " + email));
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        UsuarioGoogle user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email : " + email));
 
-		return UserPrincipal.create(user);
-	}
+        return UserPrincipal.create(user);
+    }
 
-	@Transactional
-	public UserDetails loadUserById(Long id) {
-		UsuarioGoogle user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+    @Transactional
+    public UserDetails loadUserById(Long id) {
+        UsuarioGoogle user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
 
-		return UserPrincipal.create(user);
-	}
+        return UserPrincipal.create(user);
+    }
 
 }

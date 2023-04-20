@@ -31,32 +31,32 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "users", uniqueConstraints = { @UniqueConstraint(columnNames = "email") })
+@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
 public class UsuarioGoogle {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(nullable = false)
-	private String name;
+    @Column(nullable = false)
+    private String name;
 
-	@Email
-	@Column(nullable = false)
-	private String email;
+    @Email
+    @Column(nullable = false)
+    private String email;
 
-	private String imageUrl;
+    private String imageUrl;
 
-	@Column(nullable = false)
-	private Boolean emailVerified = false;
+    @Column(nullable = false)
+    private Boolean emailVerified = false;
 
-	@JsonIgnore
-	private String password;
+    @JsonIgnore
+    private String password;
 
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	private AuthProvider provider;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private AuthProvider provider;
 
-	private String providerId;
+    private String providerId;
 
 }

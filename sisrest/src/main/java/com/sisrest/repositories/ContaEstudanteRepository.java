@@ -10,7 +10,7 @@ import com.sisrest.model.entities.ContaEstudante;
 @Repository
 public interface ContaEstudanteRepository extends JpaRepository<ContaEstudante, Long> {
 
-	Optional<ContaEstudante> findByEmail(String email);
+    Optional<ContaEstudante> findByEmail(String email);
 
-	boolean existsByEmail(String email);
+    boolean existsByEmail(String email);
 }

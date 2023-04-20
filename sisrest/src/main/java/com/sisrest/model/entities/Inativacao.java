@@ -28,25 +28,25 @@ import lombok.ToString;
 @Entity
 @Table(name = "inativacao")
 public class Inativacao {
-	
-	@Id
-	@Column(name = "inativacao_id")
-	private long id;
-	
-	@NotNull
-	@Column(name = "inativacao_data_inicio")
-	private Date inicio;
 
-	@NotNull
-	@Column(name = "inativacao_data_termino")
-	private Date termino;
-	
-	@NotNull
-	@Column(name = "inativacao_motivo")
-	private String motivo;
-	
-	@ManyToOne
-	@JoinColumn(name = "beneficiario_id")
-	private Beneficiario beneficiario;
+    @Id
+    @Column(name = "inativacao_id")
+    private long id;
+
+    @NotNull
+    @Column(name = "inativacao_data_inicio")
+    private Date inicio;
+
+    @NotNull
+    @Column(name = "inativacao_data_termino")
+    private Date termino;
+
+    @NotNull
+    @Column(name = "inativacao_motivo")
+    private String motivo;
+
+    @ManyToOne
+    @JoinColumn(name = "beneficiario_id")
+    private Beneficiario beneficiario;
 
 }

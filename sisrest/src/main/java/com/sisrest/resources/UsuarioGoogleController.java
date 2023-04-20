@@ -14,8 +14,8 @@ import com.sisrest.repositories.UsuarioGoogleRepository;
 @RestController
 public class UsuarioGoogleController {
 
-	@Autowired
-	private UsuarioGoogleRepository userRepository;
+    @Autowired
+    private UsuarioGoogleRepository userRepository;
 
 
     @GetMapping("/api/user/me")

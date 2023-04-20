@@ -31,51 +31,51 @@ import com.sisrest.repositories.UsuarioGoogleRepository;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-	@Autowired
-	private AuthenticationManager authenticationManager;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
-	@Autowired
-	private UsuarioGoogleRepository userRepository;
+    @Autowired
+    private UsuarioGoogleRepository userRepository;
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-	@Autowired
-	private TokenProvider tokenProvider;
+    @Autowired
+    private TokenProvider tokenProvider;
 
-	@PostMapping("/login")
-	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    @PostMapping("/login")
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
-		Authentication authentication = authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
 
-		SecurityContextHolder.getContext().setAuthentication(authentication);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-		String token = tokenProvider.createToken(authentication);
-		return ResponseEntity.ok(new AuthResponse(token));
-	}
+        String token = tokenProvider.createToken(authentication);
+        return ResponseEntity.ok(new AuthResponse(token));
+    }
 
-	@PostMapping("/signup")
-	public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-			throw new BadRequestException("Email address already in use.");
-		}
+    @PostMapping("/signup")
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
+        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+            throw new BadRequestException("Email address already in use.");
+        }
 
-		// Creating user's account
-		UsuarioGoogle user = new UsuarioGoogle();
-		user.setName(signUpRequest.getName());
-		user.setEmail(signUpRequest.getEmail());
-		user.setPassword(signUpRequest.getPassword());
-		user.setProvider(AuthProvider.local);
+        // Creating user's account
+        UsuarioGoogle user = new UsuarioGoogle();
+        user.setName(signUpRequest.getName());
+        user.setEmail(signUpRequest.getEmail());
+        user.setPassword(signUpRequest.getPassword());
+        user.setProvider(AuthProvider.local);
 
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-		UsuarioGoogle result = userRepository.save(user);
+        UsuarioGoogle result = userRepository.save(user);
 
-		URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/me")
-				.buildAndExpand(result.getId()).toUri();
+        URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/me")
+                .buildAndExpand(result.getId()).toUri();
 
-		return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully@"));
-	}
+        return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully@"));
+    }
 
 }

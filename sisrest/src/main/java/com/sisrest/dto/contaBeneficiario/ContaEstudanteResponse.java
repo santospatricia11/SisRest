@@ -7,8 +7,16 @@ import lombok.Setter;
 @Setter
 public class ContaEstudanteResponse {
 
-	private String nome;
-	private String senha;
-	private String email;
-	private long matricula;
+    private long id;
+
+    private String nome;
+
+    private String email;
+
+    private String campus;
+
+    private String curso;
+
+    private long matricula;
+
 }

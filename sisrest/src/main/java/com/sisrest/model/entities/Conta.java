@@ -36,29 +36,24 @@ import lombok.ToString;
 @DiscriminatorValue("C")
 public abstract class Conta {
 
-	@NotNull
-	@NotEmpty
-	@NotBlank(message = "Campo não informado")
-	@Column
-	@Pattern(regexp = "^[A-Z]+(.)*", message = "Campo nome deve iniciar com letra maiúscula")
-	private String nome;
+    @NotNull
+    @NotEmpty
+    @NotBlank(message = "Campo não informado")
+    @Column
+    @Pattern(regexp = "^[A-Z]+(.)*", message = "Campo nome deve iniciar com letra maiúscula")
+    private String nome;
 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Id
-	@Column
-	private long id;
-	
-	@NotNull
-	@Email(message = "Campo inválido")
-	@Column
-	private String email;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column
+    private long id;
 
-	@NotNull
-	@Column
-	@Size(min = 8, max = 30)
-	@Pattern(regexp = "^[^\\s]+$", message = "Campo inválido")
-	private String senha;
+    @NotNull
+    @Email(message = "Campo inválido")
+    @Column
+    private String email;
 
-
-
+    @NotNull
+    @Column
+    private String campus;
 }

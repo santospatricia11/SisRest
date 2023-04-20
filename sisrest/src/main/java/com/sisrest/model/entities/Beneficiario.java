@@ -31,23 +31,36 @@ import lombok.ToString;
 @Table(name = "beneficiario")
 public class Beneficiario implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Id
-	@Column(name = "beneficiario_id")
-	private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "beneficiario_id")
+    private long id;
 
-	@Column
-	@NotNull
-	private boolean ativo;
+    @Column
+    @NotNull
+    private boolean ativo;
 
-	@ManyToOne
-	@JoinColumn(name = "edital_id")
-	private Edital edital;
+    @NotNull
+    @Column
+    private long CPF;
 
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "contaEstudante_id")
-	private ContaEstudante contaEstudante;
+    @NotNull
+    @Column
+    private String programa;
+
+    @NotNull
+    @Column
+    private String situacao;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "edital_id")
+    private Edital edital;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "contaEstudante_id")
+    private ContaEstudante contaEstudante;
 }

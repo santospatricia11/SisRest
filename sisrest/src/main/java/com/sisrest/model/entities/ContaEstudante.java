@@ -27,13 +27,18 @@ import lombok.ToString;
 @DiscriminatorValue(value = "E")
 public class ContaEstudante extends Conta implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	@Id
-	@Column
-	private long id;
+    private static final long serialVersionUID = 1L;
 
-	@Column
-	@NotNull
-	private long matricula;
+    @Id
+    @Column
+    private long id;
+
+    @Column
+    @NotNull
+    private long matricula;
+
+    @NotNull
+    @Column
+    private String curso;
 
 }

@@ -9,17 +9,17 @@ import lombok.Setter;
 @Setter
 public class EditalResponse {
 
-	private long id;
+    private long id;
 
-	private int numero;
+    private int numero;
 
-	private int ano;
+    private int ano;
 
-	private String nome;
-	
-	private String link;
+    private String nome;
 
-	private Date vigenteInicio;
+    private String link;
 
-	private Date vigenteFinal;
+    private Date vigenteInicio;
+
+    private Date vigenteFinal;
 }

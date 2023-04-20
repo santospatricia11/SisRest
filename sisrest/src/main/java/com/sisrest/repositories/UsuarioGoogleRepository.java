@@ -10,7 +10,7 @@ import com.sisrest.model.entities.UsuarioGoogle;
 @Repository
 public interface UsuarioGoogleRepository extends JpaRepository<UsuarioGoogle, Long> {
 
-	Optional<UsuarioGoogle> findByEmail(String email);
+    Optional<UsuarioGoogle> findByEmail(String email);
 
-	Boolean existsByEmail(String email);
+    Boolean existsByEmail(String email);
 }

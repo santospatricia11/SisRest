@@ -1,6 +1,7 @@
- package com.sisrest.services.convertes;
+package com.sisrest.services.convertes;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,21 +14,21 @@ import com.sisrest.model.entities.ContaEstudante;
 @Service
 public class ContaEstudanteServiceConvert {
 
-	@Autowired
-	private ModelMapper mapper;
+    @Autowired
+    private ModelMapper mapper;
 
-	public List<ContaEstudanteResponse> usersToResponses(List<ContaEstudante> contasEstudantes) {
-		return contasEstudantes.stream().map(this::contaEstudanteToDTO).toList();
-	}
+    public List<ContaEstudanteResponse> usersToResponses(List<ContaEstudante> contasEstudantes) {
+        return contasEstudantes.stream().map(this::contaEstudanteToDTO).collect(Collectors.toList());
+    }
 
-	public ContaEstudante dtoToContaEstudante(ContaEstudanteRequest dto) {
-		ContaEstudante contaEstudante = mapper.map(dto, ContaEstudante.class);
-		return contaEstudante;
-	}
+    public ContaEstudante dtoToContaEstudante(ContaEstudanteRequest dto) {
+        ContaEstudante contaEstudante = mapper.map(dto, ContaEstudante.class);
+        return contaEstudante;
+    }
 
-	public ContaEstudanteResponse contaEstudanteToDTO(ContaEstudante contaEstudante) {
-		ContaEstudanteResponse contaEstudanteResponse = mapper.map(contaEstudante, ContaEstudanteResponse.class);
-		return contaEstudanteResponse;
-	}
+    public ContaEstudanteResponse contaEstudanteToDTO(ContaEstudante contaEstudante) {
+        ContaEstudanteResponse contaEstudanteResponse = mapper.map(contaEstudante, ContaEstudanteResponse.class);
+        return contaEstudanteResponse;
+    }
 
 }
