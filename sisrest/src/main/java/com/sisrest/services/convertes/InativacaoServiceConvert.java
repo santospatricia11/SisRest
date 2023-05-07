@@ -1,15 +1,14 @@
 package com.sisrest.services.convertes;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+import com.sisrest.dto.inativacao.InativacaoRequest;
+import com.sisrest.dto.inativacao.InativacaoResponse;
+import com.sisrest.model.entities.Inativacao;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sisrest.dto.inativacao.InativacaoRequest;
-import com.sisrest.dto.inativacao.InativacaoResponse;
-import com.sisrest.model.entities.Inativacao;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class InativacaoServiceConvert {

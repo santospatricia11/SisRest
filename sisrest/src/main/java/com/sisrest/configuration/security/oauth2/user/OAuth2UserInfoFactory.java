@@ -1,9 +1,9 @@
 package com.sisrest.configuration.security.oauth2.user;
 
-import java.util.Map;
-
 import com.sisrest.exception.OAuth2AuthenticationProcessingException;
 import com.sisrest.model.enums.AuthProvider;
+
+import java.util.Map;
 
 public class OAuth2UserInfoFactory {
 

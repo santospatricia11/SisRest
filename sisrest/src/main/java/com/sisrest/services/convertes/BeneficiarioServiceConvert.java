@@ -1,15 +1,14 @@
 package com.sisrest.services.convertes;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+import com.sisrest.dto.beneficiario.BeneficiarioRequest;
+import com.sisrest.dto.beneficiario.BeneficiarioResponse;
+import com.sisrest.model.entities.Beneficiario;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sisrest.dto.beneficiario.BeneficiarioRequest;
-import com.sisrest.dto.beneficiario.BeneficiarioResponse;
-import com.sisrest.model.entities.Beneficiario;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BeneficiarioServiceConvert {

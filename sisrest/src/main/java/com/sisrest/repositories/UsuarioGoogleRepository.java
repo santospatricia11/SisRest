@@ -1,11 +1,10 @@
 package com.sisrest.repositories;
 
-import java.util.Optional;
-
+import com.sisrest.model.entities.UsuarioGoogle;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.sisrest.model.entities.UsuarioGoogle;
+import java.util.Optional;
 
 @Repository
 public interface UsuarioGoogleRepository extends JpaRepository<UsuarioGoogle, Long> {

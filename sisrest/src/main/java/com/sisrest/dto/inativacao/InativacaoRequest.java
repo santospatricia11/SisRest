@@ -1,11 +1,10 @@
 package com.sisrest.dto.inativacao;
 
-import java.util.Date;
+import com.sisrest.model.entities.Beneficiario;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
-import com.sisrest.model.entities.Beneficiario;
+import java.util.Date;
 
 public class InativacaoRequest {
 

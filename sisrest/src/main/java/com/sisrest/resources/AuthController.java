@@ -1,9 +1,14 @@
 package com.sisrest.resources;
 
-import java.net.URI;
-
-import javax.validation.Valid;
-
+import com.sisrest.configuration.security.TokenProvider;
+import com.sisrest.dto.usuarioGoogle.ApiResponse;
+import com.sisrest.dto.usuarioGoogle.AuthResponse;
+import com.sisrest.dto.usuarioGoogle.LoginRequest;
+import com.sisrest.dto.usuarioGoogle.SignUpRequest;
+import com.sisrest.exception.BadRequestException;
+import com.sisrest.model.entities.UsuarioGoogle;
+import com.sisrest.model.enums.AuthProvider;
+import com.sisrest.repositories.UsuarioGoogleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,15 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.sisrest.configuration.security.TokenProvider;
-import com.sisrest.dto.usuarioGoogle.ApiResponse;
-import com.sisrest.dto.usuarioGoogle.AuthResponse;
-import com.sisrest.dto.usuarioGoogle.LoginRequest;
-import com.sisrest.dto.usuarioGoogle.SignUpRequest;
-import com.sisrest.exception.BadRequestException;
-import com.sisrest.model.entities.UsuarioGoogle;
-import com.sisrest.model.enums.AuthProvider;
-import com.sisrest.repositories.UsuarioGoogleRepository;
+import javax.validation.Valid;
+import java.net.URI;
 
 @RestController
 @RequestMapping("/api/auth")

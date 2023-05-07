@@ -1,7 +1,12 @@
 package com.sisrest.configuration.security.oauth2;
 
-import java.util.Optional;
-
+import com.sisrest.configuration.security.UserPrincipal;
+import com.sisrest.configuration.security.oauth2.user.OAuth2UserInfo;
+import com.sisrest.configuration.security.oauth2.user.OAuth2UserInfoFactory;
+import com.sisrest.exception.OAuth2AuthenticationProcessingException;
+import com.sisrest.model.entities.UsuarioGoogle;
+import com.sisrest.model.enums.AuthProvider;
+import com.sisrest.repositories.UsuarioGoogleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
@@ -12,13 +17,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.sisrest.configuration.security.UserPrincipal;
-import com.sisrest.configuration.security.oauth2.user.OAuth2UserInfo;
-import com.sisrest.configuration.security.oauth2.user.OAuth2UserInfoFactory;
-import com.sisrest.exception.OAuth2AuthenticationProcessingException;
-import com.sisrest.model.entities.UsuarioGoogle;
-import com.sisrest.model.enums.AuthProvider;
-import com.sisrest.repositories.UsuarioGoogleRepository;
+import java.util.Optional;
 
 @Service
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {

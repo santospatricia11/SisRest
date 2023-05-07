@@ -1,15 +1,14 @@
 package com.sisrest.services.convertes;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+import com.sisrest.dto.contaBeneficiario.ContaEstudanteRequest;
+import com.sisrest.dto.contaBeneficiario.ContaEstudanteResponse;
+import com.sisrest.model.entities.ContaEstudante;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sisrest.dto.contaBeneficiario.ContaEstudanteRequest;
-import com.sisrest.dto.contaBeneficiario.ContaEstudanteResponse;
-import com.sisrest.model.entities.ContaEstudante;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ContaEstudanteServiceConvert {

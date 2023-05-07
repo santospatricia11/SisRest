@@ -1,14 +1,13 @@
 package com.sisrest.configuration.security.oauth2;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.nimbusds.oauth2.sdk.util.StringUtils;
+import com.sisrest.util.CookieUtils;
 import org.springframework.security.oauth2.client.web.AuthorizationRequestRepository;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.stereotype.Component;
 
-import com.nimbusds.oauth2.sdk.util.StringUtils;
-import com.sisrest.util.CookieUtils;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class HttpCookieOAuth2AuthorizationRequestRepository

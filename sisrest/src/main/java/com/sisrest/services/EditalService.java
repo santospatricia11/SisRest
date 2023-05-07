@@ -1,17 +1,16 @@
 package com.sisrest.services;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.sisrest.dto.edital.EditalRequest;
 import com.sisrest.dto.edital.EditalResponse;
 import com.sisrest.exception.edital.EditalJaCadastradoException;
 import com.sisrest.model.entities.Edital;
 import com.sisrest.repositories.EditalRepository;
 import com.sisrest.services.convertes.EditalServiceConvert;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EditalService {

@@ -1,11 +1,10 @@
 package com.sisrest.dto.inativacao;
 
-import java.util.Date;
-
 import com.sisrest.model.entities.Beneficiario;
-
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Date;
 
 @Getter
 @Setter

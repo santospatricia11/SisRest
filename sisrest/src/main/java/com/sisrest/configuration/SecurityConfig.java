@@ -1,5 +1,12 @@
 package com.sisrest.configuration;
 
+import com.sisrest.configuration.security.CustomUserDetailsService;
+import com.sisrest.configuration.security.RestAuthenticationEntryPoint;
+import com.sisrest.configuration.security.TokenAuthenticationFilter;
+import com.sisrest.configuration.security.oauth2.CustomOAuth2UserService;
+import com.sisrest.configuration.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
+import com.sisrest.configuration.security.oauth2.OAuth2AuthenticationFailureHandler;
+import com.sisrest.configuration.security.oauth2.OAuth2AuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,14 +22,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import com.sisrest.configuration.security.CustomUserDetailsService;
-import com.sisrest.configuration.security.RestAuthenticationEntryPoint;
-import com.sisrest.configuration.security.TokenAuthenticationFilter;
-import com.sisrest.configuration.security.oauth2.CustomOAuth2UserService;
-import com.sisrest.configuration.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
-import com.sisrest.configuration.security.oauth2.OAuth2AuthenticationFailureHandler;
-import com.sisrest.configuration.security.oauth2.OAuth2AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity

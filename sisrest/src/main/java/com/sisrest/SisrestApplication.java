@@ -1,10 +1,9 @@
 package com.sisrest;
 
+import com.sisrest.configuration.AppProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-
-import com.sisrest.configuration.AppProperties;
 
 @SpringBootApplication
 @EnableConfigurationProperties(AppProperties.class)

@@ -1,13 +1,12 @@
 package com.sisrest.services;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.sisrest.model.entities.Conta;
+import com.sisrest.repositories.ContaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sisrest.model.entities.Conta;
-import com.sisrest.repositories.ContaRepository;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ContaService {
@@ -31,7 +30,7 @@ public class ContaService {
     }
 
     public List<Conta> findAll() {
-        return (List<Conta>) contaRepository.findAll();
+        return contaRepository.findAll();
     }
 
     public Conta update(long id, Conta conta) {

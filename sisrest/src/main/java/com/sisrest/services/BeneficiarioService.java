@@ -1,11 +1,5 @@
 package com.sisrest.services;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.sisrest.dto.beneficiario.BeneficiarioRequest;
 import com.sisrest.dto.beneficiario.BeneficiarioResponse;
 import com.sisrest.model.entities.Beneficiario;
@@ -15,6 +9,11 @@ import com.sisrest.repositories.BeneficiarioRepository;
 import com.sisrest.repositories.ContaEstudanteRepository;
 import com.sisrest.repositories.EditalRepository;
 import com.sisrest.services.convertes.BeneficiarioServiceConvert;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BeneficiarioService {
