@@ -17,6 +17,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.sisrest.dto.contaServidor.ContaServidorRequest;
+
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -47,18 +49,20 @@ public abstract class Conta {
 	@Id
 	@Column
 	private long id;
-	
+
 	@NotNull
 	@Email(message = "Campo inválido")
 	@Column
 	private String email;
 
-	@NotNull
+	//@NotNull
 	@Column
 	@Size(min = 8, max = 30)
 	@Pattern(regexp = "^[^\\s]+$", message = "Campo inválido")
 	private String senha;
 
 
+	@Column
+	private String campus;
 
 }
