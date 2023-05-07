@@ -17,20 +17,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
+/*@Getter
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
 @Embeddable
 @AllArgsConstructor
 @ToString
-@Entity
-@Table(name = "restricao")
-
-public class RestricaoAlimentar {
-	private String obcervacao;
-	private TipoDeRestricaoAlimentar tipo;
-	private boolean resultadoAnalise;
-	private String justificativaAnalise;
-	private Date analisadoEm;
-}
+@Entity*/
+/*
+ * @Table(name = "restricao")
+ * 
+ * public class RestricaoAlimentar { private String obcervacao; private
+ * TipoDeRestricaoAlimentar tipo; private boolean resultadoAnalise; private
+ * String justificativaAnalise; private Date analisadoEm; }
+ */

@@ -15,16 +15,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-@Getter
-@Setter
-@EqualsAndHashCode
-@NoArgsConstructor
-@Embeddable
-@AllArgsConstructor
-@ToString
-@Entity
-public class AcessoDiaRefeicao {
+/*
+ * @Getter
+ * 
+ * @Setter
+ * 
+ * @EqualsAndHashCode
+ * 
+ * @NoArgsConstructor
+ * 
+ * @Embeddable
+ * 
+ * @AllArgsConstructor
+ * 
+ * @ToString
+ * 
+ * @Entity
+ */
+/*public class AcessoDiaRefeicao {
 	private DiaDaSemana diaSemana;
 	private TipoDeRefeicao tipoRefeicao;
 
-}
+}*/
