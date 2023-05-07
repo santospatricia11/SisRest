@@ -9,12 +9,14 @@ import lombok.Setter;
 @EqualsAndHashCode
 public class ContaEstudanteRequest {
 
-	private String senha;
 
-	private String nome;
+    private String nome;
 
-	private String email;
+    private String matricula;
 
-	private String matricula;
+    private String email;
 
+    private String campus;
+
+    private String curso;
 }

@@ -1,12 +1,10 @@
 package com.sisrest.model.entities;
 
-import java.io.Serializable;
+import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -15,7 +13,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -24,19 +21,13 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Entity
-@DiscriminatorValue(value = "E")
-public class ContaEstudante extends Conta implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-	@Id
-	@Column
-	private long id;
-
-	@Column
-	@NotNull
-	private long matricula;
-	@Column
-
-	private String curso;
+@Table(name = "pedido")
+public class PedidoDeAcesso {
+	
+	private Date solicitoEm;
+	private Date analisadoEm;
+	private String justificativaAnalise;
+	private boolean isAprovado;
+	private boolean isVigente;
 
 }

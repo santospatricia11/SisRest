@@ -1,9 +1,14 @@
 package com.sisrest.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.stereotype.Service;
 
 import com.sisrest.dto.contaBeneficiario.ContaEstudanteRequest;
@@ -57,7 +62,7 @@ public class ContaEstudanteService {
 		return contaEstudanteServiceConvert.usersToResponses(contaEstudanteRepository.findAll());
 	}
 
-	public ContaEstudanteResponse update(long id, ContaEstudanteRequest contaEstudanteDto){
+	public ContaEstudanteResponse update(long id, ContaEstudanteRequest contaEstudanteDto) {
 		Optional<ContaEstudante> contaEstudante = contaEstudanteRepository.findById(id);
 		ContaEstudante original = contaEstudante.get();
 		ContaEstudante atualizar = contaEstudanteServiceConvert.dtoToContaEstudante(contaEstudanteDto);
@@ -79,4 +84,5 @@ public class ContaEstudanteService {
 				.contaEstudanteToDTO(contaEstudanteRepository.save(atualizar));
 		return contaEstudanteResponse;
 	}
+
 }
