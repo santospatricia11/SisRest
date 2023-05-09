@@ -30,5 +30,4 @@ public class ContaEstudante extends Conta implements Serializable {
     @NotNull
     @Column
     private String curso;
-
 }
