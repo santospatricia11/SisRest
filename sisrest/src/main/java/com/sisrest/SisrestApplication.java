@@ -11,7 +11,6 @@ public class SisrestApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SisrestApplication.class, args);
-
     }
 
 }

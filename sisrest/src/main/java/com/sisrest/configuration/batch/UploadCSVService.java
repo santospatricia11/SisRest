@@ -12,10 +12,10 @@ import java.nio.file.Paths;
 
 @Component
 public class UploadCSVService {
-    @Value("D:\\GitHub\\SisRest\\sisrest\\src\\main")
+    @Value("D:\\GitHub\\SisRest")
     private String raiz;
 
-    @Value("resources\\files")
+    @Value("sisrest")
     private String diretorio;
 
     private File file;
