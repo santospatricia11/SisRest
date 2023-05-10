@@ -4,11 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
 import java.io.Serializable;
-
-import com.sisrest.dto.contaBeneficiario.ContaEstudanteResponse;
-import com.sisrest.dto.edital.EditalResponse;
 
 @Getter
 @Setter

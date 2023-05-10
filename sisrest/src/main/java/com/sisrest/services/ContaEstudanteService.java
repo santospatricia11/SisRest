@@ -1,22 +1,16 @@
 package com.sisrest.services;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.data.domain.ExampleMatcher.StringMatcher;
-import org.springframework.stereotype.Service;
-
 import com.sisrest.dto.contaBeneficiario.ContaEstudanteRequest;
 import com.sisrest.dto.contaBeneficiario.ContaEstudanteResponse;
 import com.sisrest.exception.EmailEmUsoException;
 import com.sisrest.model.entities.ContaEstudante;
 import com.sisrest.repositories.ContaEstudanteRepository;
 import com.sisrest.services.convertes.ContaEstudanteServiceConvert;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ContaEstudanteService {
