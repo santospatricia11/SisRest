@@ -11,5 +11,7 @@ public interface ContaEstudanteRepository extends JpaRepository<ContaEstudante, 
 
     Optional<ContaEstudante> findByEmail(String email);
 
+    Optional<ContaEstudante> findByMatricula(long matricula);
+
     boolean existsByEmail(String email);
 }

@@ -6,7 +6,6 @@ import org.springframework.batch.item.file.transform.FieldSet;
 import org.springframework.validation.BindException;
 
 public class ContaEstudanteFieldSetMapper implements FieldSetMapper<ContaEstudante> {
-
     @Override
     public ContaEstudante mapFieldSet(FieldSet fieldSet) throws BindException {
         ContaEstudante contaEstudante = new ContaEstudante();
