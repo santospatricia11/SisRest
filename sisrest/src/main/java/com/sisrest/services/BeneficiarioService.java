@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.zxing.NotFoundException;
+
 import com.sisrest.dto.beneficiario.BeneficiarioRequest;
 import com.sisrest.dto.beneficiario.BeneficiarioResponse;
 import com.sisrest.model.entities.Beneficiario;
@@ -27,75 +28,74 @@ import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 
 @Service
 public class BeneficiarioService {
-	 @Autowired
-	    private BeneficiarioRepository beneficiarioRepository;
 
-	    @Autowired
-	    private EditalRepository editalRepository;
+    @Autowired
+    private BeneficiarioRepository beneficiarioRepository;
 
-	    @Autowired
-	    private ContaEstudanteRepository contaEstudanteRepository;
+    @Autowired
+    private EditalRepository editalRepository;
 
-	    @Autowired
-	    private BeneficiarioServiceConvert beneficiarioServiceConvert;
+    @Autowired
+    private ContaEstudanteRepository contaEstudanteRepository;
 
-	    public BeneficiarioResponse save(BeneficiarioRequest beneficiarioDto) {
-	        Optional<Edital> edital = editalRepository.findById(beneficiarioDto.getEdital());
-	        Optional<ContaEstudante> contaEstudante = contaEstudanteRepository.findById(beneficiarioDto.getContaEstudante());
+    @Autowired
+    private BeneficiarioServiceConvert beneficiarioServiceConvert;
 
-	        Beneficiario beneficiario = beneficiarioServiceConvert.dtoToBeneficiario(beneficiarioDto);
-	        beneficiario.setContaEstudante(contaEstudante.get());
-	        beneficiario.setEdital(edital.get());
-	        boolean verificado = false;
+    public BeneficiarioResponse save(BeneficiarioRequest beneficiarioDto) {
+        Optional<Edital> edital = editalRepository.findById(beneficiarioDto.getEdital());
+        Optional<ContaEstudante> contaEstudante = contaEstudanteRepository.findById(beneficiarioDto.getContaEstudante());
 
-	        if (verificado) {
-	            return null;
-	        } else {
-	            beneficiarioRepository.save(beneficiario);
-	            BeneficiarioResponse responseDto = beneficiarioServiceConvert.beneficiarioToDTO(beneficiario);
-	            return responseDto;
-	        }
-	    }
+        Beneficiario beneficiario = beneficiarioServiceConvert.dtoToBeneficiario(beneficiarioDto);
+        beneficiario.setContaEstudante(contaEstudante.get());
+        beneficiario.setEdital(edital.get());
+        boolean verificado = false;
 
-	    public BeneficiarioResponse deleteById(long id) {
-	        Optional<Beneficiario> beneficiario = beneficiarioRepository.findById(id);
-	        beneficiarioRepository.deleteById(id);
-	        BeneficiarioResponse beneficiarioResponse = beneficiarioServiceConvert.beneficiarioToDTO(beneficiario.get());
-	        return beneficiarioResponse;
-	    }
+        if (verificado) {
+            return null;
+        } else {
+            beneficiarioRepository.save(beneficiario);
+            BeneficiarioResponse responseDto = beneficiarioServiceConvert.beneficiarioToDTO(beneficiario);
+            return responseDto;
+        }
+    }
 
-	    public BeneficiarioResponse findById(long id) {
-	        Optional<Beneficiario> beneficiario = beneficiarioRepository.findById(id);
-	        BeneficiarioResponse beneficiarioResponse = beneficiarioServiceConvert.beneficiarioToDTO(beneficiario.get());
-	        return beneficiarioResponse;
-	    }
+    public BeneficiarioResponse deleteById(long id) {
+        Optional<Beneficiario> beneficiario = beneficiarioRepository.findById(id);
+        beneficiarioRepository.deleteById(id);
+        BeneficiarioResponse beneficiarioResponse = beneficiarioServiceConvert.beneficiarioToDTO(beneficiario.get());
+        return beneficiarioResponse;
+    }
 
-	    public List<BeneficiarioResponse> findAll() {
-	        return beneficiarioServiceConvert.beneficiariosToResponses(beneficiarioRepository.findAll());
-	    }
+    public BeneficiarioResponse findById(long id) {
+        Optional<Beneficiario> beneficiario = beneficiarioRepository.findById(id);
+        BeneficiarioResponse beneficiarioResponse = beneficiarioServiceConvert.beneficiarioToDTO(beneficiario.get());
+        return beneficiarioResponse;
+    }
 
-	    public BeneficiarioResponse update(long id, BeneficiarioRequest beneficiarioDto) {
-	        Optional<Edital> edital = editalRepository.findById(beneficiarioDto.getEdital());
-	        Optional<ContaEstudante> contaEstudante = contaEstudanteRepository.findById(beneficiarioDto.getContaEstudante());
+    public List<BeneficiarioResponse> findAll() {
+        return beneficiarioServiceConvert.beneficiariosToResponses(beneficiarioRepository.findAll());
+    }
 
-	        Optional<Beneficiario> beneficiario = beneficiarioRepository.findById(id);
-	        Beneficiario original = beneficiario.get();
-	        Beneficiario atualizar = beneficiarioServiceConvert.dtoToBeneficiario(beneficiarioDto);
-	        boolean verificado = beneficiarioRepository.existsById(beneficiario.get().getId());
+    public BeneficiarioResponse update(long id, BeneficiarioRequest beneficiarioDto) {
+        Optional<Edital> edital = editalRepository.findById(beneficiarioDto.getEdital());
+        Optional<ContaEstudante> contaEstudante = contaEstudanteRepository.findById(beneficiarioDto.getContaEstudante());
 
-	        if (verificado)
-	            atualizar.setId(beneficiario.get().getId());
-	        if (atualizar.getEdital() == null) {
-	            atualizar.setEdital(original.getEdital());
-	            
-	        } else if (atualizar.getContaEstudante() == null) {
-	            atualizar.setContaEstudante(original.getContaEstudante());
-	        }
-	        atualizar.setContaEstudante(contaEstudante.get());
-	        atualizar.setEdital(edital.get());
-	        BeneficiarioResponse beneficiarioResponse = beneficiarioServiceConvert
-	                .beneficiarioToDTO(beneficiarioRepository.save(atualizar));
-	        return beneficiarioResponse;
-	    }
+        Optional<Beneficiario> beneficiario = beneficiarioRepository.findById(id);
+        Beneficiario original = beneficiario.get();
+        Beneficiario atualizar = beneficiarioServiceConvert.dtoToBeneficiario(beneficiarioDto);
+        boolean verificado = beneficiarioRepository.existsById(beneficiario.get().getId());
 
+        if (verificado)
+            atualizar.setId(beneficiario.get().getId());
+        if (atualizar.getEdital() == null) {
+            atualizar.setEdital(original.getEdital());
+        } else if (atualizar.getContaEstudante() == null) {
+            atualizar.setContaEstudante(original.getContaEstudante());
+        }
+        atualizar.setContaEstudante(contaEstudante.get());
+        atualizar.setEdital(edital.get());
+        BeneficiarioResponse beneficiarioResponse = beneficiarioServiceConvert
+                .beneficiarioToDTO(beneficiarioRepository.save(atualizar));
+        return beneficiarioResponse;
+    }
 }

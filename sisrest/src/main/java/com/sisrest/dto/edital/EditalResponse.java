@@ -1,25 +1,25 @@
 package com.sisrest.dto.edital;
 
-import java.sql.Date;
-
 import lombok.Getter;
 import lombok.Setter;
+
+import java.sql.Date;
 
 @Getter
 @Setter
 public class EditalResponse {
 
-	private long id;
+    private long id;
 
-	private int numero;
+    private int numero;
 
-	private int ano;
+    private int ano;
 
-	private String nome;
-	
-	private String link;
+    private String nome;
 
-	private Date vigenteInicio;
+    private String link;
 
-	private Date vigenteFinal;
+    private Date vigenteInicio;
+
+    private Date vigenteFinal;
 }
