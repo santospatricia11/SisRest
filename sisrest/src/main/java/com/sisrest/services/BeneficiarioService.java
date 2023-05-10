@@ -1,5 +1,17 @@
 package com.sisrest.services;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import javax.security.auth.login.AccountNotFoundException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.stereotype.Service;
+
+import com.google.zxing.NotFoundException;
+
 import com.sisrest.dto.beneficiario.BeneficiarioRequest;
 import com.sisrest.dto.beneficiario.BeneficiarioResponse;
 import com.sisrest.model.entities.Beneficiario;
@@ -9,14 +21,14 @@ import com.sisrest.repositories.BeneficiarioRepository;
 import com.sisrest.repositories.ContaEstudanteRepository;
 import com.sisrest.repositories.EditalRepository;
 import com.sisrest.services.convertes.BeneficiarioServiceConvert;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 
 @Service
 public class BeneficiarioService {
+
     @Autowired
     private BeneficiarioRepository beneficiarioRepository;
 

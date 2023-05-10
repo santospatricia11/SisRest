@@ -18,5 +18,4 @@ public class ContaEstudanteRequest {
     private String campus;
 
     private String curso;
-
 }

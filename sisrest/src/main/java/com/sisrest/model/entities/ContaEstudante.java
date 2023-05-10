@@ -26,7 +26,7 @@ public class ContaEstudante extends Conta implements Serializable {
     @Column
     @NotNull
     private long matricula;
-
+    
     @NotNull
     @Column
     private String curso;

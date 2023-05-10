@@ -5,6 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import com.sisrest.dto.contaServidor.ContaServidorRequest;
+
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -37,4 +39,9 @@ public abstract class Conta {
     @NotNull
     @Column
     private String campus;
+
+	  @Column
+	  @Size(min = 8, max = 30)
+	  @Pattern(regexp = "^[^\\s]+$", message = "Campo inválido")
+	  private String senha;
 }

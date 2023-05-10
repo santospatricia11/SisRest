@@ -7,6 +7,7 @@ import lombok.Setter;
 @Setter
 public class BeneficiarioRequest {
 
+
     private boolean ativo;
     private String CPF;
     private String programa;

@@ -8,7 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BeneficiarioResponse {
-
     private long id;
     private boolean ativo;
     private String CPF;
@@ -16,5 +15,4 @@ public class BeneficiarioResponse {
     private String situacao;
     private EditalResponse edital;
     private ContaEstudanteResponse contaEstudante;
-
 }

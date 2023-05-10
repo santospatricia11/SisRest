@@ -1,23 +1,52 @@
 package com.sisrest.resources;
 
+
+import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.sisrest.dto.contaBeneficiario.ContaEstudanteRequest;
 import com.sisrest.dto.contaBeneficiario.ContaEstudanteResponse;
 import com.sisrest.exception.EmailEmUsoException;
+import com.sisrest.model.entities.ContaEstudante;
 import com.sisrest.services.ContaEstudanteService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.util.List;
+import com.sisrest.services.convertes.ContaEstudanteServiceConvert;
+
 
 @RestController
 @RequestMapping("/api/contaEstudante")
 public class ContaEstudanteResource {
 
-    @Autowired
-    private ContaEstudanteService contaEstudanteService;
+	@Autowired
+	private ContaEstudanteService contaEstudanteService;
+	@Autowired
+	private ContaEstudanteServiceConvert contaEstudanteServiceConvert;
 
     @PostMapping(value = "/criar")
     public ResponseEntity<ContaEstudanteResponse> createContaEstudante(@RequestBody @Valid ContaEstudanteRequest dto) {
@@ -74,4 +103,5 @@ public class ContaEstudanteResource {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
 }
