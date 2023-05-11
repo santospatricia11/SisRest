@@ -33,18 +33,17 @@ import lombok.ToString;
 public class ContaServidor extends Conta implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private long id;
+
 	@NotNull
 	@Column
 	private long matriculaSIAPE;
+
 	@NotNull
 	@Column
 	private boolean isAdmin;
-
-
-
-	
 }
