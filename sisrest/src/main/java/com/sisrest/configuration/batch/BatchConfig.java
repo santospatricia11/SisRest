@@ -43,7 +43,6 @@ public class BatchConfig {
     @Autowired
     private EditalRepository editalRepository;
 
-
     private Long idEdital;
 
     @Bean
