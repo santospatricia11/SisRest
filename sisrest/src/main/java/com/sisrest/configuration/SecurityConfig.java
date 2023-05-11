@@ -1,5 +1,12 @@
 package com.sisrest.configuration;
 
+import com.sisrest.configuration.security.CustomUserDetailsService;
+import com.sisrest.configuration.security.RestAuthenticationEntryPoint;
+import com.sisrest.configuration.security.TokenAuthenticationFilter;
+import com.sisrest.configuration.security.oauth2.CustomOAuth2UserService;
+import com.sisrest.configuration.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
+import com.sisrest.configuration.security.oauth2.OAuth2AuthenticationFailureHandler;
+import com.sisrest.configuration.security.oauth2.OAuth2AuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,14 +22,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import com.sisrest.configuration.security.CustomUserDetailsService;
-import com.sisrest.configuration.security.RestAuthenticationEntryPoint;
-import com.sisrest.configuration.security.TokenAuthenticationFilter;
-import com.sisrest.configuration.security.oauth2.CustomOAuth2UserService;
-import com.sisrest.configuration.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
-import com.sisrest.configuration.security.oauth2.OAuth2AuthenticationFailureHandler;
-import com.sisrest.configuration.security.oauth2.OAuth2AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -40,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
-    
+
     @Autowired
     private HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
 
@@ -58,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
         return new HttpCookieOAuth2AuthorizationRequestRepository();
     }
-    
+
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder
@@ -72,7 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-    @Bean(BeanIds.AUTHENTICATION_MANAGER) 
+    @Bean(BeanIds.AUTHENTICATION_MANAGER)
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
@@ -92,40 +91,41 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(new RestAuthenticationEntryPoint())
                 .and()
                 .authorizeRequests()
-                    .antMatchers("/","/error","/favicon.ico","/**/*.png","/**/*.gif",
-                        "/**/*.svg","/**/*.jpg","/**/*.html","/**/*.css","/**/*.js").permitAll()
-                    .antMatchers("/auth/**", "/api/oauth2/**","/oauth/**").permitAll()//
-                    .antMatchers(HttpMethod.GET, "/api/**").permitAll()//
-                    .antMatchers(HttpMethod.POST, "/api/**").permitAll()
-    				.antMatchers(HttpMethod.POST, "/api/login").permitAll()//
-    				.antMatchers(HttpMethod.POST, "/api/auth").permitAll()//
-    				.antMatchers(HttpMethod.POST, "/api/edital/**").permitAll()//
-    				.antMatchers(HttpMethod.GET, "/api/edital/**").permitAll()//
-    				.antMatchers(HttpMethod.PUT, "/api/edital/**").permitAll()//
-    				.antMatchers(HttpMethod.DELETE, "/api/edital/**").permitAll()//
+                .antMatchers("/", "/error", "/favicon.ico", "/**/*.png", "/**/*.gif",
+                        "/**/*.svg", "/**/*.jpg", "/**/*.html", "/**/*.css", "/**/*.js").permitAll()
+                .antMatchers("/auth/**", "/api/oauth2/**", "/oauth/**").permitAll()//
+                .antMatchers(HttpMethod.GET, "/api/**").permitAll()//
+                .antMatchers(HttpMethod.POST, "/api/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/login").permitAll()//
+                .antMatchers(HttpMethod.POST, "/csv/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/auth").permitAll()//
+                .antMatchers(HttpMethod.POST, "/api/edital/**").permitAll()//
+                .antMatchers(HttpMethod.GET, "/api/edital/**").permitAll()//
+                .antMatchers(HttpMethod.PUT, "/api/edital/**").permitAll()//
+                .antMatchers(HttpMethod.DELETE, "/api/edital/**").permitAll()//
 //    				.antMatchers(HttpMethod.POST, "/api/user").permitAll()
-    				//.antMatchers(HttpMethod.POST, "/api/**").hasRole("ADMIN")
+                //.antMatchers(HttpMethod.POST, "/api/**").hasRole("ADMIN")
 //    				.antMatchers(HttpMethod.GET, "/api/beneficiario/**").hasRole("ADMIN")
-    				.antMatchers(HttpMethod.DELETE, "/api/**").permitAll()
-    				.antMatchers(HttpMethod.PUT, "/api/**").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/api/**").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/**").permitAll()
 //    				.antMatchers(HttpMethod.POST, "/api/aluno/**").permitAll()
-    				//.antMatchers(HttpMethod.GET, "/api/**").hasAnyRole("USER","ADMIN")
-                    .anyRequest()
-                        .authenticated()
-                    .and()
+                //.antMatchers(HttpMethod.GET, "/api/**").hasAnyRole("USER","ADMIN")
+                .anyRequest()
+                .authenticated()
+                .and()
                 .oauth2Login()
-                    .authorizationEndpoint()
-                        .baseUri("/oauth2/authorize")
-                        .authorizationRequestRepository(cookieAuthorizationRequestRepository())
-                        .and()
-                    .redirectionEndpoint()
-                        .baseUri("/oauth2/callback/*")
-                        .and()
-                    .userInfoEndpoint()
-                        .userService(customOAuth2UserService)
-                        .and()
-                    .successHandler(oAuth2AuthenticationSuccessHandler)
-                    .failureHandler(oAuth2AuthenticationFailureHandler);
+                .authorizationEndpoint()
+                .baseUri("/oauth2/authorize")
+                .authorizationRequestRepository(cookieAuthorizationRequestRepository())
+                .and()
+                .redirectionEndpoint()
+                .baseUri("/oauth2/callback/*")
+                .and()
+                .userInfoEndpoint()
+                .userService(customOAuth2UserService)
+                .and()
+                .successHandler(oAuth2AuthenticationSuccessHandler)
+                .failureHandler(oAuth2AuthenticationFailureHandler);
 
         // Add our custom Token based authentication filter
         //Adicionar nosso filtro de autenticação personalizado baseado em Token

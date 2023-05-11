@@ -1,30 +1,9 @@
 package com.sisrest.model.entities;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import lombok.*;
 
-import com.sisrest.dto.contaServidor.ContaServidorRequest;
-
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import javax.persistence.*;
+import javax.validation.constraints.*;
 
 @Getter
 @Setter
@@ -38,31 +17,24 @@ import lombok.ToString;
 @DiscriminatorValue("C")
 public abstract class Conta {
 
-	@NotNull
-	@NotEmpty
-	@NotBlank(message = "Campo não informado")
-	@Column
-	@Pattern(regexp = "^[A-Z]+(.)*", message = "Campo nome deve iniciar com letra maiúscula")
-	private String nome;
+    @NotNull
+    @NotEmpty
+    @NotBlank(message = "Campo não informado")
+    @Column
+    @Pattern(regexp = "^[A-Z]+(.)*", message = "Campo nome deve iniciar com letra maiúscula")
+    private String nome;
 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Id
-	@Column
-	private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column
+    private long id;
 
-	@NotNull
-	@Email(message = "Campo inválido")
-	@Column
-	private String email;
+    @NotNull
+    @Email(message = "Campo inválido")
+    @Column
+    private String email;
 
-	//@NotNull
-	@Column
-	@Size(min = 8, max = 30)
-	@Pattern(regexp = "^[^\\s]+$", message = "Campo inválido")
-	private String senha;
-
-
-	@Column
-	private String campus;
-
+    @NotNull
+    @Column
+    private String campus;
 }

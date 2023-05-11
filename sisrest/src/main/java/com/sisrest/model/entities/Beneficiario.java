@@ -1,27 +1,10 @@
 package com.sisrest.model.entities;
 
-import java.io.Serializable;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
-import com.sisrest.dto.contaBeneficiario.ContaEstudanteResponse;
-import com.sisrest.dto.edital.EditalResponse;
-
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -45,14 +28,15 @@ public class Beneficiario implements Serializable {
     @NotNull
     private boolean ativo;
 
-
+    @NotNull
     @Column
     private long CPF;
 
+    @NotNull
     @Column
     private String programa;
 
- 
+    @NotNull
     @Column
     private String situacao;
 
@@ -65,5 +49,4 @@ public class Beneficiario implements Serializable {
     @ManyToOne
     @JoinColumn(name = "contaEstudante_id")
     private ContaEstudante contaEstudante;
-
 }
