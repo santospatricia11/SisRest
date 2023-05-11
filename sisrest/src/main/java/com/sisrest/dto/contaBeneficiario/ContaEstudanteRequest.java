@@ -10,13 +10,8 @@ import lombok.Setter;
 public class ContaEstudanteRequest {
 
     private String nome;
-
     private String matricula;
-
     private String email;
-
     private String campus;
-
     private String curso;
-
 }

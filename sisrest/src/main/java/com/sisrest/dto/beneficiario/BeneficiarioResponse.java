@@ -16,5 +16,4 @@ public class BeneficiarioResponse {
     private String situacao;
     private EditalResponse edital;
     private ContaEstudanteResponse contaEstudante;
-
 }

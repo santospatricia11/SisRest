@@ -13,5 +13,4 @@ public class BeneficiarioRequest {
     private String situacao;
     private long edital;
     private long contaEstudante;
-
 }
