@@ -1,4 +1,4 @@
-package com.sisrest.enums;
+package com.sisrest.model.enums;
 
 public enum TipoDeRefeicao {
 	CAFE_MANHA,
