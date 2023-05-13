@@ -1,14 +1,22 @@
 package com.sisrest.configuration;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "app")
 public class AppProperties {
     private final Auth auth = new Auth();
     private final OAuth2 oauth2 = new OAuth2();
+
+    public Auth getAuth() {
+        return auth;
+    }
+
+    public OAuth2 getOauth2() {
+        return oauth2;
+    }
 
     public static class Auth {
         private String tokenSecret;
@@ -43,13 +51,5 @@ public class AppProperties {
             return this;
         }
     }
-
-    public Auth getAuth() {
-        return auth;
-    }
-
-    public OAuth2 getOauth2() {
-		return oauth2;
-	}
 
 }
