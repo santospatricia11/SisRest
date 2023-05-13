@@ -21,5 +21,5 @@ public class ContaEstudanteResponse {
 
 	    private String curso;
 
-	    private long matricula;
+	    private String matricula;
 }

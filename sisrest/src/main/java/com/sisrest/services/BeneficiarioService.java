@@ -85,9 +85,13 @@ public class BeneficiarioService {
 
 	        if (verificado)
 	            atualizar.setId(beneficiario.get().getId());
+	       
 	        if (atualizar.getEdital() == null) {
 	            atualizar.setEdital(original.getEdital());
-	            
+	        if (atualizar.getCPF()==0) {
+	        	atualizar.setCPF(original.getCPF());
+	        }
+	        	
 	        } else if (atualizar.getContaEstudante() == null) {
 	            atualizar.setContaEstudante(original.getContaEstudante());
 	        }

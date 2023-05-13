@@ -30,10 +30,8 @@ import lombok.ToString;
  * 
  * @ToString
  * 
- * @Entity
+ * @Entity public class AcessoDiaRefeicao { private DiaDaSemana diaSemana;
+ * private TipoDeRefeicao tipoRefeicao;
+ * 
+ * }
  */
-/*public class AcessoDiaRefeicao {
-	private DiaDaSemana diaSemana;
-	private TipoDeRefeicao tipoRefeicao;
-
-}*/
