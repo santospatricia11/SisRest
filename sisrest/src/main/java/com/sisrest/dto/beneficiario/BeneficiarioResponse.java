@@ -11,7 +11,7 @@ public class BeneficiarioResponse {
 
     private long id;
     private boolean ativo;
-    private String CPF;
+    private long CPF;
     private String programa;
     private String situacao;
     private EditalResponse edital;

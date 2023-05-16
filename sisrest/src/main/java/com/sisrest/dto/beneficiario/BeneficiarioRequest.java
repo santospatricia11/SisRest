@@ -8,7 +8,7 @@ import lombok.Setter;
 public class BeneficiarioRequest {
 
     private boolean ativo;
-    private String CPF;
+    private long CPF;
     private String programa;
     private String situacao;
     private long edital;

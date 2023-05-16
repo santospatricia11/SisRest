@@ -82,8 +82,6 @@ public class ContaServidorService {
 			atualizar.setNome(original.getNome());
 		} else if (atualizar.getEmail() == null) {
 			atualizar.setEmail(original.getEmail());
-		} else if (atualizar.getSenha() == null) {
-			atualizar.setSenha(original.getSenha());
 		} else if (atualizar.getMatriculaSIAPE() == 0) {
 			atualizar.setMatriculaSIAPE(original.getMatriculaSIAPE());
 		}

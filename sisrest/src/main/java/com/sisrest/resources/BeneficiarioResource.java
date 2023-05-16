@@ -20,7 +20,8 @@ public class BeneficiarioResource {
 
     @PostMapping(value = "/criar")
     public ResponseEntity<BeneficiarioResponse> createBeneficiario(@RequestBody @Valid BeneficiarioRequest dto) {
-        try {
+        System.out.println("Controller CPF: " + dto.getCPF());
+    	try {
             BeneficiarioResponse beneficiarioResponse = beneficiarioService.save(dto);
             return new ResponseEntity(beneficiarioResponse, HttpStatus.CREATED);
         } catch (Exception ex) {
