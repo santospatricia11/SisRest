@@ -33,8 +33,4 @@ public abstract class Conta {
     @Email(message = "Campo inválido")
     @Column
     private String email;
-
-    @NotNull
-    @Column
-    private String campus;
 }
