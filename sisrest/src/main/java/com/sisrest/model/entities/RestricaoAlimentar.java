@@ -13,20 +13,15 @@ public class RestricaoAlimentar {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "restricao_alimentar_id")
     private Long id;
 
     @NotNull
-    @Column(name = "observacoes")
     private String observacoes;
 
-    @Column(name = "anexo")
     private File anexo;
 
-    @Column(name = "tipo_de_restricao_alimentar")
     private TipoDeRestricaoAlimentar tipoDeRestricaoAlimentar;
 
-    @Column
     private boolean resultadoAnalise;
 
     private String justificativaAnalise;
