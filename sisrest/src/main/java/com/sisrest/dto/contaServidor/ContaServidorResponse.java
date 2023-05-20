@@ -12,6 +12,4 @@ public class ContaServidorResponse {
 	private String email;
 	private long matriculaSIAPE;
 	private boolean isAdmin;
-	private String campus;
-
 }
