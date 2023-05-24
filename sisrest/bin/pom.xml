@@ -138,10 +138,7 @@
             <version>0.11.2</version>
             <scope>runtime</scope>
         </dependency>
-
-
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
