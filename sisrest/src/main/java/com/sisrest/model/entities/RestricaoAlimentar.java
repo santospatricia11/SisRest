@@ -7,12 +7,13 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.File;
+import java.io.Serializable;
 import java.util.Date;
 
 @Getter
 @Setter
 @Entity
-public class RestricaoAlimentar {
+public class RestricaoAlimentar implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

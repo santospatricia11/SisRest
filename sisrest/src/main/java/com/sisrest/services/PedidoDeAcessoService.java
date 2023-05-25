@@ -2,9 +2,13 @@ package com.sisrest.services;
 
 import com.sisrest.dto.pedidoDeAcesso.PedidoDeAcessoRequest;
 import com.sisrest.dto.pedidoDeAcesso.PedidoDeAcessoResponse;
+import com.sisrest.model.entities.Beneficiario;
 import com.sisrest.model.entities.PedidoDeAcesso;
+import com.sisrest.repositories.BeneficiarioRepository;
 import com.sisrest.repositories.PedidoDeAcessoRepository;
+import com.sisrest.services.convertes.AcessoDiaRefeicaoServiceConvert;
 import com.sisrest.services.convertes.PedidoDeAcessoServiceConvert;
+import com.sisrest.services.convertes.RestricaoAlimentarServiceConvert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +23,24 @@ public class PedidoDeAcessoService {
     @Autowired
     private PedidoDeAcessoServiceConvert pedidoDeAcessoServiceConvert;
 
+    @Autowired
+    private BeneficiarioRepository beneficiarioRepository;
+
+    @Autowired
+    private RestricaoAlimentarServiceConvert restricaoAlimentarServiceConvert;
+
+    @Autowired
+    private AcessoDiaRefeicaoServiceConvert acessoDiaRefeicaoServiceConvert;
+
     public PedidoDeAcessoResponse save(PedidoDeAcessoRequest pedidoDeAcessoDto) {
         PedidoDeAcesso pedidoDeAcesso = pedidoDeAcessoServiceConvert.dtoToPedidoDeAcesso(pedidoDeAcessoDto);
         pedidoDeAcesso.isAprovadoFalse();
-        pedidoDeAcessoRepository.save(pedidoDeAcesso);
+        Optional<Beneficiario> beneficiario = beneficiarioRepository.findById(pedidoDeAcessoDto.getBeneficiario());
+        pedidoDeAcesso.setBeneficiario(beneficiario.get());
+        pedidoDeAcesso.setRestricoesAlimentares(restricaoAlimentarServiceConvert.restricaoRequestToRestricaoList(pedidoDeAcessoDto.getRestricaoAlimentar(), pedidoDeAcesso));
+        pedidoDeAcesso.setAcessosDiaRefeicao(acessoDiaRefeicaoServiceConvert.acessoRequestToAcessoDiaList(pedidoDeAcessoDto.getDiasAcessoRefeicao(), pedidoDeAcesso));
+        pedidoDeAcesso = pedidoDeAcessoRepository.save(pedidoDeAcesso);
+
         PedidoDeAcessoResponse responseDto = pedidoDeAcessoServiceConvert.pedidoDeAcessoToDTO(pedidoDeAcesso);
         return responseDto;
     }

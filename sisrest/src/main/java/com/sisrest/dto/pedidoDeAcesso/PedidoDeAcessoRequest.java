@@ -14,9 +14,9 @@ public class PedidoDeAcessoRequest {
 
     private Date solicitadoEm;
 
-    private Date analisadoEm;
-
     private String justificativaAnalise;
+
+    private long beneficiario;
 
     private List<AcessoDiaRefeicaoRequest> diasAcessoRefeicao;
 
