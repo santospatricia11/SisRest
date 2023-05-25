@@ -5,6 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -39,6 +41,9 @@ public class Beneficiario implements Serializable {
     @NotNull
     @Column
     private String situacao;
+
+    @OneToMany(mappedBy = "beneficiario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PedidoDeAcesso> pedidosDeAcesso = new ArrayList<>();
 
     @NotNull
     @ManyToOne
