@@ -1,10 +1,15 @@
 package com.sisrest.model.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
 public class PedidoDeAcesso {
     @Id
@@ -29,4 +34,11 @@ public class PedidoDeAcesso {
     @OneToMany(mappedBy = "pedidoDeAcesso", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AcessoDiaRefeicao> acessosDiaRefeicao = new ArrayList<>();
 
+    public void isAprovadoTrue() {
+        this.isAprovado = true;
+    }
+
+    public void isAprovadoFalse() {
+        this.isAprovado = false;
+    }
 }

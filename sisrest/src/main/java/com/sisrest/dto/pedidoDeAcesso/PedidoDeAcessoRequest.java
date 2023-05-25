@@ -1,7 +1,7 @@
 package com.sisrest.dto.pedidoDeAcesso;
 
 import com.sisrest.dto.acessoDiaRefeicao.AcessoDiaRefeicaoRequest;
-import com.sisrest.model.entities.AcessoDiaRefeicao;
+import com.sisrest.dto.restricaoAlimentar.RestricaoAlimentarRequest;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,8 +18,7 @@ public class PedidoDeAcessoRequest {
 
     private String justificativaAnalise;
 
-    private boolean isAprovado;
-
     private List<AcessoDiaRefeicaoRequest> diasAcessoRefeicao;
 
+    private List<RestricaoAlimentarRequest> restricaoAlimentar;
 }

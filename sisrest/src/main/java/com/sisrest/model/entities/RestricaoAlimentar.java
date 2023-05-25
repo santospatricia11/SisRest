@@ -1,14 +1,17 @@
 package com.sisrest.model.entities;
 
 import com.sisrest.model.enums.TipoDeRestricaoAlimentar;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.util.Date;
 
+@Getter
+@Setter
 @Entity
-@Table(name = "restricao_alimentar")
 public class RestricaoAlimentar {
 
     @Id
@@ -31,4 +34,12 @@ public class RestricaoAlimentar {
     @ManyToOne
     @JoinColumn(name = "pedido_de_acesso_id")
     private PedidoDeAcesso pedidoDeAcesso;
+
+    public void resultadoAnaliseFalse() {
+        this.resultadoAnalise = false;
+    }
+
+    public void resultadoAnaliseTrue() {
+        this.resultadoAnalise = true;
+    }
 }

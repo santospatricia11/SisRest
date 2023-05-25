@@ -2,10 +2,14 @@ package com.sisrest.model.entities;
 
 import com.sisrest.model.enums.DiaDaSemana;
 import com.sisrest.model.enums.TipoDeRefeicao;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@Getter
+@Setter
 @Entity
 public class AcessoDiaRefeicao {
 
