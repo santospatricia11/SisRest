@@ -2,7 +2,7 @@ package com.sisrest.services.convertes;
 
 import com.sisrest.dto.acessoDiaRefeicao.AcessoDiaRefeicaoRequest;
 import com.sisrest.dto.acessoDiaRefeicao.AcessoDiaRefeicaoResponse;
-import com.sisrest.model.entities.AcessoDiaRefeicao;
+import com.sisrest.model.entities.AcessoDiaRefeicaoM;
 import com.sisrest.model.entities.PedidoDeAcesso;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,22 +16,22 @@ public class AcessoDiaRefeicaoServiceConvert {
     @Autowired
     private ModelMapper mapper;
 
-    public List<AcessoDiaRefeicaoResponse> acessoDiaRefeicaoToResponses(List<AcessoDiaRefeicao> acessos) {
+    public List<AcessoDiaRefeicaoResponse> acessoDiaRefeicaoToResponses(List<AcessoDiaRefeicaoM> acessos) {
         return acessos.stream().map(this::acessoDiaRefeicaoToDTO).collect(Collectors.toList());
     }
 
-    public List<AcessoDiaRefeicao> acessoRequestToAcessoDiaList(List<AcessoDiaRefeicaoRequest> acessosRequest, PedidoDeAcesso pedidoDeAcesso) {
-        List<AcessoDiaRefeicao> acessos = acessosRequest.stream().map(this::dtoToAcessoDiaRefeicao).collect(Collectors.toList());
-        acessos.stream().forEach(acessoDiaRefeicao -> acessoDiaRefeicao.setPedidoDeAcesso(pedidoDeAcesso));
+    public List<AcessoDiaRefeicaoM> acessoRequestToAcessoDiaList(List<AcessoDiaRefeicaoRequest> acessosRequest, PedidoDeAcesso pedidoDeAcesso) {
+        List<AcessoDiaRefeicaoM> acessos = acessosRequest.stream().map(this::dtoToAcessoDiaRefeicao).collect(Collectors.toList());
+        acessos.stream().forEach(acessoDiaRefeicaoM -> acessoDiaRefeicaoM.setPedidoDeAcesso(pedidoDeAcesso));
         return acessos;
     }
 
-    public AcessoDiaRefeicao dtoToAcessoDiaRefeicao(AcessoDiaRefeicaoRequest dto) {
-        AcessoDiaRefeicao acessoDiaRefeicao = mapper.map(dto, AcessoDiaRefeicao.class);
-        return acessoDiaRefeicao;
+    public AcessoDiaRefeicaoM dtoToAcessoDiaRefeicao(AcessoDiaRefeicaoRequest dto) {
+        AcessoDiaRefeicaoM acessoDiaRefeicaoM = mapper.map(dto, AcessoDiaRefeicaoM.class);
+        return acessoDiaRefeicaoM;
     }
 
-    public AcessoDiaRefeicaoResponse acessoDiaRefeicaoToDTO(AcessoDiaRefeicao acesso) {
+    public AcessoDiaRefeicaoResponse acessoDiaRefeicaoToDTO(AcessoDiaRefeicaoM acesso) {
         AcessoDiaRefeicaoResponse response = mapper.map(acesso, AcessoDiaRefeicaoResponse.class);
         return response;
     }
