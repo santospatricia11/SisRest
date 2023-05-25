@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
-public class AcessoDiaRefeicaoM implements Serializable {
+public class AcessoDiaRefeicao implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

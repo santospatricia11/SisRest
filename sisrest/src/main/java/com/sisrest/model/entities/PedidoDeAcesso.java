@@ -33,7 +33,7 @@ public class PedidoDeAcesso implements Serializable {
     private List<RestricaoAlimentar> restricoesAlimentares = new ArrayList<>();
 
     @OneToMany(mappedBy = "pedidoDeAcesso", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AcessoDiaRefeicaoM> acessosDiaRefeicao = new ArrayList<>();
+    private List<AcessoDiaRefeicao> acessosDiaRefeicao = new ArrayList<>();
 
     public void isAprovadoTrue() {
         this.isAprovado = true;
