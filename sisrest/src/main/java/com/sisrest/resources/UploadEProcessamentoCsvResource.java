@@ -22,14 +22,9 @@ public class UploadEProcessamentoCsvResource {
     public void processarCsv(@RequestParam("arquivoEstudantesSuap") MultipartFile arquivoEstudantesSuap,
                              @RequestParam("arquivoBeneficiariosSuap") MultipartFile arquivoBeneficiariosSuap,
                              @RequestParam("idEdital") long idEdital) {
-        processamentoCSVService.processarCsv(arquivoEstudantesSuap, arquivoBeneficiariosSuap, idEdital);
-    }
-
-    @PostMapping("/upload")
-    public void uploadCsv(@RequestParam("arquivoEstudantesSuap") MultipartFile arquivoEstudantesSuap,
-                          @RequestParam("arquivoBeneficiariosSuap") MultipartFile arquivoBeneficiariosSuap) {
         uploadService.salvarCSV(arquivoEstudantesSuap);
         uploadService.salvarCSV(arquivoBeneficiariosSuap);
+        processamentoCSVService.processarCsv(arquivoEstudantesSuap, arquivoBeneficiariosSuap, idEdital);
     }
 }
 
