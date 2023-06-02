@@ -2,7 +2,9 @@ package com.sisrest.model.entities;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
@@ -14,14 +16,9 @@ import java.io.Serializable;
 @AllArgsConstructor
 @ToString
 @Entity
-@DiscriminatorValue(value = "E")
 public class ContaEstudante extends Conta implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @Column
-    private long id;
 
     @Column
     @NotNull
@@ -30,8 +27,4 @@ public class ContaEstudante extends Conta implements Serializable {
     @NotNull
     @Column
     private String curso;
-
-    @NotNull
-    @Column
-    private String campus;
 }

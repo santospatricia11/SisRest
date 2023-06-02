@@ -1,4 +1,4 @@
-package com.sisrest.servicesystem;
+package com.sisrest.serviceSystem;
 
 import com.sisrest.model.entities.SystemRole;
 
