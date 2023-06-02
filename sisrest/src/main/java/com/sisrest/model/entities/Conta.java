@@ -12,10 +12,12 @@ import javax.validation.constraints.*;
 @AllArgsConstructor
 @ToString
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo", length = 1, discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorValue("C")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Conta {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
     @NotNull
     @NotEmpty
@@ -24,13 +26,12 @@ public abstract class Conta {
     @Pattern(regexp = "^[A-Z]+(.)*", message = "Campo nome deve iniciar com letra maiúscula")
     private String nome;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column
-    private long id;
-
     @NotNull
     @Email(message = "Campo inválido")
     @Column
     private String email;
+
+    @NotNull
+    @Column
+    private String campus;
 }

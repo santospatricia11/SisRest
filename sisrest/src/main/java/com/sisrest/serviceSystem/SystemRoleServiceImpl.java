@@ -1,4 +1,4 @@
-package com.sisrest.servicesystem;
+package com.sisrest.serviceSystem;
 
 import java.util.Optional;
 
