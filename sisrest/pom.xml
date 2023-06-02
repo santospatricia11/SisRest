@@ -27,11 +27,7 @@
 			<artifactId>core</artifactId>
 			<version>3.4.0</version>
 		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<version>4.9.1</version>
-		</dependency>
+		
 		<dependency>
 			<groupId>com.google.zxing</groupId>
 			<artifactId>javase</artifactId>
@@ -39,9 +35,10 @@
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-chrome-driver</artifactId>
-			<version>4.9.1</version>
+			<artifactId>selenium-java</artifactId>
+
 		</dependency>
+
 
 		<dependency>
 			<groupId>com.opencsv</groupId>
