@@ -25,12 +25,10 @@ public class ContaEstudanteService {
         ContaEstudante contaEstudante = contaEstudanteServiceConvert.dtoToContaEstudante(contaEstudanteDto);
         boolean verificado = contaEstudanteRepository.existsByEmail(contaEstudanteDto.getEmail());
 
-        if (verificado)
-            throw new EmailEmUsoException(contaEstudanteDto.getEmail());
+        if (verificado) throw new EmailEmUsoException(contaEstudanteDto.getEmail());
         else {
             contaEstudanteRepository.save(contaEstudante);
-            ContaEstudanteResponse contaEstudanteResponse = contaEstudanteServiceConvert
-                    .contaEstudanteToDTO(contaEstudante);
+            ContaEstudanteResponse contaEstudanteResponse = contaEstudanteServiceConvert.contaEstudanteToDTO(contaEstudante);
             return contaEstudanteResponse;
         }
     }
@@ -38,16 +36,14 @@ public class ContaEstudanteService {
     public ContaEstudanteResponse deleteById(long id) {
         Optional<ContaEstudante> contaEstudante = contaEstudanteRepository.findById(id);
         contaEstudanteRepository.deleteById(id);
-        ContaEstudanteResponse contaEstudanteResponse = contaEstudanteServiceConvert
-                .contaEstudanteToDTO(contaEstudante.get());
+        ContaEstudanteResponse contaEstudanteResponse = contaEstudanteServiceConvert.contaEstudanteToDTO(contaEstudante.get());
         return contaEstudanteResponse;
 
     }
 
     public ContaEstudanteResponse findById(long id) {
         Optional<ContaEstudante> contaEstudante = contaEstudanteRepository.findById(id);
-        ContaEstudanteResponse contaEstudanteResponse = contaEstudanteServiceConvert
-                .contaEstudanteToDTO(contaEstudante.get());
+        ContaEstudanteResponse contaEstudanteResponse = contaEstudanteServiceConvert.contaEstudanteToDTO(contaEstudante.get());
         return contaEstudanteResponse;
 
     }
@@ -62,8 +58,7 @@ public class ContaEstudanteService {
         ContaEstudante atualizar = contaEstudanteServiceConvert.dtoToContaEstudante(contaEstudanteDto);
         boolean verificado = contaEstudanteRepository.existsById(contaEstudante.get().getId());
 
-        if (verificado)
-            atualizar.setId(contaEstudante.get().getId());
+        if (verificado) atualizar.setId(contaEstudante.get().getId());
 
         if (atualizar.getNome() == null) {
             atualizar.setNome(original.getNome());
@@ -72,8 +67,7 @@ public class ContaEstudanteService {
         } else if (atualizar.getMatricula() == 0) {
             atualizar.setMatricula(original.getMatricula());
         }
-        ContaEstudanteResponse contaEstudanteResponse = contaEstudanteServiceConvert
-                .contaEstudanteToDTO(contaEstudanteRepository.save(atualizar));
+        ContaEstudanteResponse contaEstudanteResponse = contaEstudanteServiceConvert.contaEstudanteToDTO(contaEstudanteRepository.save(atualizar));
         return contaEstudanteResponse;
     }
 }
