@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface ContaServidorRepository extends JpaRepository<ContaServidor, Long> {
     boolean existsByEmail(String email);
 
-    boolean existsByMatricula(String email);
+    boolean existsByMatriculaSIAPE(long matriculaSIAPE);
 
     Optional<ContaServidor> findByEmail(String email);
 

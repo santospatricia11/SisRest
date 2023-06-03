@@ -25,7 +25,7 @@ public class ContaServidorService {
     public ContaServidorResponse save(ContaServidorRequest contaServidorDto) throws EmailEmUsoException, MatriculaEmUsoException {
         ContaServidor contaServidor = contaServidorServiceConvert.dtoToContaServidor(contaServidorDto);
         boolean verificarEmail = contaServidorRepository.existsByEmail(contaServidorDto.getEmail());
-        boolean verificarMatricula = contaServidorRepository.existsByMatricula(contaServidorDto.getEmail());
+        boolean verificarMatricula = contaServidorRepository.existsByMatriculaSIAPE(contaServidorDto.getMatriculaSIAPE());
         if (verificarEmail)
             throw new EmailEmUsoException(contaServidorDto.getEmail());
         else if (verificarMatricula) {
