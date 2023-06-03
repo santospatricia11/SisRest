@@ -27,4 +27,12 @@ public class ContaServidor extends Conta implements Serializable {
     @NotNull
     @Column
     private boolean isAdmin;
+
+    public void isAdminTrue() {
+        this.isAdmin = true;
+    }
+
+    public void isAdminFalse() {
+        this.isAdmin = false;
+    }
 }

@@ -6,10 +6,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ContaServidorResponse {
-	
-	private long id;
-	private String nome;
-	private String email;
-	private long matriculaSIAPE;
-	private boolean isAdmin;
+
+    private long id;
+    private String nome;
+    private String email;
+    private String campus;
+    private long matriculaSIAPE;
+    private boolean isAdmin;
 }

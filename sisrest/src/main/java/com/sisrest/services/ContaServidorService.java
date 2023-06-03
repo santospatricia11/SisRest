@@ -3,10 +3,10 @@ package com.sisrest.services;
 import com.sisrest.dto.contaServidor.ContaServidorRequest;
 import com.sisrest.dto.contaServidor.ContaServidorResponse;
 import com.sisrest.exception.EmailEmUsoException;
+import com.sisrest.exception.MatriculaEmUsoException;
 import com.sisrest.model.entities.ContaServidor;
 import com.sisrest.repositories.ContaServidorRepository;
 import com.sisrest.services.convertes.ContaServidorServiceConvert;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,39 +22,40 @@ public class ContaServidorService {
     @Autowired
     private ContaServidorServiceConvert contaServidorServiceConvert;
 
-    public ContaServidorResponse save(ContaServidorRequest contaServidorDto) throws EmailEmUsoException {
+    public ContaServidorResponse save(ContaServidorRequest contaServidorDto) throws EmailEmUsoException, MatriculaEmUsoException {
         ContaServidor contaServidor = contaServidorServiceConvert.dtoToContaServidor(contaServidorDto);
-        boolean verificado = contaServidorRepository.existsByEmail(contaServidorDto.getEmail());
-
-        if (verificado)
+        boolean verificarEmail = contaServidorRepository.existsByEmail(contaServidorDto.getEmail());
+        boolean verificarMatricula = contaServidorRepository.existsByMatricula(contaServidorDto.getEmail());
+        if (verificarEmail)
             throw new EmailEmUsoException(contaServidorDto.getEmail());
-        else {
+        else if (verificarMatricula) {
+            throw new MatriculaEmUsoException(contaServidorDto.getMatriculaSIAPE());
+        } else {
             contaServidorRepository.save(contaServidor);
-            ContaServidorResponse contaServidorResponse = contaServidorServiceConvert.contaServidorToDTO(contaServidor);
+            ContaServidorResponse contaServidorResponse = contaServidorServiceConvert
+                    .contaServidorToDTO(contaServidor);
             return contaServidorResponse;
         }
     }
 
-    public ContaServidor save(ContaServidor contaServidor) {
-        return contaServidorRepository.save(contaServidor);
-    }
-
-    public boolean existsEmail(String email) {
-        return contaServidorRepository.existsByEmail(email);
-    }
-
-    public ContaServidor findByEmail(String email) throws ObjectNotFoundException {
-        return contaServidorRepository.findByEmail(email).orElseThrow(
-                () -> new ObjectNotFoundException("ContaServidor  não encontrada/ email: " + email, email));
-    }
-
     public ContaServidorResponse deleteById(long id) {
-        Optional<ContaServidor> contaEstudante = contaServidorRepository.findById(id);
+        Optional<ContaServidor> contaServidor = contaServidorRepository.findById(id);
         contaServidorRepository.deleteById(id);
         ContaServidorResponse contaServidorResponse = contaServidorServiceConvert
-                .contaServidorToDTO(contaEstudante.get());
+                .contaServidorToDTO(contaServidor.get());
+        return contaServidorResponse;
+    }
+
+    public ContaServidorResponse findById(long id) {
+        Optional<ContaServidor> contaServidor = contaServidorRepository.findById(id);
+        ContaServidorResponse contaServidorResponse = contaServidorServiceConvert
+                .contaServidorToDTO(contaServidor.get());
         return contaServidorResponse;
 
+    }
+
+    public List<ContaServidorResponse> findAll() {
+        return contaServidorServiceConvert.usersToResponses(contaServidorRepository.findAll());
     }
 
     public ContaServidorResponse update(long id, ContaServidorRequest contaServidorDto) {
@@ -70,6 +71,8 @@ public class ContaServidorService {
             atualizar.setNome(original.getNome());
         } else if (atualizar.getEmail() == null) {
             atualizar.setEmail(original.getEmail());
+        } else if (atualizar.getCampus() == null) {
+            atualizar.setCampus(original.getCampus());
         } else if (atualizar.getMatriculaSIAPE() == 0) {
             atualizar.setMatriculaSIAPE(original.getMatriculaSIAPE());
         }
@@ -77,30 +80,4 @@ public class ContaServidorService {
                 .contaServidorToDTO(contaServidorRepository.save(atualizar));
         return contaServidorResponse;
     }
-
-    public List<ContaServidorResponse> findAll() {
-        return contaServidorServiceConvert.usersToResponses(contaServidorRepository.findAll());
-    }
-
-    public ContaServidorResponse findById(long id) {
-        Optional<ContaServidor> contaServidor = contaServidorRepository.findById(id);
-        ContaServidorResponse contaServidorResponse = contaServidorServiceConvert
-                .contaServidorToDTO(contaServidor.get());
-        return contaServidorResponse;
-
-    }
-    /*
-     * @Autowired private ContaServidorRepository contaServidorRepository;
-     */
-    /*
-     * public ContaServidorRequest salvarContaPorEmail(String email) {
-     * ContaServidorResponse response =
-     * contaServidorRepository.salvarPorEmail(email); if (response == null) { // a
-     * conta do servidor não existe para o e-mail fornecido return null; }
-     *
-     * // cria uma instância do DTO para transferir os dados return new
-     * ContaServidorRequest(response.getId(), response.getNome(),
-     * response.getEmail(), response.getMatriculaSIAPE(), response.isAdmin()); }
-     */
-
 }

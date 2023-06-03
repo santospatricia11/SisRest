@@ -1,27 +1,18 @@
 package com.sisrest.repositories;
 
-import java.util.Optional;
-
-import javax.validation.constraints.NotNull;
-
+import com.sisrest.model.entities.ContaServidor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.sisrest.dto.contaServidor.ContaServidorResponse;
-import com.sisrest.model.entities.ContaServidor;
+import java.util.Optional;
 
 @Repository
 public interface ContaServidorRepository extends JpaRepository<ContaServidor, Long> {
+    boolean existsByEmail(String email);
 
-	/*
-	 * ContaServidor findByEmailOrMatriculaSIAPE(String email);
-	 * 
-	 * 
-	 * 
-	 * 
-	 * ContaServidorResponse salvarPorEmail(String email);
-	 */
-	boolean existsByEmail(String email);
+    boolean existsByMatricula(String email);
 
-	Optional<ContaServidor> findByEmail(String email);
+    Optional<ContaServidor> findByEmail(String email);
+
+
 }

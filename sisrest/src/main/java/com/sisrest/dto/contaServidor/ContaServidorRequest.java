@@ -15,6 +15,7 @@ public class ContaServidorRequest {
 
 	private String nome;
 	private String email;
+	private String campus;
 	private long matriculaSIAPE;
 	private boolean isAdmin;
 }
