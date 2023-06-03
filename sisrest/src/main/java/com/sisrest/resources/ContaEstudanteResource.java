@@ -65,8 +65,7 @@ public class ContaEstudanteResource {
     }
 
     @PutMapping(value = "/atualizar/{id}")
-    public ResponseEntity<ContaEstudanteResponse> update(@PathVariable("id") long id,
-                                                         @RequestBody @Valid ContaEstudanteRequest dto) {
+    public ResponseEntity<ContaEstudanteResponse> update(@PathVariable("id") long id, @RequestBody @Valid ContaEstudanteRequest dto) {
         ContaEstudanteResponse contaEstudanteResponse = contaEstudanteService.update(id, dto);
         if (contaEstudanteResponse != null) {
             return new ResponseEntity<>(contaEstudanteResponse, HttpStatus.OK);

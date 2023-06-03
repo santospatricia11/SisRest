@@ -26,14 +26,12 @@ public class ContaServidorService {
         ContaServidor contaServidor = contaServidorServiceConvert.dtoToContaServidor(contaServidorDto);
         boolean verificarEmail = contaServidorRepository.existsByEmail(contaServidorDto.getEmail());
         boolean verificarMatricula = contaServidorRepository.existsByMatriculaSIAPE(contaServidorDto.getMatriculaSIAPE());
-        if (verificarEmail)
-            throw new EmailEmUsoException(contaServidorDto.getEmail());
+        if (verificarEmail) throw new EmailEmUsoException(contaServidorDto.getEmail());
         else if (verificarMatricula) {
             throw new MatriculaEmUsoException(contaServidorDto.getMatriculaSIAPE());
         } else {
             contaServidorRepository.save(contaServidor);
-            ContaServidorResponse contaServidorResponse = contaServidorServiceConvert
-                    .contaServidorToDTO(contaServidor);
+            ContaServidorResponse contaServidorResponse = contaServidorServiceConvert.contaServidorToDTO(contaServidor);
             return contaServidorResponse;
         }
     }
@@ -41,15 +39,13 @@ public class ContaServidorService {
     public ContaServidorResponse deleteById(long id) {
         Optional<ContaServidor> contaServidor = contaServidorRepository.findById(id);
         contaServidorRepository.deleteById(id);
-        ContaServidorResponse contaServidorResponse = contaServidorServiceConvert
-                .contaServidorToDTO(contaServidor.get());
+        ContaServidorResponse contaServidorResponse = contaServidorServiceConvert.contaServidorToDTO(contaServidor.get());
         return contaServidorResponse;
     }
 
     public ContaServidorResponse findById(long id) {
         Optional<ContaServidor> contaServidor = contaServidorRepository.findById(id);
-        ContaServidorResponse contaServidorResponse = contaServidorServiceConvert
-                .contaServidorToDTO(contaServidor.get());
+        ContaServidorResponse contaServidorResponse = contaServidorServiceConvert.contaServidorToDTO(contaServidor.get());
         return contaServidorResponse;
 
     }
@@ -64,8 +60,7 @@ public class ContaServidorService {
         ContaServidor atualizar = contaServidorServiceConvert.dtoToContaServidor(contaServidorDto);
         boolean verificado = contaServidorRepository.existsById(contaServidor.get().getId());
 
-        if (verificado)
-            atualizar.setId(contaServidor.get().getId());
+        if (verificado) atualizar.setId(contaServidor.get().getId());
 
         if (atualizar.getNome() == null) {
             atualizar.setNome(original.getNome());
@@ -76,8 +71,7 @@ public class ContaServidorService {
         } else if (atualizar.getMatriculaSIAPE() == 0) {
             atualizar.setMatriculaSIAPE(original.getMatriculaSIAPE());
         }
-        ContaServidorResponse contaServidorResponse = contaServidorServiceConvert
-                .contaServidorToDTO(contaServidorRepository.save(atualizar));
+        ContaServidorResponse contaServidorResponse = contaServidorServiceConvert.contaServidorToDTO(contaServidorRepository.save(atualizar));
         return contaServidorResponse;
     }
 }
