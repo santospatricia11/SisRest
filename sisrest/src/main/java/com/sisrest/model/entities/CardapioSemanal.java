@@ -3,10 +3,7 @@ package com.sisrest.model.entities;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -20,6 +17,10 @@ public class CardapioSemanal {
     private short sequenciaSemanal;
 
     private boolean isAtual;
+
+    @ManyToOne
+    @JoinColumn(name = "edital_id")
+    private Edital edital;
 
     public void isAtualFalse() {
         this.isAtual = false;
