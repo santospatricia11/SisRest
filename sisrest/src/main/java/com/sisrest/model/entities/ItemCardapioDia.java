@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -19,6 +20,7 @@ public class ItemCardapioDia {
 
     private boolean isAtual;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "cardapio_semanal_id")
     private CardapioSemanal cardapioSemanal;
