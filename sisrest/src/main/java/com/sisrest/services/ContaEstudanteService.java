@@ -1,7 +1,7 @@
 package com.sisrest.services;
 
-import com.sisrest.dto.contaBeneficiario.ContaEstudanteRequest;
-import com.sisrest.dto.contaBeneficiario.ContaEstudanteResponse;
+import com.sisrest.dto.contaEstudante.ContaEstudanteRequest;
+import com.sisrest.dto.contaEstudante.ContaEstudanteResponse;
 import com.sisrest.exception.EmailEmUsoException;
 import com.sisrest.model.entities.ContaEstudante;
 import com.sisrest.repositories.ContaEstudanteRepository;

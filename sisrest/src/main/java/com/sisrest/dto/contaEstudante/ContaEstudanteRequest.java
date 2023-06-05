@@ -1,15 +1,17 @@
-package com.sisrest.dto.contaBeneficiario;
+package com.sisrest.dto.contaEstudante;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class ContaEstudanteResponse {
-    private long id;
+@EqualsAndHashCode
+public class ContaEstudanteRequest {
+
     private String nome;
+    private String matricula;
     private String email;
     private String campus;
     private String curso;
-    private long matricula;
 }

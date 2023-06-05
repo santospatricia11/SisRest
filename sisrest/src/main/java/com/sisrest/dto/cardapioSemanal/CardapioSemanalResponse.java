@@ -1,5 +1,6 @@
 package com.sisrest.dto.cardapioSemanal;
 
+import com.sisrest.dto.edital.EditalResponse;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,4 +13,6 @@ public class CardapioSemanalResponse {
     private short sequenciaSemanal;
 
     private boolean isAtual;
+
+    private EditalResponse edital;
 }

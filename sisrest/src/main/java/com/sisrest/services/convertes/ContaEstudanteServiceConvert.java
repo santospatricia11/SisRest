@@ -1,7 +1,7 @@
 package com.sisrest.services.convertes;
 
-import com.sisrest.dto.contaBeneficiario.ContaEstudanteRequest;
-import com.sisrest.dto.contaBeneficiario.ContaEstudanteResponse;
+import com.sisrest.dto.contaEstudante.ContaEstudanteRequest;
+import com.sisrest.dto.contaEstudante.ContaEstudanteResponse;
 import com.sisrest.model.entities.ContaEstudante;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
