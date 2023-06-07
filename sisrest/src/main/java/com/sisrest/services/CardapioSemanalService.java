@@ -2,8 +2,11 @@ package com.sisrest.services;
 
 import com.sisrest.dto.cardapioSemanal.CardapioSemanalRequest;
 import com.sisrest.dto.cardapioSemanal.CardapioSemanalResponse;
+import com.sisrest.dto.itemCardapioDia.ItemCardapioDiaResponse;
 import com.sisrest.model.entities.CardapioSemanal;
+import com.sisrest.model.entities.Edital;
 import com.sisrest.repositories.CardapioSemanalRepository;
+import com.sisrest.repositories.EditalRepository;
 import com.sisrest.services.convertes.CardapioSemanalServiceConvert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,13 +21,23 @@ public class CardapioSemanalService {
     private CardapioSemanalRepository cardapioSemanalRepository;
 
     @Autowired
+    private EditalRepository editalRepository;
+
+    @Autowired
     private CardapioSemanalServiceConvert cardapioSemanalServiceConvert;
 
+    @Autowired
+    private ItemCardapioDiaService itemCardapioDiaService;
+
     public CardapioSemanalResponse saveCardapioSemanal(CardapioSemanalRequest cardapioSemanalDto) {
+        Optional<Edital> edital = editalRepository.findById(cardapioSemanalDto.getEdital());
         CardapioSemanal cardapioSemanal = cardapioSemanalServiceConvert.dtoToCardapioSemanal(cardapioSemanalDto);
+        cardapioSemanal.setEdital(edital.get());
         cardapioSemanalRepository.save(cardapioSemanal);
-        CardapioSemanalResponse responseDto = cardapioSemanalServiceConvert.cardapioSemanalToDTO(cardapioSemanal);
-        return responseDto;
+        List<ItemCardapioDiaResponse> itensResponses = itemCardapioDiaService.saveItensCardapioDia(cardapioSemanalDto.getItensCardapioDia(), cardapioSemanal);
+        CardapioSemanalResponse response = cardapioSemanalServiceConvert.cardapioSemanalToDTO(cardapioSemanal);
+        response.setItensCardapioDia(itensResponses);
+        return response;
     }
 
     public CardapioSemanalResponse deleteCardapioSemanalById(long id) {

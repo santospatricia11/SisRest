@@ -19,6 +19,10 @@ public class CardapioSemanalServiceConvert {
         return cardapios.stream().map(this::cardapioSemanalToDTO).collect(Collectors.toList());
     }
 
+    public List<CardapioSemanal> responsesToCardapios(List<CardapioSemanalRequest> cardapios) {
+        return cardapios.stream().map(this::dtoToCardapioSemanal).collect(Collectors.toList());
+    }
+
     public CardapioSemanal dtoToCardapioSemanal(CardapioSemanalRequest dto) {
         CardapioSemanal cardapioSemanal = mapper.map(dto, CardapioSemanal.class);
         return cardapioSemanal;

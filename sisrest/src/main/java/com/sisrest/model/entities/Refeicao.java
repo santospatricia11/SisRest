@@ -25,4 +25,7 @@ public class Refeicao {
     @CollectionTable(name = "refeicao_restricoes", joinColumns = @JoinColumn(name = "refeicao_id"))
     private List<TipoDeRestricaoAlimentar> restricoes;
 
+    @ManyToMany(mappedBy = "refeicoes")
+    private List<ItemCardapioDia> itensCardapiosDias;
+
 }

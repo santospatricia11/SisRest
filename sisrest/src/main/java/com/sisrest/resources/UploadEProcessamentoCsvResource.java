@@ -3,6 +3,8 @@ package com.sisrest.resources;
 import com.sisrest.services.ProcessamentoCSVService;
 import com.sisrest.services.UploadCSVService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,12 +21,24 @@ public class UploadEProcessamentoCsvResource {
     private ProcessamentoCSVService processamentoCSVService;
 
     @PostMapping("/processar")
-    public void processarCsv(@RequestParam("arquivoEstudantesSuap") MultipartFile arquivoEstudantesSuap,
-                             @RequestParam("arquivoBeneficiariosSuap") MultipartFile arquivoBeneficiariosSuap,
-                             @RequestParam("idEdital") long idEdital) {
-        uploadService.salvarCSV(arquivoEstudantesSuap);
-        uploadService.salvarCSV(arquivoBeneficiariosSuap);
-        processamentoCSVService.processarCsv(arquivoEstudantesSuap, arquivoBeneficiariosSuap, idEdital);
+    public ResponseEntity processarCsv(@RequestParam("arquivoEstudantesSuap") MultipartFile arquivoEstudantesSuap,
+                                       @RequestParam("arquivoBeneficiariosSuap") MultipartFile arquivoBeneficiariosSuap,
+                                       @RequestParam("idEdital") long idEdital) {
+        if(this.upload(arquivoEstudantesSuap,arquivoBeneficiariosSuap)){
+            processamentoCSVService.processarCsv(arquivoEstudantesSuap, arquivoBeneficiariosSuap, idEdital);
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    private boolean upload(@RequestParam("arquivoEstudantesSuap") MultipartFile arquivoEstudantesSuap,
+                          @RequestParam("arquivoBeneficiariosSuap") MultipartFile arquivoBeneficiariosSuap) {
+        boolean arquivoEstudantes = uploadService.salvarCSV(arquivoEstudantesSuap);
+        boolean arquivoBeneficiarios = uploadService.salvarCSV(arquivoBeneficiariosSuap);
+        if (arquivoEstudantes == true && arquivoBeneficiarios == true) {
+            return true;
+        }
+        return false;
     }
 }
 
