@@ -31,7 +31,7 @@ public class UploadEProcessamentoCsvResource {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    public boolean upload(@RequestParam("arquivoEstudantesSuap") MultipartFile arquivoEstudantesSuap,
+    private boolean upload(@RequestParam("arquivoEstudantesSuap") MultipartFile arquivoEstudantesSuap,
                           @RequestParam("arquivoBeneficiariosSuap") MultipartFile arquivoBeneficiariosSuap) {
         boolean arquivoEstudantes = uploadService.salvarCSV(arquivoEstudantesSuap);
         boolean arquivoBeneficiarios = uploadService.salvarCSV(arquivoBeneficiariosSuap);

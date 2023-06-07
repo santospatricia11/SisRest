@@ -13,7 +13,4 @@ public class CardapioSemanalRequest {
     private short sequenciaSemanal;
     private long edital;
     private List<ItemCardapioDiaRequest> itensCardapioDia;
-
-
-
 }

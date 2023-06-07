@@ -19,6 +19,10 @@ public class RefeicaoServiceConvert {
         return refeicoes.stream().map(this::refeicaoToDTO).collect(Collectors.toList());
     }
 
+    public List<Refeicao> dtosToRefeicao(List<RefeicaoRequest> refeicoes) {
+        return refeicoes.stream().map(this::dtoToRefeicao).collect(Collectors.toList());
+    }
+
     public Refeicao dtoToRefeicao(RefeicaoRequest dto) {
         Refeicao refeicao = mapper.map(dto, Refeicao.class);
         return refeicao;
