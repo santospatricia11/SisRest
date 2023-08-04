@@ -63,8 +63,7 @@ public class CardapioSemanalService {
         CardapioSemanal atualizar = cardapioSemanalServiceConvert.dtoToCardapioSemanal(cardapioSemanalDto);
         boolean verificado = cardapioSemanalRepository.existsById(cardapioSemanal.get().getId());
 
-        if (verificado)
-            atualizar.setId(cardapioSemanal.get().getId());
+        if (verificado) atualizar.setId(cardapioSemanal.get().getId());
 
         if (atualizar.getSequenciaSemanal() == 0) {
             atualizar.setSequenciaSemanal(original.getSequenciaSemanal());
@@ -72,12 +71,31 @@ public class CardapioSemanalService {
         CardapioSemanalResponse responseDto = cardapioSemanalServiceConvert.cardapioSemanalToDTO(cardapioSemanalRepository.save(atualizar));
         return responseDto;
     }
+/*
+    @Scheduled(cron = "0 0 0 * * SUN")
+    public void isAtualTrue() {
+        Calendar calendario = Calendar.getInstance();
+        int numeroDaSemana = calendario.get(Calendar.WEEK_OF_YEAR);
+        long quantidadeDeCardapios = cardapioSemanalRepository.count();
+        if (numeroDaSemana < quantidadeDeCardapios) {
+            CardapioSemanal atual = cardapioSemanalRepository.buscarUltimoAtual();
+            atual.isAtualFalse();
+            CardapioSemanal cardapio = cardapioSemanalRepository.buscarPorSequenciaSemanal((short) numeroDaSemana);
+            cardapio.isAtualTrue();
+        } else {
+            short restoDivisao = (short) (numeroDaSemana % quantidadeDeCardapios);
+            if (restoDivisao == 0) {
+                CardapioSemanal atual = cardapioSemanalRepository.buscarUltimoAtual();
+                atual.isAtualFalse();
+                CardapioSemanal cardapio = cardapioSemanalRepository.buscarPorSequenciaSemanal((short) quantidadeDeCardapios);
+                cardapio.isAtualTrue();
+            } else {
+                CardapioSemanal atual = cardapioSemanalRepository.buscarUltimoAtual();
+                atual.isAtualFalse();
+                CardapioSemanal cardapio = cardapioSemanalRepository.buscarPorSequenciaSemanal(restoDivisao);
+                cardapio.isAtualTrue();
+            }
+        }
 
-    public CardapioSemanalResponse isAtualTrue(Long id) {
-        Optional<CardapioSemanal> cardapioSemanal = cardapioSemanalRepository.findById(id);
-        CardapioSemanal cardapio = cardapioSemanal.get();
-        cardapio.isAtualTrue();
-        CardapioSemanalResponse responseDto = cardapioSemanalServiceConvert.cardapioSemanalToDTO(cardapioSemanalRepository.save(cardapio));
-        return responseDto;
-    }
+    }*/
 }
