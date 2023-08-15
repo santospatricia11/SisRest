@@ -27,5 +27,4 @@ public class Refeicao {
 
     @ManyToMany(mappedBy = "refeicoes")
     private List<ItemCardapioDia> itensCardapiosDias;
-
 }
