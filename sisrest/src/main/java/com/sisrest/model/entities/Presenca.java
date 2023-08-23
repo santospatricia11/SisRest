@@ -23,7 +23,7 @@ public class Presenca {
     @JoinColumn(name = "beneficiario_id")
     private Beneficiario beneficiario;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "listaDiaria_id")
     private ListaDiaria listaDiaria;
 
