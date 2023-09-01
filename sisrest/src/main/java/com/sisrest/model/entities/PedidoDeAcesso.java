@@ -23,7 +23,7 @@ public class PedidoDeAcesso implements Serializable {
 
     private String justificativaAnalise;
 
-    private boolean isAprovado;
+    private Boolean isAprovado;
 
     @ManyToOne
     @JoinColumn(name = "beneficiario_id")
@@ -35,11 +35,4 @@ public class PedidoDeAcesso implements Serializable {
     @OneToMany(mappedBy = "pedidoDeAcesso", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AcessoDiaRefeicao> acessosDiaRefeicao = new ArrayList<>();
 
-    public void isAprovadoTrue() {
-        this.isAprovado = true;
-    }
-
-    public void isAprovadoFalse() {
-        this.isAprovado = false;
-    }
 }
