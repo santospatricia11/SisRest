@@ -95,6 +95,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.svg", "/**/*.jpg", "/**/*.html", "/**/*.css", "/**/*.js").permitAll()
                 .antMatchers("/auth/**", "/api/oauth2/**", "/oauth/**").permitAll()//
                 .antMatchers(HttpMethod.GET, "/api/**").permitAll()//
+                .antMatchers(HttpMethod.PATCH, "/api/**").permitAll()//
                 .antMatchers(HttpMethod.POST, "/api/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/login").permitAll()//
                 .antMatchers(HttpMethod.POST, "/csv/**").permitAll()

@@ -2,6 +2,7 @@ package com.sisrest.resources;
 
 import com.sisrest.dto.pedidoDeAcesso.PedidoDeAcessoRequest;
 import com.sisrest.dto.pedidoDeAcesso.PedidoDeAcessoResponse;
+import com.sisrest.exception.PedidoDeAcessoJaAnalisadoException;
 import com.sisrest.services.PedidoDeAcessoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -61,13 +62,18 @@ public class PedidoDeAcessoResource {
         }
     }
 
-    @PutMapping(value = "/atualizar/{id}")
-    public ResponseEntity<PedidoDeAcessoResponse> updatePedidoDeAcesso(@PathVariable("id") long id, @RequestBody @Valid PedidoDeAcessoRequest dto) {
-        PedidoDeAcessoResponse pedidoDeAcessoResponse = pedidoDeAcessoService.update(id, dto);
-        if (pedidoDeAcessoResponse != null) {
-            return new ResponseEntity<>(pedidoDeAcessoResponse, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @PatchMapping(value = "/avaliar/{id}/{isAprovado}")
+    public ResponseEntity<PedidoDeAcessoResponse> updatePedidoDeAcesso(@PathVariable("id") long id, @PathVariable("isAprovado") boolean isAprovado) {
+        PedidoDeAcessoResponse pedidoDeAcessoResponse = null;
+        try {
+            pedidoDeAcessoResponse = pedidoDeAcessoService.aprovarPedido(id, isAprovado);
+            if (pedidoDeAcessoResponse != null) {
+                return new ResponseEntity<>(pedidoDeAcessoResponse, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (PedidoDeAcessoJaAnalisadoException e) {
+            throw new RuntimeException(e);
         }
     }
 }
