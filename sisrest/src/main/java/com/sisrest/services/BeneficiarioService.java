@@ -37,7 +37,6 @@ public class BeneficiarioService {
         beneficiario.setContaEstudante(contaEstudante.get());
         beneficiario.setEdital(edital.get());
         boolean verificado = false;
-        System.out.println(beneficiario.getCPF());
         if (verificado) {
             return null;
         } else {
