@@ -4,6 +4,7 @@ import com.sisrest.dto.contaEstudante.ContaEstudanteRequest;
 import com.sisrest.dto.contaEstudante.ContaEstudanteResponse;
 import com.sisrest.exception.EmailEmUsoException;
 import com.sisrest.model.entities.ContaEstudante;
+import com.sisrest.model.enums.Role;
 import com.sisrest.repositories.ContaEstudanteRepository;
 import com.sisrest.services.convertes.ContaEstudanteServiceConvert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,9 @@ public class ContaEstudanteService {
     public ContaEstudanteResponse save(ContaEstudanteRequest contaEstudanteDto) throws EmailEmUsoException {
         ContaEstudante contaEstudante = contaEstudanteServiceConvert.dtoToContaEstudante(contaEstudanteDto);
         boolean verificado = contaEstudanteRepository.existsByEmail(contaEstudanteDto.getEmail());
-
+        contaEstudante.setRole(Role.ESTUDANTE);
         if (verificado) throw new EmailEmUsoException(contaEstudanteDto.getEmail());
+        	
         else {
             contaEstudanteRepository.save(contaEstudante);
             ContaEstudanteResponse contaEstudanteResponse = contaEstudanteServiceConvert.contaEstudanteToDTO(contaEstudante);
