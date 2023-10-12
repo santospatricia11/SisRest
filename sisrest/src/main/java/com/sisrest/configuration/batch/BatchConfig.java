@@ -82,7 +82,25 @@ public class BatchConfig {
             @Override
             public void write(List<? extends ContaEstudante> items) throws Exception {
                 for (ContaEstudante contaEstudante : items) {
-                    contaEstudanteRepository.save(contaEstudante);
+                    Optional<ContaEstudante> original = contaEstudanteRepository.findByMatricula(contaEstudante.getMatricula());
+
+                    if (original.isPresent() == true) {
+                        ContaEstudante atualizar = contaEstudante;
+                        atualizar.setId(original.get().getId());
+
+                        if (atualizar.getNome() == null) {
+                            atualizar.setNome(original.get().getNome());
+                        } else if (atualizar.getEmail() == null) {
+                            atualizar.setEmail(original.get().getEmail());
+                        } else if (atualizar.getCurso() == null) {
+                            atualizar.setCurso(original.get().getCurso());
+                        } else if (atualizar.getCampus() == null) {
+                            atualizar.setCampus(original.get().getCampus());
+                        }
+                        contaEstudanteRepository.save(atualizar);
+                    } else {
+                        contaEstudanteRepository.save(contaEstudante);
+                    }
                 }
             }
         };
