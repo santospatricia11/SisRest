@@ -20,7 +20,6 @@ public class UsuarioGoogleController {
     @GetMapping("/api/user/me")
     @PreAuthorize("hasRole('USER')")
     public UsuarioGoogle getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
-        return userRepository.findById(userPrincipal.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
+        return userRepository.findById(userPrincipal.getId()).orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
     }
 }

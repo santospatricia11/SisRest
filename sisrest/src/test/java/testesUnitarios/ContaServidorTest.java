@@ -1,12 +1,10 @@
 package testesUnitarios;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.BeforeAll;
+import com.sisrest.model.entities.ContaServidor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.sisrest.model.entities.ContaServidor;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ContaServidorTest {
 
@@ -25,7 +23,7 @@ class ContaServidorTest {
 
         assertEquals(matricula, contaServidor.getMatriculaSIAPE());
     }
-    
+
     @Test
     public void testIsAdminTrue() {
         contaServidor.isAdminTrue();
@@ -37,6 +35,7 @@ class ContaServidorTest {
         contaServidor.isAdminFalse();
         assertFalse(contaServidor.isAdmin());
     }
+
     @Test
     public void testIsAdminDefault() {
         assertFalse(contaServidor.isAdmin());

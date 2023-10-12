@@ -59,16 +59,14 @@ public class ListaDiariaService {
         ListaDiaria atualizar = listaDiariaServiceConvert.dtoToListaDiaria(listaDiariaDto);
         boolean verificado = listaDiariaRepository.existsById(listaDiaria.get().getId());
 
-        if (verificado)
-            atualizar.setId(listaDiaria.get().getId());
+        if (verificado) atualizar.setId(listaDiaria.get().getId());
         if (atualizar.getRefeicao() == null) {
             atualizar.setRefeicao(original.getRefeicao());
         } else if (atualizar.getData() == null) {
             atualizar.setData(original.getData());
         }
 
-        ListaDiariaResponse listaDiariaResponse = listaDiariaServiceConvert
-                .listaToDTO(listaDiariaRepository.save(atualizar));
+        ListaDiariaResponse listaDiariaResponse = listaDiariaServiceConvert.listaToDTO(listaDiariaRepository.save(atualizar));
         return listaDiariaResponse;
     }
 }

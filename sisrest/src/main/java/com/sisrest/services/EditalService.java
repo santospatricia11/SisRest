@@ -57,8 +57,7 @@ public class EditalService {
         Edital atualizar = editalServiceConvert.dtoToEdital(editalDto);
         boolean verificado = editalRepository.existsById(edital.get().getId());
 
-        if (verificado)
-            atualizar.setId(edital.get().getId());
+        if (verificado) atualizar.setId(edital.get().getId());
 
         if (atualizar.getNome() == null) {
             atualizar.setNome(original.getNome());

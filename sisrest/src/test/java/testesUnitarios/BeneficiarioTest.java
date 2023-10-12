@@ -1,37 +1,35 @@
 package testesUnitarios;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
+import com.sisrest.model.entities.Beneficiario;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 
-import com.sisrest.model.entities.Beneficiario;
+import static org.junit.Assert.*;
 
 public class BeneficiarioTest {
-	 private Beneficiario beneficiario;
+    private Beneficiario beneficiario;
 
-	    @BeforeEach
-	    public void setUp() {
-	        beneficiario = new Beneficiario();
-	    }
-	    @Test
-	    public void testAtivo() {
-	        Beneficiario beneficiario = new Beneficiario();
-	        beneficiario.setAtivo(true);
-	        assertTrue(beneficiario.isAtivo());
+    @BeforeEach
+    public void setUp() {
+        beneficiario = new Beneficiario();
+    }
 
-	        beneficiario.setAtivo(false);
-	        assertFalse(beneficiario.isAtivo());
-	    }
-	 
-	    
-	    @Test
-	    public void testCPF() {
-	        long cpf = 12345678901L;
-	        beneficiario.setCPF(cpf);
+    @Test
+    public void testAtivo() {
+        Beneficiario beneficiario = new Beneficiario();
+        beneficiario.setAtivo(true);
+        assertTrue(beneficiario.isAtivo());
 
-	        assertEquals(cpf, beneficiario.getCPF());
-	    }
+        beneficiario.setAtivo(false);
+        assertFalse(beneficiario.isAtivo());
+    }
+
+
+    @Test
+    public void testCPF() {
+        long cpf = 12345678901L;
+        beneficiario.setCPF(cpf);
+
+        assertEquals(cpf, beneficiario.getCPF());
+    }
 }

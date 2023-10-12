@@ -1,15 +1,10 @@
 package com.sisrest.model.entities;
 
+import com.sisrest.model.enums.Role;
 import lombok.*;
-
-import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-
-import org.springframework.security.core.userdetails.UserDetails;
-
-import com.sisrest.model.enums.Role;
 
 @Getter
 @Setter
@@ -40,10 +35,10 @@ public abstract class Conta {
     @NotNull
     @Column
     private String campus;
-    
+
     @NotNull
     @Column
     private Role role;
-    
-	
+
+
 }

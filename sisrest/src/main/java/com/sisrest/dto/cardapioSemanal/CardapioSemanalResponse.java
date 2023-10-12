@@ -1,7 +1,6 @@
 package com.sisrest.dto.cardapioSemanal;
 
 import com.sisrest.dto.edital.EditalResponse;
-import com.sisrest.dto.itemCardapioDia.ItemCardapioDiaRequest;
 import com.sisrest.dto.itemCardapioDia.ItemCardapioDiaResponse;
 import lombok.Getter;
 import lombok.Setter;

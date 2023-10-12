@@ -21,18 +21,15 @@ public class UploadEProcessamentoCsvResource {
     private ProcessamentoCSVService processamentoCSVService;
 
     @PostMapping("/processar")
-    public ResponseEntity processarCsv(@RequestParam("arquivoEstudantesSuap") MultipartFile arquivoEstudantesSuap,
-                                       @RequestParam("arquivoBeneficiariosSuap") MultipartFile arquivoBeneficiariosSuap,
-                                       @RequestParam("idEdital") long idEdital) {
-        if(this.upload(arquivoEstudantesSuap,arquivoBeneficiariosSuap)){
+    public ResponseEntity processarCsv(@RequestParam("arquivoEstudantesSuap") MultipartFile arquivoEstudantesSuap, @RequestParam("arquivoBeneficiariosSuap") MultipartFile arquivoBeneficiariosSuap, @RequestParam("idEdital") long idEdital) {
+        if (this.upload(arquivoEstudantesSuap, arquivoBeneficiariosSuap)) {
             processamentoCSVService.processarCsv(arquivoEstudantesSuap, arquivoBeneficiariosSuap, idEdital);
             return new ResponseEntity(HttpStatus.OK);
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    private boolean upload(@RequestParam("arquivoEstudantesSuap") MultipartFile arquivoEstudantesSuap,
-                          @RequestParam("arquivoBeneficiariosSuap") MultipartFile arquivoBeneficiariosSuap) {
+    private boolean upload(@RequestParam("arquivoEstudantesSuap") MultipartFile arquivoEstudantesSuap, @RequestParam("arquivoBeneficiariosSuap") MultipartFile arquivoBeneficiariosSuap) {
         boolean arquivoEstudantes = uploadService.salvarCSV(arquivoEstudantesSuap);
         boolean arquivoBeneficiarios = uploadService.salvarCSV(arquivoBeneficiariosSuap);
         if (arquivoEstudantes == true && arquivoBeneficiarios == true) {

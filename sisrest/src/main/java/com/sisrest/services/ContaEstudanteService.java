@@ -27,7 +27,7 @@ public class ContaEstudanteService {
         boolean verificado = contaEstudanteRepository.existsByEmail(contaEstudanteDto.getEmail());
         contaEstudante.setRole(Role.ESTUDANTE);
         if (verificado) throw new EmailEmUsoException(contaEstudanteDto.getEmail());
-        	
+
         else {
             contaEstudanteRepository.save(contaEstudante);
             ContaEstudanteResponse contaEstudanteResponse = contaEstudanteServiceConvert.contaEstudanteToDTO(contaEstudante);

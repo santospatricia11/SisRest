@@ -1,57 +1,56 @@
 package testesUnitarios;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.BeforeAll;
+import com.sisrest.model.entities.CardapioSemanal;
+import com.sisrest.model.entities.Edital;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.sisrest.model.entities.CardapioSemanal;
-import com.sisrest.model.entities.Edital;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CardapioSemanalTest {
 
-	 private CardapioSemanal cardapioSemanal;
+    private CardapioSemanal cardapioSemanal;
 
-	    @BeforeEach
-	    public void setUp() {
-	        cardapioSemanal = new CardapioSemanal();
-	    }
+    @BeforeEach
+    public void setUp() {
+        cardapioSemanal = new CardapioSemanal();
+    }
 
-	    @Test
-	    public void testIsAtualFalse() {
-	        cardapioSemanal.isAtualTrue();
-	        assertTrue(cardapioSemanal.isAtual());
+    @Test
+    public void testIsAtualFalse() {
+        cardapioSemanal.isAtualTrue();
+        assertTrue(cardapioSemanal.isAtual());
 
-	        cardapioSemanal.isAtualFalse();
-	        assertFalse(cardapioSemanal.isAtual());
-	    }
-	    
-	    @Test
-	    public void testIsAtualTrue() {
-	        cardapioSemanal.isAtualTrue();
-	        assertTrue(cardapioSemanal.isAtual());
-	    }
+        cardapioSemanal.isAtualFalse();
+        assertFalse(cardapioSemanal.isAtual());
+    }
 
-	    @Test
-	    public void testIsAtualDefault() {
-	        assertFalse(cardapioSemanal.isAtual());
-	    }
+    @Test
+    public void testIsAtualTrue() {
+        cardapioSemanal.isAtualTrue();
+        assertTrue(cardapioSemanal.isAtual());
+    }
 
-	    @Test
-	    public void testSetAndGetEdital() {
-	        Edital edital = new Edital();
-	        cardapioSemanal.setEdital(edital);
+    @Test
+    public void testIsAtualDefault() {
+        assertFalse(cardapioSemanal.isAtual());
+    }
 
-	        assertEquals(edital, cardapioSemanal.getEdital());
-	    }
-	    @Test
-	    public void testSequenciaSemanal() {
-	        short sequencia = 5;
-	        cardapioSemanal.setSequenciaSemanal(sequencia);
+    @Test
+    public void testSetAndGetEdital() {
+        Edital edital = new Edital();
+        cardapioSemanal.setEdital(edital);
 
-	        assertEquals(sequencia, cardapioSemanal.getSequenciaSemanal());
-	    }
+        assertEquals(edital, cardapioSemanal.getEdital());
+    }
+
+    @Test
+    public void testSequenciaSemanal() {
+        short sequencia = 5;
+        cardapioSemanal.setSequenciaSemanal(sequencia);
+
+        assertEquals(sequencia, cardapioSemanal.getSequenciaSemanal());
+    }
 
 
 }

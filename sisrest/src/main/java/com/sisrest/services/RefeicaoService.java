@@ -49,8 +49,7 @@ public class RefeicaoService {
         Refeicao atualizar = refeicaoServiceConvert.dtoToRefeicao(refeicaoDto);
         boolean verificado = refeicaoRepository.existsById(refeicao.get().getId());
 
-        if (verificado)
-            atualizar.setId(refeicao.get().getId());
+        if (verificado) atualizar.setId(refeicao.get().getId());
 
         if (atualizar.getDescricao() == null) {
             atualizar.setDescricao(original.getDescricao());

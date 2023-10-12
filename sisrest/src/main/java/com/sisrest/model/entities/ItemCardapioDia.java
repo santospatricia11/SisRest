@@ -27,8 +27,6 @@ public class ItemCardapioDia {
     private CardapioSemanal cardapioSemanal;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "item_cardapio_dia_refeicao",
-            joinColumns = @JoinColumn(name = "item_cardapio_dia_id"),
-            inverseJoinColumns = @JoinColumn(name = "refeicao_id"))
+    @JoinTable(name = "item_cardapio_dia_refeicao", joinColumns = @JoinColumn(name = "item_cardapio_dia_id"), inverseJoinColumns = @JoinColumn(name = "refeicao_id"))
     private List<Refeicao> refeicoes;
 }

@@ -6,11 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
-
-import org.springframework.security.core.GrantedAuthority;
-
 import java.io.Serializable;
-import java.util.Collection;
 
 @Getter
 @Setter
@@ -31,13 +27,6 @@ public class ContaEstudante extends Conta implements Serializable {
     @NotNull
     @Column
     private String curso;
-    
-  
 
-	
-	
 
-	
-
-	
 }

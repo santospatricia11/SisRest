@@ -68,8 +68,7 @@ public class BatchConfig {
         reader.setLineMapper(new DefaultLineMapper<BeneficiarioRaw>() {{
             setLineTokenizer(new DelimitedLineTokenizer() {{
                 setDelimiter(",");
-                setNames("numero", "nome", "matricula", "cpf", "curso", "programa", "modalidade", "situacao", "classificacao", "pontuacao",
-                        "rendaBruta", "qtDePessoas", "percapta", "cota", "nascimento", "valor");
+                setNames("numero", "nome", "matricula", "cpf", "curso", "programa", "modalidade", "situacao", "classificacao", "pontuacao", "rendaBruta", "qtDePessoas", "percapta", "cota", "nascimento", "valor");
             }});
             setFieldSetMapper(new BeneficiarioRawFieldSetMapper());
         }});
@@ -144,31 +143,17 @@ public class BatchConfig {
 
     @Bean
     public Step contaEstudanteStep() {
-        return stepBuilderFactory.get("contaEstudanteStep")
-                .<ContaEstudante, ContaEstudante>chunk(100)
-                .reader(contaEstudanteReader(null))
-                .writer(contaEstudanteWriter())
-                .build();
+        return stepBuilderFactory.get("contaEstudanteStep").<ContaEstudante, ContaEstudante>chunk(100).reader(contaEstudanteReader(null)).writer(contaEstudanteWriter()).build();
     }
 
     @Bean
     public Step beneficiarioStep() {
-        return stepBuilderFactory.get("beneficiarioStep")
-                .<BeneficiarioRaw, Beneficiario>chunk(100)
-                .reader(beneficiarioRawReader(null))
-                .processor(beneficiarioProcessor(this.idEdital))
-                .writer(beneficiarioWriter())
-                .build();
+        return stepBuilderFactory.get("beneficiarioStep").<BeneficiarioRaw, Beneficiario>chunk(100).reader(beneficiarioRawReader(null)).processor(beneficiarioProcessor(this.idEdital)).writer(beneficiarioWriter()).build();
     }
 
     @Bean
     public Job job() {
-        return jobBuilderFactory.get("job")
-                .incrementer(new RunIdIncrementer())
-                .flow(contaEstudanteStep())
-                .on("COMPLETED").to(beneficiarioStep())
-                .end()
-                .build();
+        return jobBuilderFactory.get("job").incrementer(new RunIdIncrementer()).flow(contaEstudanteStep()).on("COMPLETED").to(beneficiarioStep()).end().build();
     }
 }
 

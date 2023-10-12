@@ -1,19 +1,15 @@
 package testesUnitarios;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.Date;
-
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import com.sisrest.model.entities.Beneficiario;
 import com.sisrest.model.entities.ListaDiaria;
 import com.sisrest.model.entities.Presenca;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PresencaTest {
-	private Presenca presenca;
+    private Presenca presenca;
 
     @BeforeEach
     public void setUp() {
@@ -27,7 +23,7 @@ class PresencaTest {
 
         assertEquals(beneficiario, presenca.getBeneficiario());
     }
-    
+
     @Test
     public void testListaDiaria() {
         ListaDiaria listaDiaria = new ListaDiaria();
@@ -36,5 +32,5 @@ class PresencaTest {
         assertEquals(listaDiaria, presenca.getListaDiaria());
     }
 
-    
+
 }

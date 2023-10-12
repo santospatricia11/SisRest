@@ -44,8 +44,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -70,8 +69,7 @@ public class AuthController {
 
         UsuarioGoogle result = userRepository.save(user);
 
-        URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/me")
-                .buildAndExpand(result.getId()).toUri();
+        URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/me").buildAndExpand(result.getId()).toUri();
 
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully@"));
     }

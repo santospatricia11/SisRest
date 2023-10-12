@@ -68,8 +68,7 @@ public class PresencaService {
         Presenca atualizar = presencaServiceConvert.dtoToPresenca(presencaRequest);
         boolean verificado = presencaRepository.existsById(presenca.get().getId());
 
-        if (verificado)
-            atualizar.setId(presenca.get().getId());
+        if (verificado) atualizar.setId(presenca.get().getId());
         if (atualizar.getBeneficiario() == null) {
             atualizar.setBeneficiario(original.getBeneficiario());
         } else if (atualizar.getListaDiaria() == null) {
@@ -79,8 +78,7 @@ public class PresencaService {
         } else if (atualizar.getCompareceuEm() == null) {
             atualizar.setCompareceuEm(original.getCompareceuEm());
         }
-        PresencaResponse presencaResponse = presencaServiceConvert
-                .presencaToDTO(presencaRepository.save(atualizar));
+        PresencaResponse presencaResponse = presencaServiceConvert.presencaToDTO(presencaRepository.save(atualizar));
         return presencaResponse;
     }
 }

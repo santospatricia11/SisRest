@@ -16,15 +16,9 @@ public class ProcessamentoCSVService {
     @Autowired
     private Job job;
 
-    public boolean processarCsv(@RequestParam("arquivoEstudantesSuap") MultipartFile arquivoEstudantesSuap,
-                                @RequestParam("arquivoBeneficiariosSuap") MultipartFile arquivoBeneficiariosSuap,
-                                @RequestParam("idEdital") long idEdital) {
+    public boolean processarCsv(@RequestParam("arquivoEstudantesSuap") MultipartFile arquivoEstudantesSuap, @RequestParam("arquivoBeneficiariosSuap") MultipartFile arquivoBeneficiariosSuap, @RequestParam("idEdital") long idEdital) {
         try {
-            JobParameters jobParameters = new JobParametersBuilder()
-                    .addString("arquivoEstudantesSuap", arquivoEstudantesSuap.getOriginalFilename())
-                    .addString("arquivoBeneficiariosSuap", arquivoBeneficiariosSuap.getOriginalFilename())
-                    .addLong("idEdital", idEdital)
-                    .toJobParameters();
+            JobParameters jobParameters = new JobParametersBuilder().addString("arquivoEstudantesSuap", arquivoEstudantesSuap.getOriginalFilename()).addString("arquivoBeneficiariosSuap", arquivoBeneficiariosSuap.getOriginalFilename()).addLong("idEdital", idEdital).toJobParameters();
             jobLauncher.run(job, jobParameters);
             return true;
         } catch (Exception ex) {

@@ -21,7 +21,7 @@ public class BeneficiarioResource {
     @PostMapping(value = "/criar")
     public ResponseEntity<BeneficiarioResponse> createBeneficiario(@RequestBody @Valid BeneficiarioRequest dto) {
         System.out.println("Controller CPF: " + dto.getCPF());
-    	try {
+        try {
             BeneficiarioResponse beneficiarioResponse = beneficiarioService.save(dto);
             return new ResponseEntity(beneficiarioResponse, HttpStatus.CREATED);
         } catch (Exception ex) {
@@ -64,8 +64,7 @@ public class BeneficiarioResource {
     }
 
     @PutMapping(value = "/atualizar/{id}")
-    public ResponseEntity<BeneficiarioResponse> update(@PathVariable("id") long id,
-                                                       @RequestBody @Valid BeneficiarioRequest dto) {
+    public ResponseEntity<BeneficiarioResponse> update(@PathVariable("id") long id, @RequestBody @Valid BeneficiarioRequest dto) {
         BeneficiarioResponse beneficiarioResponse = beneficiarioService.update(id, dto);
         if (beneficiarioResponse != null) {
             return new ResponseEntity<>(beneficiarioResponse, HttpStatus.OK);

@@ -1,7 +1,6 @@
 package com.sisrest.dto.contaServidor;
 
 import com.sisrest.model.enums.Role;
-
 import lombok.Getter;
 import lombok.Setter;
 
