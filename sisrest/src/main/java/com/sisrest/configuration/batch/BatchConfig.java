@@ -4,6 +4,7 @@ import com.sisrest.model.entities.Beneficiario;
 import com.sisrest.model.entities.BeneficiarioRaw;
 import com.sisrest.model.entities.ContaEstudante;
 import com.sisrest.model.entities.Edital;
+import com.sisrest.model.enums.Role;
 import com.sisrest.repositories.BeneficiarioRepository;
 import com.sisrest.repositories.ContaEstudanteRepository;
 import com.sisrest.repositories.EditalRepository;
@@ -96,8 +97,10 @@ public class BatchConfig {
                         } else if (atualizar.getCampus() == null) {
                             atualizar.setCampus(original.get().getCampus());
                         }
+                        atualizar.setRole(Role.ESTUDANTE);
                         contaEstudanteRepository.save(atualizar);
                     } else {
+                        contaEstudante.setRole(Role.ESTUDANTE);
                         contaEstudanteRepository.save(contaEstudante);
                     }
                 }
